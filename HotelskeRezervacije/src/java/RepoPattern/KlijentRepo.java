@@ -4,6 +4,9 @@ import Models.Klijent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,11 +16,11 @@ public class KlijentRepo {
     public void insertKlijent(Klijent klijent){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
+            String URL =  "jdbc:mysql://localhost:3306/hotel", USER = "root", PASS = "";
             Connection con = DriverManager.getConnection(URL, USER, PASS);
             
-            String insertToKlijent = "INSERT INTO `klijenti`( `Ime`, `Prezime`, `KIme`, `Sifra`, `Email`, `Telefon`,"
-                    + " `Adresa`, `Grad`, `Drzava`, `Vrsta`, `Poeni`, `HotelID`, 'PostanskiBroj') "
+            String insertToKlijent = "INSERT INTO `klijenti`(Ime, Prezime, KIme, Sifra, Email, Telefon,"
+                    + " Adresa, Grad, Drzava, Vrsta, Poeni, HotelID, PostanskiBroj)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             PreparedStatement pst = con.prepareStatement(insertToKlijent);
@@ -32,19 +35,19 @@ public class KlijentRepo {
             pst.setString(8, klijent.getGrad());
             pst.setString(9, klijent.getDrzava());
             pst.setString(10, "Nista");
-            pst.setDouble(11, 0);
+            pst.setDouble(11, 0.0);
             //prilikom registracije klijentu se po difoltu dodeljuje  prvi hotel u tabeli
             pst.setInt(12, 1);
             pst.setString(13, klijent.getPostanskiBroj());
             
+            
             pst.executeUpdate();
+           
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }
-    
-   
 }

@@ -32,7 +32,7 @@ public class KlijentController extends HttpServlet {
             klijent.setAdresa(request.getParameter("Adresa"));
             klijent.setDrzava(request.getParameter("Drzava"));
             klijent.setGrad(request.getParameter("Grad"));
-            klijent.setPostanskiBroj("PostanskiBroj");
+            klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
             
             
             new KlijentRepo().insertKlijent(klijent);
@@ -60,8 +60,7 @@ public class KlijentController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
-
+    
     @Override
     public String getServletInfo() {
         return "Short description";
