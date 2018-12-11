@@ -13,10 +13,10 @@ import java.util.logging.Logger;
  * @author Ilhan Kalac
  */
 public class KlijentRepo {
-    public void insertKlijent(Klijent klijent){
+    public int insertKlijent(Klijent klijent){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String URL =  "jdbc:mysql://localhost:3306/hotel", USER = "root", PASS = "";
+            String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
             Connection con = DriverManager.getConnection(URL, USER, PASS);
             
             String insertToKlijent = "INSERT INTO `klijenti`(Ime, Prezime, KIme, Sifra, Email, Telefon,"
@@ -41,13 +41,15 @@ public class KlijentRepo {
             pst.setString(13, klijent.getPostanskiBroj());
             
             
-            pst.executeUpdate();
+           pst.executeUpdate();
            
-            
+           return 1;
         } catch (SQLException e) {
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return 0;
     }
 }

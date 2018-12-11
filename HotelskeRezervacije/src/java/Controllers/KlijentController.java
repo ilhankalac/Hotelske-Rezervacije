@@ -35,18 +35,15 @@ public class KlijentController extends HttpServlet {
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
             
             
-            new KlijentRepo().insertKlijent(klijent);
+            if(new KlijentRepo().insertKlijent(klijent)==1){
+                request.setAttribute("rezultat", "True");
+                request.getRequestDispatcher("Registracija.jsp").forward(request, response);
+            }
+            else{
+                request.setAttribute("rezultat", "False");
+                request.getRequestDispatcher("Registracija.jsp").forward(request, response);
+            }
            
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet KlijentController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet KlijentController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
