@@ -72,7 +72,16 @@
                                 <span class="input-group-text" id="basic-addon1">Lozinka:  </span>
                               </div>
                               <input name="password" type="password" class="form-control" placeholder="Lozinka" aria-label="Password" aria-describedby="basic-addon1">
-                            </div>
+                                <% 
+                                    String loginGreska =  (String) request.getAttribute("prvoLogovanje");
+                                    if(loginGreska!=null)
+                                    if(loginGreska.equals("False")) {%>
+                                       <div class="invalid-tooltip" style="color:red">
+                                           Pogrešno ste uneli podatke.
+                                       </div>
+                                    <%}
+                                %> 
+                             </div>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
@@ -85,12 +94,6 @@
            </ul>
          </div>
        </nav>
-       
-                  
-                  
-       
-       
+              
    </body>
-
-
 </html>

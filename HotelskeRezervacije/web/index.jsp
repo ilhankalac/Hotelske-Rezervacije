@@ -22,7 +22,8 @@
         <form action="Test">
         <%
             String Ime =(String) request.getSession().getAttribute("ulogovan");
-            if(request.getAttribute("prvoLogovanje")!=null) {%>
+            if(request.getAttribute("prvoLogovanje")!=null)
+            if(request.getAttribute("prvoLogovanje").equals("True")){%>
             <script type="text/javascript">
                 swal("Dobrodošli  <%=Ime %>!", "Uspešno ste se ulogovali! ", "success")
                     .then(function() {
@@ -31,6 +32,16 @@
 
             </script>
              <%   }
+            
+             if(request.getAttribute("prvoLogovanje")!=null)
+             if(request.getAttribute("prvoLogovanje").equals("False")) {%>
+                <script type="text/javascript">
+                    $(window).on('load',function(){
+                        $('#exampleModal').modal('show');
+                    });
+                </script>
+            <%}
+
             %>
             
         <input type="submit" value="posalji">

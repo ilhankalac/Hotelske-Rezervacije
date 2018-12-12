@@ -33,8 +33,11 @@ public class Login extends HttpServlet {
                 request.setAttribute("prvoLogovanje", "True");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-            else
+            else{
+                request.setAttribute("prvoLogovanje", "False");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+                
           
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
