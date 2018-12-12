@@ -20,6 +20,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <body>
+        <jsp:include page="navbar.jsp" /> 
         <%
             String rezultat =(String) request.getAttribute("rezultat");
             
@@ -38,7 +39,7 @@
          else if (rezultat.equals("False"))  {%>
                
                 <script type="text/javascript">
-                     swal("Greška", "Registracija nije uspela", "error")
+                     swal("Greška", "Uneli ste postojeće korisničko ime ili E-mail.", "error")
                     .then(function() {
                         window.location = "Registracija.jsp";
                     });
