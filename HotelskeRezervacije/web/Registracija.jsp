@@ -3,9 +3,6 @@
     Created on : 10-Dec-2018, 21:41:48
     Author     : Ilhan Kalac
 --%>
-
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,6 +17,14 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <body>
+        <% 
+            HttpSession sesija = request.getSession();
+            
+            if(sesija.getAttribute("ulogovan")!=null)
+                response.sendRedirect("index.jsp");
+        %>
+        
+        
         <jsp:include page="navbar.jsp" /> 
         <%
             String rezultat =(String) request.getAttribute("rezultat");
@@ -36,16 +41,16 @@
              
                      <%   }
             
-         else if (rezultat.equals("False"))  {%>
-               
-                <script type="text/javascript">
-                     swal("Greška", "Uneli ste postojeće korisničko ime ili E-mail.", "error")
-                    .then(function() {
-                        window.location = "Registracija.jsp";
-                    });
-                </script>
-                
-         <% }%>
+            else if (rezultat.equals("False"))  {%>
+
+                   <script type="text/javascript">
+                        swal("Greška", "Uneli ste postojeće korisničko ime ili E-mail.", "error")
+                       .then(function() {
+                           window.location = "Registracija.jsp";
+                       });
+                   </script>
+
+            <% }%>
             
         
         <h1>Hello World!</h1>

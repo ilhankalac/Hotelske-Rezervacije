@@ -4,6 +4,7 @@ import Models.Klijent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,4 +53,29 @@ public class KlijentRepo {
         
         return 0;
     }
+    
+    public boolean logovanje(String username, String password) throws SQLException{
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
+        Connection con = DriverManager.getConnection(URL, USER, PASS);
+        
+        String provera = "select * from Klijenti where KIme = '" + username+ "'  and Sifra = '"+ password+"'";
+        
+        PreparedStatement pst = con.prepareStatement(provera);        
+        ResultSet rs =  pst.executeQuery(provera);
+        
+        while(rs.next())
+            return  true;
+        
+        return false;
+    }
+    
+    
+    
+    
+    
 }

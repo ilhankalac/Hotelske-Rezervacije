@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Ilhan Kalac
@@ -33,11 +34,13 @@ public class KlijentController extends HttpServlet {
             klijent.setDrzava(request.getParameter("Drzava"));
             klijent.setGrad(request.getParameter("Grad"));
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
-            
+
             
             if(new KlijentRepo().insertKlijent(klijent)==1){
                 request.setAttribute("rezultat", "True");
                 request.getRequestDispatcher("Registracija.jsp").forward(request, response);
+                HttpSession sesija = request.getSession();
+                sesija.setAttribute("ulogovan", klijent.getKIme());
             }
             else{
                 request.setAttribute("rezultat", "False");
