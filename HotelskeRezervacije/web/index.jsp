@@ -19,7 +19,7 @@
     <body>
          <jsp:include page="navbar.jsp" />  
         <h1>Hello World!</h1>
-        <form action="Test">
+        <form action="Klijenti">
         <%
             String Ime =(String) request.getSession().getAttribute("ulogovan");
             if(request.getAttribute("prvoLogovanje")!=null)

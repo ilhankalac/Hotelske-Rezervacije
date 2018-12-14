@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Ilhan Kalac
  */
-public class KlijentController extends HttpServlet {
+public class Registracija extends HttpServlet {
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

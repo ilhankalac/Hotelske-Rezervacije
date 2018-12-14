@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -73,7 +75,45 @@ public class KlijentRepo {
         
         return false;
     }
-    
+    public ArrayList<Klijent> ListaKlijenata(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<Klijent> klijenti = new ArrayList<Klijent>();
+        String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
+        try {
+            Connection con = DriverManager.getConnection(URL, USER, PASS);
+             String upit = "select *from klijenti";
+        
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(upit);
+             
+             while(rs.next()){
+                 Klijent klijent = new Klijent();
+                 klijent.setIme(rs.getString("Ime"));
+                 klijent.setPrezime(rs.getString("Prezime"));
+                 klijent.setKIme(rs.getString("KIme"));
+                 klijent.setEmail(rs.getString("Email"));
+                 klijent.setTelefon(rs.getString("Telefon"));
+                 klijent.setAdresa(rs.getString("Adresa"));
+                 klijent.setGrad(rs.getString("Grad"));
+                 klijent.setDrzava(rs.getString("Drzava"));
+                 klijent.setVrsta(rs.getString("Vrsta"));
+                 klijent.setPoeni(rs.getDouble("Poeni"));
+                 klijent.setHotelID(rs.getInt("HotelID"));
+                 klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
+                 klijenti.add(klijent);
+             }
+ 
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return klijenti; 
+    }
     
     
     

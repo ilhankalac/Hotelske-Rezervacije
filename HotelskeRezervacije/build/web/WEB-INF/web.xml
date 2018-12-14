@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>KlijentController</servlet-name>
-        <servlet-class>Controllers.KlijentController</servlet-class>
+        <servlet-class>Controllers.Registracija</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
@@ -15,6 +15,10 @@
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>Controllers.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Klijenti</servlet-name>
+        <servlet-class>Controllers.Klijenti</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Klijenti</servlet-name>
+        <url-pattern>/Klijenti</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
