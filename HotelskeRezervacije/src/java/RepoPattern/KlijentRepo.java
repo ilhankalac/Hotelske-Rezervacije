@@ -84,14 +84,15 @@ public class KlijentRepo {
         ArrayList<Klijent> klijenti = new ArrayList<Klijent>();
         String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
         try {
-            Connection con = DriverManager.getConnection(URL, USER, PASS);
-             String upit = "select *from klijenti";
+             Connection con = DriverManager.getConnection(URL, USER, PASS);
+             String select = "select *from klijenti";
         
              Statement st = con.createStatement();
-             ResultSet rs = st.executeQuery(upit);
+             ResultSet rs = st.executeQuery(select);
              
              while(rs.next()){
                  Klijent klijent = new Klijent();
+                 klijent.setKlijentId(rs.getInt("Id"));
                  klijent.setIme(rs.getString("Ime"));
                  klijent.setPrezime(rs.getString("Prezime"));
                  klijent.setKIme(rs.getString("KIme"));
@@ -114,8 +115,24 @@ public class KlijentRepo {
         
         return klijenti; 
     }
-    
-    
-    
-    
+    public void brisanje(String Id){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
+        
+        try {
+            Connection con = DriverManager.getConnection(URL, USER, PASS);
+            String delete = "delete from  klijenti where id = " + Id;
+            PreparedStatement ps  = con.prepareStatement(delete);
+
+            ps.executeUpdate();
+  
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
 }

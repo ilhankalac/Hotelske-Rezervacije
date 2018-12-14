@@ -37,11 +37,13 @@
                       <th scope="col">E-mail</th>
                       <th scope="col">Telefon</th>
                       <th scope="col">Adresa</th>
+                      <th scope="col">Država</th>
                       <th scope="col">Grad</th>
                       <th scope="col">Rola</th>
                       <th scope="col">Poeni</th>
                       <th scope="col">HotelID</th>
                       <th scope="col">Postanski Broj</th>
+                      <th scope="col">Opcije</th>
                     </tr>
          </thead>
          <tbody>
@@ -57,11 +59,20 @@
                       <td><%=klijent.getEmail()%> </td>
                       <td><%=klijent.getTelefon()%> </td>
                       <td><%=klijent.getAdresa()%> </td>
+                      <td><%=klijent.getDrzava()%> </td>
                       <td><%=klijent.getGrad()%> </td>
                       <td><%=klijent.getVrsta()%> </td>
                       <td><%=klijent.getPoeni()%> </td>
                       <td><%=klijent.getHotelID()%> </td>
                       <td><%=klijent.getPostanskiBroj()%> </td>
+                      <td> 
+                         <a class="delete_link"
+                                    href="${pageContext.request.contextPath}/Klijenti?Klijent_Id=<%= klijent.getKlijentId()%>" >
+                                   <i class="fa fa-trash"> Obriši</i>
+                                   
+                         </a>
+                      
+                      </td>
                     </tr>
                  
              <%}

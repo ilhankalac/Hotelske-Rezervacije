@@ -20,17 +20,9 @@ public class Klijenti extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            new KlijentRepo().ListaKlijenata();
+            new KlijentRepo().brisanje(request.getParameter("Klijent_Id"));
+            response.sendRedirect("Klijenti.jsp");
             
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Klijenti</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Klijenti at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
