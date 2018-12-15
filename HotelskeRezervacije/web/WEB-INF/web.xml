@@ -20,6 +20,10 @@
         <servlet-name>Klijenti</servlet-name>
         <servlet-class>Controllers.Klijenti</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditKlijent</servlet-name>
+        <servlet-class>Controllers.EditKlijent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>Klijenti</servlet-name>
         <url-pattern>/Klijenti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditKlijent</servlet-name>
+        <url-pattern>/EditKlijent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

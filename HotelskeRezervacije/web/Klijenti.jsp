@@ -66,12 +66,15 @@
                       <td><%=klijent.getHotelID()%> </td>
                       <td><%=klijent.getPostanskiBroj()%> </td>
                       <td> 
+                          
                          <a class="delete_link"
-                                    href="${pageContext.request.contextPath}/Klijenti?Klijent_Id=<%= klijent.getKlijentId()%>" >
-                                   <i class="fa fa-trash"> Obriši</i>
-                                   
+                                    href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%= klijent.getKlijentId()%>" >
+                                   <i class="fa fa-trash"> Izmeni</i>                                  
                          </a>
-                      
+                         <a class="delete_link" style="color:red"
+                                    href="${pageContext.request.contextPath}/Klijenti?Klijent_Id=<%= klijent.getKlijentId()%>" >
+                                   <i class="fa fa-trash"> Obriši</i>                                  
+                         </a>
                       </td>
                     </tr>
                  

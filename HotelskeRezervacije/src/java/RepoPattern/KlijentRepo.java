@@ -16,12 +16,28 @@ import java.util.logging.Logger;
  * @author Ilhan Kalac
  */
 public class KlijentRepo {
-    public int insertKlijent(Klijent klijent){
+    
+    Connection con;
+    public KlijentRepo() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
-            Connection con = DriverManager.getConnection(URL, USER, PASS);
-            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
+        try {
+            con = DriverManager.getConnection(URL, USER, PASS);
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    
+    public int insertKlijent(Klijent klijent){
+        try {
             String insertToKlijent = "INSERT INTO `klijenti`(Ime, Prezime, KIme, Sifra, Email, Telefon,"
                     + " Adresa, Grad, Drzava, Vrsta, Poeni, HotelID, PostanskiBroj)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -48,43 +64,34 @@ public class KlijentRepo {
            
            return 1;
         } catch (SQLException e) {
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+          
         }
-        
         return 0;
     }
-    
-    public boolean logovanje(String username, String password) throws SQLException{
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
-        Connection con = DriverManager.getConnection(URL, USER, PASS);
+    public boolean logovanje(String username, String password){
+        
         
         String provera = "select * from Klijenti where KIme = '" + username+ "'  and Sifra = '"+ password+"'";
         
-        PreparedStatement pst = con.prepareStatement(provera);        
-        ResultSet rs =  pst.executeQuery(provera);
+        PreparedStatement pst;        
+        try {
+            pst = con.prepareStatement(provera);
+            ResultSet rs =  pst.executeQuery(provera);
+            while(rs.next())
+                return  true;
         
-        while(rs.next())
-            return  true;
-        
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+      
         return false;
     }
     public ArrayList<Klijent> ListaKlijenata(){
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         ArrayList<Klijent> klijenti = new ArrayList<Klijent>();
-        String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
         try {
-             Connection con = DriverManager.getConnection(URL, USER, PASS);
+           
              String select = "select *from klijenti";
         
              Statement st = con.createStatement();
@@ -116,15 +123,10 @@ public class KlijentRepo {
         return klijenti; 
     }
     public void brisanje(String Id){
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String URL =  "jdbc:mysql://localhost:3306/hotelskerezervacije", USER = "root", PASS = "";
+ 
         
         try {
-            Connection con = DriverManager.getConnection(URL, USER, PASS);
+          
             String delete = "delete from  klijenti where id = " + Id;
             PreparedStatement ps  = con.prepareStatement(delete);
 
@@ -134,5 +136,78 @@ public class KlijentRepo {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+    }
+    public Klijent klijent(String Id){
+
+        Klijent klijent = new Klijent();
+        try {
+        String select = "select *from klijenti where id = " + Id;
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(select);
+        
+        while(rs.next()){
+            klijent.setKlijentId(rs.getInt("Id"));
+            klijent.setIme(rs.getString("Ime"));
+            klijent.setPrezime(rs.getString("Prezime"));
+            klijent.setKIme(rs.getString("KIme"));
+            klijent.setEmail(rs.getString("Email"));
+            klijent.setTelefon(rs.getString("Telefon"));
+            klijent.setAdresa(rs.getString("Adresa"));
+            klijent.setGrad(rs.getString("Grad"));
+            klijent.setDrzava(rs.getString("Drzava"));
+            klijent.setVrsta(rs.getString("Vrsta"));
+            klijent.setPoeni(rs.getDouble("Poeni"));
+            klijent.setHotelID(rs.getInt("HotelID"));
+            klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
+        }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        return klijent;
+    }
+    
+    public int update(Klijent klijent){
+        
+        String update = "update klijenti "
+                      + "set Ime = ?,"
+                      + "Prezime = ?,"
+                      + "KIme = ?,"
+                      + "Email = ?,"
+                      + "Telefon = ?,"
+                      + "Adresa = ?,"
+                      + "Drzava = ?,"
+                      + "Grad = ?,"
+                      + "Vrsta = ?,"
+                      + "Poeni = ?,"
+                      + "HotelID = ?,"
+                      + "PostanskiBroj = ?"
+                      + " where id = ?";
+         
+        try {
+            PreparedStatement pst = con.prepareStatement(update);
+
+            pst.setString(1, klijent.getIme());
+            pst.setString(2, klijent.getPrezime());
+            pst.setString(3, klijent.getKIme());
+            pst.setString(4, klijent.getEmail());
+            pst.setString(5, klijent.getTelefon());
+            pst.setString(6, klijent.getAdresa());
+            pst.setString(7, klijent.getDrzava());
+            pst.setString(8, klijent.getGrad()); 
+            pst.setString(9, klijent.getVrsta());
+            pst.setDouble(10, klijent.getPoeni());
+            pst.setInt(11, klijent.getHotelID());
+            pst.setString(12, klijent.getPostanskiBroj());
+            pst.setInt(13, klijent.getKlijentId());
+
+            pst.executeUpdate();
+            
+            return 1;
+            
+        } catch (SQLException e) {
+          return 0;
+        }
     }
 }
