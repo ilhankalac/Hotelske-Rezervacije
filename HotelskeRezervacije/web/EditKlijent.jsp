@@ -22,105 +22,92 @@
         <form action="EditKlijent" method="post">
             <input value="<%= request.getParameter("Klijent_Id")%>" name="Klijent_Id" type="hidden">
            <div style="padding-left:5%">
-               <div class="input-group mb-3" >
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Ime:</span>
-               </div>
-                   <input type="text" class="form-control" placeholder="Ime" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getIme() %>" name="Ime">
-               </div> <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Prezime:</span>
-               </div>
-                  <input type="text" class="form-control" placeholder="Prezime" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getPrezime() %>"  name="Prezime">
-               </div>
+              <table style="margin-top: -14%; text-align: right">
+               <tr>
+                 <div class="form-inline">
+                  <td style="padding-top:2%"><label>Ime: </label></td>
+                  <td style="padding-left:2%"><input type="text" class="form-control" placeholder="Ime" value="<%= klijent.getIme() %>" name="Ime"></td>
+                 </div>
+               </tr>
                <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Korisničko ime:</span>
-               </div>
-                  <input type="text" class="form-control" placeholder="Korisničko ime" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getKIme() %>"  name="KIme">
-               </div>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Prezime: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Prezime" value="<%= klijent.getPrezime() %>"  name="Prezime"></td>
+                </div>
+               </tr>
                <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> E-mail:</span>
-               </div>
-                   <input type="text" class="form-control" placeholder="Email:" aria-label="Username" aria-describedby="basic-addon1"
-                          value="<%= klijent.getEmail()%>" name="Email">
-               </div>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Korisnicko ime: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Korisnicko ime" value="<%= klijent.getKIme() %>"  name="KIme"></td>
+                </div>
+               </tr>
                <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Telefon:</span>
-               </div>
-                  <input type="text" class="form-control" placeholder="Telefon" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getTelefon() %>" name="Telefon">
-               </div>
-                <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Adresa: </span>
-               </div>
-                  <input type="text" class="form-control" placeholder="Adresa" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getAdresa() %>"  name="Adresa">
-               </div>
-                 <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Država: </span>
-               </div>
-                  <input type="text" class="form-control" placeholder="Država" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getDrzava()%>"  name="Drzava">
-               </div>
-                   <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Grad: </span>
-               </div>
-                   <input type="text" class="form-control" placeholder="Grad" aria-label="Username" aria-describedby="basic-addon1"
-                          value="<%= klijent.getGrad()%>"  name="Grad">
-               </div>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> E-mail:</label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="E-mail:" value="<%= klijent.getEmail()%>" name="Email"></td>
+                </div>
+               </tr>
                <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Rola: </span>
-               </div>
-                  <input type="text" class="form-control" placeholder="Rola" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getVrsta()%>"  name="Rola">
-               </div>
-
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Telefon:</label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Telefon" value="<%= klijent.getTelefon() %>" name="Telefon"></td>
+                </div>
+               </tr>
                <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Poeni: </span>
-               </div>
-                  <input type="text" class="form-control" placeholder="Poeni" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getPoeni()%>"  name="Poeni">
-               </div>
-
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Adresa: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Adresa" value="<%= klijent.getAdresa() %>"  name="Adresa"></td>
+                </div>
+               </tr>
                <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> HotelID: </span>
-               </div>
-                  <input type="text" class="form-control" placeholder="HotelID" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getHotelID()%>" name="HotelID">
-               </div>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Država: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Država" value="<%= klijent.getDrzava()%>"  name="Drzava"></td>
+                </div>
+               </tr>
                <br>
-               <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                     <span class="input-group-text" id="basic-addon1"> Poštanski Broj: </span>
-               </div>
-                  <input type="text" class="form-control" placeholder="Poštanski Broj" aria-label="Username" aria-describedby="basic-addon1"
-                         value="<%= klijent.getPostanskiBroj()%>" name="PostanskiBroj">
-               </div>
-               <br> <br>
-                <input type="submit" value ="Izmeni">
-                <br><br>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Grad: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Grad" value="<%= klijent.getGrad()%>"  name="Grad"></td>
+                </div>
+               </tr>
+               <br>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Rola: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Rola" value="<%= klijent.getVrsta()%>"  name="Rola"></td>
+                </div>
+               </tr>
+               <br>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Poeni: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Poeni" value="<%= klijent.getPoeni()%>"  name="Poeni"></td>
+                </div>
+               </tr>
+               <br>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> HotelID: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="HotelID" value="<%= klijent.getHotelID()%>" name="HotelID"></td>
+                </div>
+               </tr>
+               <br>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Poštanski Broj: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Poštanski Broj" value="<%= klijent.getPostanskiBroj()%>" name="PostanskiBroj"></td>
+                </div>
+               </tr>
+              </table> <br>
+               <input type="submit" value ="Izmeni" class="btn btn-secondary">
            </div>
         </form>
         

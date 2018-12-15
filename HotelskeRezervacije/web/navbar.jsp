@@ -39,7 +39,7 @@
                 if (!pom){%>
                
                   <li><a href="Registracija.jsp">Registruj se</a></li>
-                  <li>  <a  data-toggle="modal" data-target="#exampleModal">
+                  <li>  <a  data-toggle="modal" data-target="#exampleModal" class="btn btn-link">
                     Prijavi se
                       </a> </li>
                   

@@ -141,24 +141,24 @@ public class KlijentRepo {
 
         Klijent klijent = new Klijent();
         try {
-        String select = "select *from klijenti where id = " + Id;
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery(select);
-        
-        while(rs.next()){
-            klijent.setKlijentId(rs.getInt("Id"));
-            klijent.setIme(rs.getString("Ime"));
-            klijent.setPrezime(rs.getString("Prezime"));
-            klijent.setKIme(rs.getString("KIme"));
-            klijent.setEmail(rs.getString("Email"));
-            klijent.setTelefon(rs.getString("Telefon"));
-            klijent.setAdresa(rs.getString("Adresa"));
-            klijent.setGrad(rs.getString("Grad"));
-            klijent.setDrzava(rs.getString("Drzava"));
-            klijent.setVrsta(rs.getString("Vrsta"));
-            klijent.setPoeni(rs.getDouble("Poeni"));
-            klijent.setHotelID(rs.getInt("HotelID"));
-            klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
+            String select = "select *from klijenti where id = " + Id;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(select);
+
+            while(rs.next()){
+                klijent.setKlijentId(rs.getInt("Id"));
+                klijent.setIme(rs.getString("Ime"));
+                klijent.setPrezime(rs.getString("Prezime"));
+                klijent.setKIme(rs.getString("KIme"));
+                klijent.setEmail(rs.getString("Email"));
+                klijent.setTelefon(rs.getString("Telefon"));
+                klijent.setAdresa(rs.getString("Adresa"));
+                klijent.setGrad(rs.getString("Grad"));
+                klijent.setDrzava(rs.getString("Drzava"));
+                klijent.setVrsta(rs.getString("Vrsta"));
+                klijent.setPoeni(rs.getDouble("Poeni"));
+                klijent.setHotelID(rs.getInt("HotelID"));
+                klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
         }
         
         } catch (SQLException ex) {
