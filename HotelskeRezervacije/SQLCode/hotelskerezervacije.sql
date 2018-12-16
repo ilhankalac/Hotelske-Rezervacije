@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2018 at 06:01 PM
+-- Generation Time: Dec 16, 2018 at 08:26 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -30,15 +30,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `hotel` (
   `Id` int(11) NOT NULL,
-  `Naziv` varchar(30) NOT NULL
+  `Naziv` varchar(30) NOT NULL,
+  `Drzava` varchar(30) NOT NULL,
+  `Grad` varchar(30) NOT NULL,
+  `Adresa` varchar(30) NOT NULL,
+  `BrojZvezdica` smallint(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `hotel`
 --
 
-INSERT INTO `hotel` (`Id`, `Naziv`) VALUES
-(1, 'Nemacki');
+INSERT INTO `hotel` (`Id`, `Naziv`, `Drzava`, `Grad`, `Adresa`, `BrojZvezdica`) VALUES
+(1, 'Nemacki', '', '', '', 0),
+(2, 'Nemacka', 'Austrija', 'Rozaje', 'Savnicka 26', 1),
+(3, 'Nemacka', 'Austrija', 'Rozaje', 'Savnicka 26', 2),
+(4, 'Nemacka', 'Austrija', 'Rozaje', 'Savnicka 26', 4),
+(5, 'Nemacka', 'fdsa', 'fdas', 'qfdsa', 5);
 
 -- --------------------------------------------------------
 
@@ -68,7 +76,11 @@ CREATE TABLE `klijenti` (
 --
 
 INSERT INTO `klijenti` (`Id`, `Ime`, `Prezime`, `KIme`, `Sifra`, `Email`, `Telefon`, `Adresa`, `Grad`, `Drzava`, `Poeni`, `HotelID`, `PostanskiBroj`, `RolaID`) VALUES
-(118, 'Bice Zemlja', '', 'Amerika', 'Engleskas', 'ilhandeveloper@gmail.com', '+3826815514', 'Savnicka 26', 'Belgrade', 'Srbija', '0.0', 1, '512132', 1);
+(118, 'Bice Zemljaafdasfsdafsda', 'Kurac', 'Amerika', 'Engleskas', 'ilhandeveloper@gmail.com', '+3826815514', 'Savnicka 26', 'Belgrade', 'Srbija', '0.0', 1, '512132', 1),
+(119, 'admin', 'fdsa', 'slusajte', 'fdsa', 'ilhandevelop1er@gmail.com', '+3826815514', 'Savnicka 26', 'Belgrade', 'Srbija', '0.0', 1, '512132', 1),
+(120, 'Antonije', 'Pusic', 'RamboAmadeus', 'titonehrunaser', 'ramboamadeus@its.edu.rs', '123456', 'Nemacka 22', 'Kanbera', 'Australija', '0.0', 1, '666', 2),
+(121, '2fdsafsd', 'fdsaf', 'eee', '', 'wfdsaafsad', 'fdsasfsda', 'fdsaafsdaf', '1dsfasdfsad', '1dassfaasdfsda', '0.0', 1, 'fdsasfdsa', 1),
+(122, 'fsdaf', 'fdsa', 'fsdafsda32121', '', 'qfsdasd12321', 'fdsaflkdmsal', 'fdsafmdsla', 'fdsa/kmfdsa', 'fdsaa/lkmfds', '0.0', 1, 'fdsafds', 1);
 
 -- --------------------------------------------------------
 
@@ -148,13 +160,13 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `hotel`
 --
 ALTER TABLE `hotel`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `klijenti`
 --
 ALTER TABLE `klijenti`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `role`

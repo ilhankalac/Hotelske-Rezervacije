@@ -24,6 +24,10 @@
         <servlet-name>EditKlijent</servlet-name>
         <servlet-class>Controllers.EditKlijent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>KreiranjeHotela</servlet-name>
+        <servlet-class>Controllers.KreiranjeHotela</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>EditKlijent</servlet-name>
         <url-pattern>/EditKlijent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>KreiranjeHotela</servlet-name>
+        <url-pattern>/KreiranjeHotela</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
