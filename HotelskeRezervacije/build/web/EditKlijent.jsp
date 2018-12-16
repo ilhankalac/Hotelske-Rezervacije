@@ -18,6 +18,14 @@
         <% 
             request.setAttribute("Klijent", new KlijentRepo().klijent(request.getParameter("Klijent_Id")));
             Klijent klijent = (Klijent)request.getAttribute("Klijent");
+            
+            String Rola = "";
+            if (klijent.getRola().equals("1"))
+                Rola = "Klijent";
+            else if(klijent.getRola().equals("2"))
+                Rola = "Administrator";
+            else
+                Rola = "Menadžer hotela";
         %>
         <form action="EditKlijent" method="post">
             <input value="<%= request.getParameter("Klijent_Id")%>" name="Klijent_Id" type="hidden">
@@ -79,12 +87,22 @@
                 </div>
                </tr>
                <br>
-               <tr>
-                <div class="form-inline">
-                    <td style="padding-top:9%"><label> Rola: </label></td>
-                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Rola" value="<%= klijent.getVrsta()%>"  name="Rola"></td>
-                </div>
-               </tr>
+               <tr>              
+                   <td style="padding-top:9%"> <label> Rola:</label> </td>
+                   <td style="padding-top:6%; padding-left:2%">
+                        <select name="Rola">
+                            <option value="1"<%if (klijent.getRola().equals("1")){
+                                {%> selected <%}
+                            }%>>Klijent</option>
+                            <option value="2"<%if (klijent.getRola().equals("2")){
+                                {%> selected <%}
+                            }%>>Administrator</option>
+                            <option value="3"<%if (klijent.getRola().equals("3")){
+                                {%> selected <%}
+                            }%>>Menadžer hotela</option>
+                        </select>
+                   </td>
+               </tr> 
                <br>
                <tr>
                 <div class="form-inline">

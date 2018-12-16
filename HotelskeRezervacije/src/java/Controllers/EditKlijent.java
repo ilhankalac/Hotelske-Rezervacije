@@ -51,13 +51,13 @@ public class EditKlijent extends HttpServlet {
         klijent.setAdresa(request.getParameter("Adresa"));
         klijent.setDrzava(request.getParameter("Drzava"));
         klijent.setGrad(request.getParameter("Grad"));
-        klijent.setVrsta(request.getParameter("Rola"));
+        klijent.setRola(request.getParameter("Rola"));
         klijent.setPoeni(Double.parseDouble( request.getParameter("Poeni")));
         klijent.setHotelID(Integer.parseInt(request.getParameter("HotelID")));
         klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
 
         
-        if(new  KlijentRepo().update(klijent)==1)
+        if(new  KlijentRepo().update(klijent))
             response.sendRedirect("Klijenti.jsp");
         else
         {

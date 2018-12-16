@@ -15,7 +15,7 @@ public class Klijent {
     private String  Adresa;
     private String Grad;
     private String Drzava;
-    private String Vrsta;
+    private String Rola;
     private Double Poeni;
     private String PostanskiBroj;
     private Integer HotelID;
@@ -25,7 +25,7 @@ public class Klijent {
 
     public Klijent(Integer Id, String Ime, String Prezime, String KIme, String Sifra, 
             String Email, String Telefon, String Adresa, String Grad,
-            String Drzava, String Vrsta, Double Poeni,String PostanskiBroj, Integer HotelID) {
+            String Drzava, String Rola, Double Poeni,String PostanskiBroj, Integer HotelID) {
         this.Id = Id;
         this.Ime = Ime;
         this.Prezime = Prezime;
@@ -36,7 +36,7 @@ public class Klijent {
         this.Adresa = Adresa;
         this.Grad = Grad;
         this.Drzava = Drzava;
-        this.Vrsta = Vrsta;
+        this.Rola = Rola;
         this.Poeni = Poeni;
         this.PostanskiBroj = PostanskiBroj;
         this.HotelID = HotelID;
@@ -107,12 +107,12 @@ public class Klijent {
         this.Drzava = Drzava;
     } 
     
-    public String getVrsta() {
-        return this.Vrsta ;
+    public String getRola() {
+        return this.Rola ;
     }
-    public void setVrsta(String Vrsta) {
-        this.Vrsta = Vrsta;
-    } 
+    public void setRola(String Rola) {
+        this.Rola = Rola;
+    }  
     
     public Double getPoeni(){
         return this.Poeni;

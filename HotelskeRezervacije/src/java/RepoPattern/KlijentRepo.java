@@ -36,10 +36,10 @@ public class KlijentRepo {
     
     
     
-    public int insertKlijent(Klijent klijent){
+    public boolean insertKlijent(Klijent klijent){
         try {
             String insertToKlijent = "INSERT INTO `klijenti`(Ime, Prezime, KIme, Sifra, Email, Telefon,"
-                    + " Adresa, Grad, Drzava, Vrsta, Poeni, HotelID, PostanskiBroj)"
+                    + " Adresa, Grad, Drzava, Poeni, HotelID, PostanskiBroj, RolaID)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             PreparedStatement pst = con.prepareStatement(insertToKlijent);
@@ -53,20 +53,20 @@ public class KlijentRepo {
             pst.setString(7, klijent.getAdresa());
             pst.setString(8, klijent.getGrad());
             pst.setString(9, klijent.getDrzava());
-            pst.setString(10, "Nista");
-            pst.setDouble(11, 0.0);
+            pst.setDouble(10, 0.0);
             //prilikom registracije klijentu se po difoltu dodeljuje  prvi hotel u tabeli
-            pst.setInt(12, 1);
-            pst.setString(13, klijent.getPostanskiBroj());
+            pst.setInt(11, 1);
+            pst.setString(12, klijent.getPostanskiBroj());
+            pst.setInt(13, 1);
             
             
            pst.executeUpdate();
            
-           return 1;
+           return true;
         } catch (SQLException e) {
           
         }
-        return 0;
+        return false;
     }
     public boolean logovanje(String username, String password){
         
@@ -108,7 +108,7 @@ public class KlijentRepo {
                  klijent.setAdresa(rs.getString("Adresa"));
                  klijent.setGrad(rs.getString("Grad"));
                  klijent.setDrzava(rs.getString("Drzava"));
-                 klijent.setVrsta(rs.getString("Vrsta"));
+                 klijent.setRola(Integer.toString(rs.getInt("RolaID")));
                  klijent.setPoeni(rs.getDouble("Poeni"));
                  klijent.setHotelID(rs.getInt("HotelID"));
                  klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
@@ -155,7 +155,7 @@ public class KlijentRepo {
                 klijent.setAdresa(rs.getString("Adresa"));
                 klijent.setGrad(rs.getString("Grad"));
                 klijent.setDrzava(rs.getString("Drzava"));
-                klijent.setVrsta(rs.getString("Vrsta"));
+                klijent.setRola(Integer.toString( rs.getInt("RolaID")));
                 klijent.setPoeni(rs.getDouble("Poeni"));
                 klijent.setHotelID(rs.getInt("HotelID"));
                 klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
@@ -168,7 +168,7 @@ public class KlijentRepo {
         return klijent;
     }
     
-    public int update(Klijent klijent){
+    public boolean update(Klijent klijent){
         
         String update = "update klijenti "
                       + "set Ime = ?,"
@@ -179,7 +179,7 @@ public class KlijentRepo {
                       + "Adresa = ?,"
                       + "Drzava = ?,"
                       + "Grad = ?,"
-                      + "Vrsta = ?,"
+                      + "RolaID = ?,"
                       + "Poeni = ?,"
                       + "HotelID = ?,"
                       + "PostanskiBroj = ?"
@@ -196,7 +196,7 @@ public class KlijentRepo {
             pst.setString(6, klijent.getAdresa());
             pst.setString(7, klijent.getDrzava());
             pst.setString(8, klijent.getGrad()); 
-            pst.setString(9, klijent.getVrsta());
+            pst.setInt(9, Integer.parseInt(klijent.getRola()));
             pst.setDouble(10, klijent.getPoeni());
             pst.setInt(11, klijent.getHotelID());
             pst.setString(12, klijent.getPostanskiBroj());
@@ -204,10 +204,10 @@ public class KlijentRepo {
 
             pst.executeUpdate();
             
-            return 1;
+            return true;
             
         } catch (SQLException e) {
-          return 0;
+          return false;
         }
     }
 }

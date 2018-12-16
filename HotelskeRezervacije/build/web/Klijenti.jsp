@@ -24,6 +24,8 @@
       
     </style>
     <body>
+        
+      
           
         <jsp:include page="navbar.jsp" />  
         <div style="padding-left:10%; padding-right: 10%;">
@@ -39,7 +41,7 @@
                       <th scope="col">Adresa</th>
                       <th scope="col">Država</th>
                       <th scope="col">Grad</th>
-                      <th scope="col">Rola</th>
+                      <th scope="col">Rola</th> 
                       <th scope="col">Poeni</th>
                       <th scope="col">HotelID</th>
                       <th scope="col">Postanski Broj</th>
@@ -49,8 +51,17 @@
          <tbody>
          <%
              int  i = 1;
-             for(Klijent klijent: new KlijentRepo().ListaKlijenata()){ { %>
-
+             for(Klijent klijent: new KlijentRepo().ListaKlijenata()){
+                    String Rola = "";
+                    if (klijent.getRola().equals("1"))
+                        Rola = "Klijent";
+                    else if(klijent.getRola().equals("2"))
+                        Rola = "Administrator";
+                    else
+                        Rola = "Menadžer hotela";
+                    { %>
+                    
+                        
                     <tr>
                       <td> <%= i++ %> </td>
                       <td><%=klijent.getIme() %> </td>
@@ -61,7 +72,7 @@
                       <td><%=klijent.getAdresa()%> </td>
                       <td><%=klijent.getDrzava()%> </td>
                       <td><%=klijent.getGrad()%> </td>
-                      <td><%=klijent.getVrsta()%> </td>
+                      <td><%=Rola%> </td>
                       <td><%=klijent.getPoeni()%> </td>
                       <td><%=klijent.getHotelID()%> </td>
                       <td><%=klijent.getPostanskiBroj()%> </td>
@@ -80,7 +91,6 @@
                  
              <%}
              }
-             
              %>
           </tbody>
          </table>
