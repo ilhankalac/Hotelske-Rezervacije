@@ -30,6 +30,7 @@ public class Login extends HttpServlet {
             
             if(new KlijentRepo().logovanje(username, password)){
                 sesija.setAttribute("ulogovan", username); 
+                sesija.setAttribute("UlogovanaRola", new KlijentRepo().Rola(username, password));
                 request.setAttribute("prvoLogovanje", "True");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
@@ -37,8 +38,6 @@ public class Login extends HttpServlet {
                 request.setAttribute("prvoLogovanje", "False");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-                
-          
         }    }
 
 

@@ -41,6 +41,7 @@ public class Registracija extends HttpServlet {
                 request.getRequestDispatcher("Registracija.jsp").forward(request, response);
                 HttpSession sesija = request.getSession();
                 sesija.setAttribute("ulogovan", klijent.getKIme());
+                sesija.setAttribute("UlogovanaRola", "1");
             }
             else{
                 request.setAttribute("rezultat", "False");

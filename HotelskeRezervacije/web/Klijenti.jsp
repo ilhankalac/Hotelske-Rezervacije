@@ -24,7 +24,10 @@
       
     </style>
     <body>
-        
+        <%
+            if(!request.getSession().getAttribute("UlogovanaRola").equals("2"))
+                response.sendRedirect("index.jsp");
+        %>
       
           
         <jsp:include page="navbar.jsp" />  

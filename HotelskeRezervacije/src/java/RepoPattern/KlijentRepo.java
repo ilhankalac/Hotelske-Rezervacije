@@ -167,7 +167,22 @@ public class KlijentRepo {
       
         return klijent;
     }
-    
+    public String Rola(String username, String password){
+        
+        String select = "select RolaID from klijenti where sifra = '"+ password + "' and KIme = '" + username + "'";
+        Statement st;
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(select);
+
+            while(rs.next())
+                return rs.getString("RolaID");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Greska";
+    }
     public boolean update(Klijent klijent){
         
         String update = "update klijenti "

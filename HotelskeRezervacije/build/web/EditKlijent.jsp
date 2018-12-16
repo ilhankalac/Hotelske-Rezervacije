@@ -26,6 +26,8 @@
                 Rola = "Administrator";
             else
                 Rola = "Menadžer hotela";
+            
+            
         %>
         <form action="EditKlijent" method="post">
             <input value="<%= request.getParameter("Klijent_Id")%>" name="Klijent_Id" type="hidden">
