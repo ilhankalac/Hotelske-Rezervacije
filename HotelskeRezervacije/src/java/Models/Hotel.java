@@ -1,5 +1,7 @@
 package Models;
 
+import java.sql.Blob;
+
 /**
  *
  * @author Ilhan Kalac
@@ -12,17 +14,18 @@ public class Hotel {
     private String Grad;
     private String Drzava;
     private Integer BrojZvezdica;
-
+    private Blob Fotografija;
     public Hotel(){
         
     }
-    public Hotel(Integer Id, String Naziv, String Adresa, String Grad, String Drzava, Integer BrojZvezdica) {
+    public Hotel(Integer Id, String Naziv, String Adresa, String Grad, String Drzava, Integer BrojZvezdica, Blob Fotografija) {
         this.Id = Id;
         this.Naziv = Naziv;
         this.Adresa = Adresa;
         this.Grad = Grad;
         this.Drzava = Drzava;
         this.BrojZvezdica = BrojZvezdica;
+        this.Fotografija = Fotografija;
     }
     
     public int getHotelId(){
@@ -70,5 +73,12 @@ public class Hotel {
     public  void setBrojZvezdica(Integer BrojZvezdica){
         this.BrojZvezdica = BrojZvezdica;
     }
+    
+     public Blob getFotografija() {
+        return this.Fotografija;
+    }
+    public void setFotografija(Blob Fotografija) {
+        this.Fotografija = Fotografija;
+    } 
     
 }

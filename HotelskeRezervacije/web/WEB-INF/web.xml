@@ -28,6 +28,10 @@
         <servlet-name>KreiranjeHotela</servlet-name>
         <servlet-class>Controllers.KreiranjeHotela</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Hoteli</servlet-name>
+        <servlet-class>Controllers.Hoteli</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -56,9 +60,18 @@
         <servlet-name>KreiranjeHotela</servlet-name>
         <url-pattern>/KreiranjeHotela</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Hoteli</servlet-name>
+        <url-pattern>/Hoteli</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.0.1</version>
+    </dependency>
 </web-app>

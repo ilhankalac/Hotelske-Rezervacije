@@ -13,13 +13,15 @@
     </head>
     <body>
          <jsp:include page="navbar.jsp" /> 
-         <form action = "KreiranjeHotela" method="post">
+         <form action = "KreiranjeHotela" method="post" enctype="multipart/form-data">
 
              Naziv: <input type="text" name="Naziv"> <br> <br> 
              Država: <input type="text" name="Drzava"> <br> <br> 
              Grad: <input type="text" name="Grad"> <br><br> 
              Adresa: <input type="text" name="Adresa"> <br> <br> 
              Broj zvezdica: <input type="text" name="Zvezdice"> <br>  <br> 
+             Fotografija: <input type="file" name="file"> <br> <br>
+             
              <input type="submit" value="Kreiraj">
              
          </form>

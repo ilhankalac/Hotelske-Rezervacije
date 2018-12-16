@@ -137,7 +137,7 @@ public class KlijentRepo {
         }
        
     }
-    public Klijent klijent(String Id){
+    public Klijent Klijent(String Id){
 
         Klijent klijent = new Klijent();
         try {
