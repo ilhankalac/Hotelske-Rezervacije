@@ -55,7 +55,7 @@ public class KlijentRepo {
             pst.setString(9, klijent.getDrzava());
             pst.setDouble(10, 0.0);
             //prilikom registracije klijentu se po difoltu dodeljuje  prvi hotel u tabeli
-            pst.setInt(11, 1);
+            pst.setInt(11, 7);
             pst.setString(12, klijent.getPostanskiBroj());
             pst.setInt(13, 1);
             
