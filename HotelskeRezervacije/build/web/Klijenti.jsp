@@ -54,7 +54,7 @@
          <tbody>
          <%
              int  i = 1;
-             for(Klijent klijent: new KlijentRepo().ListaKlijenata()){
+             for(Klijent klijent: new KlijentRepo().lista()){
                     String Rola = "";
                     if (klijent.getRola().equals("1"))
                         Rola = "Klijent";

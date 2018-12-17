@@ -16,7 +16,7 @@
     <body>
         <jsp:include page="navbar.jsp" />  
         <% 
-            request.setAttribute("Klijent", new KlijentRepo().klijent(request.getParameter("Klijent_Id")));
+            request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
             Klijent klijent = (Klijent)request.getAttribute("Klijent");
             
             String Rola = "";

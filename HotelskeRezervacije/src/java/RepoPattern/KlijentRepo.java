@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author Ilhan Kalac
@@ -36,7 +37,7 @@ public class KlijentRepo {
     
     
     
-    public boolean insertKlijent(Klijent klijent){
+    public boolean insert(Klijent klijent){
         try {
             String insertToKlijent = "INSERT INTO `klijenti`(Ime, Prezime, KIme, Sifra, Email, Telefon,"
                     + " Adresa, Grad, Drzava, Poeni, HotelID, PostanskiBroj, RolaID)"
@@ -87,7 +88,7 @@ public class KlijentRepo {
       
         return false;
     }
-    public ArrayList<Klijent> ListaKlijenata(){
+    public ArrayList<Klijent> lista(){
         
         ArrayList<Klijent> klijenti = new ArrayList<Klijent>();
         try {
@@ -137,7 +138,7 @@ public class KlijentRepo {
         }
        
     }
-    public Klijent Klijent(String Id){
+    public Klijent select(String Id){
 
         Klijent klijent = new Klijent();
         try {
@@ -225,4 +226,5 @@ public class KlijentRepo {
           return false;
         }
     }
+    
 }

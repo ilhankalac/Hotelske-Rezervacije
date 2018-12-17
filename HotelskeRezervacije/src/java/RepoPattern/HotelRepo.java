@@ -4,6 +4,8 @@ import Models.Hotel;
 import Models.Klijent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +15,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
@@ -65,7 +69,7 @@ public class HotelRepo {
             return false;
         }
     }
-    public ArrayList<Hotel> ListaHotela(){
+    public ArrayList<Hotel> lista(){
         
         ArrayList<Hotel> hoteli = new ArrayList<Hotel>();
         try {
@@ -95,7 +99,28 @@ public class HotelRepo {
         
         return hoteli; 
     }
-    
+    public void fotografije(HttpServletRequest request, HttpServletResponse response, String HotelID)throws ServletException, IOException {
+        
+            Statement stmt;
+            try {
+
+                stmt = con.createStatement();
+                byte[] imgData = null;
+                ResultSet rs = stmt.executeQuery("select fotografija from hotel where id = " + HotelID);
+                while (rs.next()) 
+                {
+                    Blob image = rs.getBlob(1);
+                    imgData = image.getBytes(1,(int)image.length());
+                }
+                response.setContentType("image/jpg");
+                try (OutputStream o = response.getOutputStream()) {
+                    o.write(imgData);
+                    o.flush();
+                }
+            } catch (SQLException ex) {
+
+            }
+    }
 
     
 }

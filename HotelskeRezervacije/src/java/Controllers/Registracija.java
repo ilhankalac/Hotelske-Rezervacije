@@ -36,7 +36,7 @@ public class Registracija extends HttpServlet {
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
 
             
-            if(new KlijentRepo().insertKlijent(klijent)){
+            if(new KlijentRepo().insert(klijent)){
                 request.setAttribute("rezultat", "True");
                 request.getRequestDispatcher("Registracija.jsp").forward(request, response);
                 HttpSession sesija = request.getSession();
