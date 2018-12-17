@@ -5,12 +5,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    <body> 
        
        <% 
@@ -20,80 +16,96 @@
                pom = true;
            }
            %>             
-        <nav class="navbar navbar-inverse">
-         <div class="container-fluid">
-           <div class="navbar-header">
-             <a class="navbar-brand" href="index.jsp">Hotelske rezervacije</a>
-           </div>
-           <ul class="nav navbar-nav navbar-right">
-             <li class="dropdown">
-               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
-               <span class="caret"></span></a>
-               <ul class="dropdown-menu">
-                 <li><a href="#">Page 1-1</a></li>
-                 <li><a href="#">Page 1-2</a></li>
-                 <li><a href="#">Page 1-3</a></li>
-               </ul>
-             </li>
-            <%
-                if (!pom){%>
-               
-                  <li><a href="Registracija.jsp">Registruj se</a></li>
-                  <li>  <a  data-toggle="modal" data-target="#exampleModal" class="btn btn-link">
-                    Prijavi se
-                      </a> </li>
-                  
-                    <%   } 
-                else {%>
-                     <li><a href="Logout">Odjavi se</a></li>
-                 <%   } 
-                  %>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Prijava</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <form action="Login" method="post">
-                        <div class="modal-body">
-                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Korisničko ime: </span>
-                              </div>
-                              <input name="username" type="text" class="form-control" placeholder="Korisničko ime" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.jsp">Hotelske rezervacije</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <%
+                 if (!pom){%>
+
+                   <li class="nav-item"><a class="nav-link" href="Registracija.jsp">Registruj se</a></li>
+                   <li class="nav-item"><a class="nav-link" href="" data-toggle="modal" data-target="#exampleModal" >Prijavi se</a></li>
+
+
+                     <%   } 
+                 else {%>
+                      <li class="nav-item"><a class="nav-link" href="Logout">Odjavi se</a></li>
+                  <%   } 
+                   %>
+
+                 <!-- Modal -->
+                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                   <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">Prijava</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                         </button>
+                       </div>
+                       <form action="Login" method="post">
+                         <div class="modal-body">
                              <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Lozinka:  </span>
-                              </div>
-                              <input name="password" type="password" class="form-control" placeholder="Lozinka" aria-label="Password" aria-describedby="basic-addon1">
-                                <% 
-                                    String loginGreska =  (String) request.getAttribute("prvoLogovanje");
-                                    if(loginGreska!=null)
-                                    if(loginGreska.equals("False")) {%>
-                                       <div class="invalid-tooltip" style="color:red">
-                                           Pogrešno ste uneli podatke.
-                                       </div>
-                                    <%}
-                                %> 
+                               <div class="input-group-prepend">
+                                 <span class="input-group-text" id="basic-addon1" for="validationServer03">Korisničko ime: </span>
+                               </div>
+                                 <input required name="username" type="text" class="form-control" placeholder="Korisničko ime" aria-label="Username" aria-describedby="basic-addon1">
                              </div>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-                        <button type="submit" class="btn btn-primary">Prijavi  se</button>
-                      </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>              
-           </ul>
+                              <div class="input-group mb-3">
+                               <div class="input-group-prepend">
+                                 <span class="input-group-text" id="basic-addon1">Lozinka: </span>
+                               </div>
+                               <input required name="password" type="password" class="form-control" placeholder="Lozinka" aria-label="Password" aria-describedby="basic-addon1">
+                                 <% 
+                                     String loginGreska =  (String) request.getAttribute("prvoLogovanje");
+                                     if(loginGreska!=null)
+                                     if(loginGreska.equals("False")) {%>
+                                     <div class="invalid-feedback">
+                                         Pogresan unos podataka !
+                                     </div>
+                                     <%}
+                                 %> 
+                              </div>
+                         </div>
+                         <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                         <button type="submit" class="btn btn-primary">Prijavi  se</button>
+                       </form>
+                       </div>
+                     </div>
+                   </div>
+                 </div> 
+       <li class="nav-item">
+         <a class="nav-link" href="#">Features</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="#">Pricing</a>
+       </li>
+       <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Dropdown link
+         </a>
+         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="#">Action</a>
+           <a class="dropdown-item" href="#">Another action</a>
+           <a class="dropdown-item" href="#">Something else here</a>
          </div>
-       </nav>
-              
+       </li>
+     </ul>
+   </div>
+ </nav>
+       
+   
+      
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    </body>
 </html>

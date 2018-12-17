@@ -23,6 +23,7 @@ public class Logout extends HttpServlet {
             
             HttpSession sesija = request.getSession();
             sesija.removeAttribute("ulogovan");
+            sesija.removeAttribute("UlogovanaRola");
             response.sendRedirect("index.jsp");
             
         }

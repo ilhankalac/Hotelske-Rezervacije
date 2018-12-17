@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Hoteli</title>
     </head>
-      <link rel="stylesheet" type="text/css" href="theme.css">
+     
     <body>
         <jsp:include page="navbar.jsp" />  
         <%

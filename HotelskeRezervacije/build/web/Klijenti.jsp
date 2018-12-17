@@ -25,8 +25,14 @@
     </style>
     <body>
         <%
+            if(request.getSession().getAttribute("UlogovanaRola")!=null){   
             if(!request.getSession().getAttribute("UlogovanaRola").equals("2"))
                 response.sendRedirect("index.jsp");
+            }
+            else
+                response.sendRedirect("index.jsp");
+          
+            
         %>
       
           
