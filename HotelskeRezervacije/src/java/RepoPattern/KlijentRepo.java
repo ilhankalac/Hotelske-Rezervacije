@@ -37,7 +37,7 @@ public class KlijentRepo {
     
     
     
-    public boolean insert(Klijent klijent){
+    public boolean insert(Klijent klijent) throws SQLException{
         try {
             String insertToKlijent = "INSERT INTO `klijenti`(Ime, Prezime, KIme, Sifra, Email, Telefon,"
                     + " Adresa, Grad, Drzava, Poeni, HotelID, PostanskiBroj, RolaID)"
@@ -67,9 +67,12 @@ public class KlijentRepo {
         } catch (SQLException e) {
           
         }
+        finally{
+            con.close();
+        }
         return false;
     }
-    public boolean logovanje(String username, String password){
+    public boolean logovanje(String username, String password) throws SQLException{
         
         
         String provera = "select * from Klijenti where KIme = '" + username+ "'  and Sifra = '"+ password+"'";
@@ -84,11 +87,14 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
        
       
         return false;
     }
-    public ArrayList<Klijent> lista(){
+    public ArrayList<Klijent> lista() throws SQLException{
         
         ArrayList<Klijent> klijenti = new ArrayList<Klijent>();
         try {
@@ -119,11 +125,14 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
         
         
         return klijenti; 
     }
-    public void brisanje(String Id){
+    public void brisanje(String Id) throws SQLException{
  
         
         try {
@@ -136,9 +145,12 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
        
     }
-    public Klijent select(String Id){
+    public Klijent select(String Id) throws SQLException{
 
         Klijent klijent = new Klijent();
         try {
@@ -165,10 +177,13 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
       
         return klijent;
     }
-    public String Rola(String username, String password){
+    public String Rola(String username, String password) throws SQLException{
         
         String select = "select RolaID from klijenti where sifra = '"+ password + "' and KIme = '" + username + "'";
         Statement st;
@@ -182,9 +197,12 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
         return "Greska";
     }
-    public boolean update(Klijent klijent){
+    public boolean update(Klijent klijent) throws SQLException{
         
         String update = "update klijenti "
                       + "set Ime = ?,"
@@ -224,6 +242,9 @@ public class KlijentRepo {
             
         } catch (SQLException e) {
           return false;
+        }
+        finally{
+            con.close();
         }
     }
     

@@ -50,7 +50,7 @@ public class KreiranjeHotela extends HttpServlet {
             hotel.setGrad(request.getParameter("Grad"));
             hotel.setAdresa(request.getParameter("Adresa")); 
             hotel.setBrojZvezdica(Integer.parseInt(request.getParameter("Zvezdice")));
-            
+            hotel.setOpis(request.getParameter("Opis"));
             //klasa koja pomaze  za insert fotografije u bazu
             Part part = request.getPart("file");
             

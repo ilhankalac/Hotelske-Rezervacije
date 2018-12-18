@@ -15,10 +15,11 @@ public class Hotel {
     private String Drzava;
     private Integer BrojZvezdica;
     private Blob Fotografija;
+    private String  Opis;
     public Hotel(){
         
     }
-    public Hotel(Integer Id, String Naziv, String Adresa, String Grad, String Drzava, Integer BrojZvezdica, Blob Fotografija) {
+    public Hotel(Integer Id, String Naziv, String Adresa, String Grad, String Drzava, Integer BrojZvezdica, Blob Fotografija, String Opis) {
         this.Id = Id;
         this.Naziv = Naziv;
         this.Adresa = Adresa;
@@ -26,6 +27,7 @@ public class Hotel {
         this.Drzava = Drzava;
         this.BrojZvezdica = BrojZvezdica;
         this.Fotografija = Fotografija;
+        this.Opis = Opis;
     }
     
     public int getHotelId(){
@@ -79,6 +81,13 @@ public class Hotel {
     }
     public void setFotografija(Blob Fotografija) {
         this.Fotografija = Fotografija;
+    } 
+    
+    public String getOpis() {
+        return this.Opis;
+    }
+    public void setOpis(String Opis) {
+        this.Opis = Opis;
     } 
     
 }

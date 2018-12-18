@@ -20,8 +20,8 @@
              Grad: <input type="text" name="Grad"> <br><br> 
              Adresa: <input type="text" name="Adresa"> <br> <br> 
              Broj zvezdica: <input type="text" name="Zvezdice"> <br>  <br> 
+             Opis: <input type="text" name="Opis"> <br>  <br> 
              Fotografija: <input type="file" name="file"> <br> <br>
-             
              <input type="submit" value="Kreiraj">
              
          </form>

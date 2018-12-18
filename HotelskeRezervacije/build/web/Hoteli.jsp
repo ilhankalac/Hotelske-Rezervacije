@@ -19,21 +19,31 @@
     <body>
         <jsp:include page="navbar.jsp" />  
         <%
-
+           String IDk = "";
+           if(request.getSession().getAttribute("UlogovanaRola")!=null)
+            IDk = (String)request.getSession().getAttribute("UlogovanaRola");
            for(Hotel hotel : new HotelRepo().lista())
            {
                {%>
-                <div class="card" style="width: 18rem;">
-                    <img height="90px" width="160px" src="PrikaziFotografije.jsp?hotelID=<%=hotel.getHotelId()%>" /> 
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text"><%=hotel.getNaziv()%>.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-               </div>      
+                <div class="card" style="width: 18rem; float:left; margin:7.5px">              
+                    <img height="180px" width="286px" src="PrikaziFotografije.jsp?hotelID=<%=hotel.getHotelId()%>" /> 
+                    <div class="card-body">
+                        <h5 class="card-title"> <%=hotel.getNaziv()%></h5>
+                        <p class="card-text">Država: <%=hotel.getDrzava()%> </p>
+                        <p class="card-text">Grad: <%=hotel.getGrad()%> </p>
+                        <p class="card-text">Adresa: <%=hotel.getAdresa()%> </p>
+                        <p class="card-text">Opis: <%=hotel.getOpis()%> </p>
+                        <p class="card-text">Broj zvezdica: <%=hotel.getBrojZvezdica()%> </p>
+                        <a href="#" class="btn btn-primary">Pogledaj sobe</a>
+                        <% if (IDk.equals("2")) {%> 
+                            <a href="#" class="btn btn-success">Izmeni</a>
+                            <%}
+                        %>
+                        
+                    </div>   
+                </div>  
                <%}
            }
-        
         %>
     </body>
 </html>

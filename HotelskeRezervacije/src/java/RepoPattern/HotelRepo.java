@@ -39,12 +39,13 @@ public class HotelRepo {
             con = DriverManager.getConnection(URL, USER, PASS);
         } catch (SQLException ex) {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
+        
     }
     
-    public boolean insert(Hotel hotel, Part part){
-        String insert = "INSERT INTO `hotel`( `Naziv`, `Drzava`, `Grad`, `Adresa`, `BrojZvezdica`, Fotografija) "
-                        + "VALUES (?,?,?,?,?,?) ";
+    public boolean insert(Hotel hotel, Part part) throws SQLException{
+        String insert = "INSERT INTO `hotel`( `Naziv`, `Drzava`, `Grad`, `Adresa`, `BrojZvezdica`, Fotografija, Opis) "
+                        + "VALUES (?,?,?,?,?,?,?) ";
         try {
             PreparedStatement pst = con.prepareStatement(insert);
             
@@ -56,6 +57,7 @@ public class HotelRepo {
             
             InputStream is = part.getInputStream();
             pst.setBlob(6,is);
+            pst.setString(7, hotel.getOpis());
             
             
             pst.executeUpdate();
@@ -68,8 +70,11 @@ public class HotelRepo {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+        finally{
+            con.close();
+        }
     }
-    public ArrayList<Hotel> lista(){
+    public ArrayList<Hotel> lista() throws SQLException{
         
         ArrayList<Hotel> hoteli = new ArrayList<Hotel>();
         try {
@@ -88,12 +93,15 @@ public class HotelRepo {
                  hotel.setDrzava(rs.getString("Drzava"));
                  hotel.setBrojZvezdica(rs.getInt("BrojZvezdica"));
                  hotel.setFotografija(rs.getBlob("Fotografija"));
-                 
+                 hotel.setOpis(rs.getString("Opis"));
                  hoteli.add(hotel);
              }
- 
+             
         } catch (SQLException ex) {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
         }
         
         
@@ -121,6 +129,29 @@ public class HotelRepo {
 
             }
     }
+    public Hotel select(String Id) throws SQLException{
+        Hotel hotel = new Hotel();
+        try {
+            String select = "select *from hotel where id = " + Id;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(select);
 
+            while(rs.next()){
+                hotel.setHotelId(rs.getInt("Id"));
+                hotel.setNaziv(rs.getString("Naziv"));
+                hotel.setDrzava(rs.getString("Drzava"));
+                hotel.setGrad(rs.getString("Grad"));
+                hotel.setAdresa(rs.getString("Adresa"));
+                hotel.setBrojZvezdica(rs.getInt("BrojZvezdica"));
+                hotel.setFotografija(rs.getBlob("Fotografija"));
+            }
+        } catch (SQLException ex) {
+           Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
+        }
+        return hotel;
+    }
     
 }
