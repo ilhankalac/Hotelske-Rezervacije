@@ -1,7 +1,6 @@
 package RepoPattern;
 
 import Models.Hotel;
-import Models.Klijent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -143,6 +142,7 @@ public class HotelRepo {
                 hotel.setGrad(rs.getString("Grad"));
                 hotel.setAdresa(rs.getString("Adresa"));
                 hotel.setBrojZvezdica(rs.getInt("BrojZvezdica"));
+                hotel.setOpis(rs.getString("Opis"));
                 hotel.setFotografija(rs.getBlob("Fotografija"));
             }
         } catch (SQLException ex) {
@@ -152,6 +152,58 @@ public class HotelRepo {
             con.close();
         }
         return hotel;
+    }
+    public boolean update(Hotel hotel, Part part) throws SQLException, IOException{
+        
+        
+        String dodatakUpita = "Fotografija = ?,";
+        
+        String update = "update hotel "
+                      + "set Naziv = ?,"
+                      + "Drzava = ?,"
+                      + "Grad = ?,"
+                      + "Adresa = ?,"
+                      + "BrojZvezdica = ?,";
+        
+        if (part.getSize()!=0)
+            update += dodatakUpita;
+    
+        update += "Opis = ?"+
+                  "where id = ?";      
+                
+         
+        try {
+            PreparedStatement pst = con.prepareStatement(update);
+
+            pst.setString(1, hotel.getNaziv());
+            pst.setString(2, hotel.getDrzava());
+            pst.setString(3, hotel.getGrad());
+            pst.setString(4, hotel.getAdresa());
+            pst.setInt(5, hotel.getBrojZvezdica());
+            
+            InputStream is;
+            
+            if(part.getSize()!=0){
+                is = part.getInputStream();
+                pst.setBlob(6, is);
+                pst.setString(7,hotel.getOpis());
+                pst.setInt(8, hotel.getHotelId());
+            }
+            else{
+                pst.setString(6, hotel.getOpis());
+                pst.setInt(7, hotel.getHotelId());
+            }
+
+            pst.executeUpdate();
+            
+            return true;
+            
+        } catch (SQLException e) {
+          return false;
+        }
+        finally{
+            con.close();
+        }
     }
     
 }

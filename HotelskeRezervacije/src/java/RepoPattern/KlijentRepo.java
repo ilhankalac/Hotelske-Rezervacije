@@ -177,9 +177,6 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
       
         return klijent;
     }
@@ -242,9 +239,6 @@ public class KlijentRepo {
             
         } catch (SQLException e) {
           return false;
-        }
-        finally{
-            con.close();
         }
     }
     

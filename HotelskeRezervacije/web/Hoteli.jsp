@@ -36,7 +36,7 @@
                         <p class="card-text">Broj zvezdica: <%=hotel.getBrojZvezdica()%> </p>
                         <a href="#" class="btn btn-primary">Pogledaj sobe</a>
                         <% if (IDk.equals("2")) {%> 
-                            <a href="#" class="btn btn-success">Izmeni</a>
+                            <a href="${pageContext.request.contextPath}/EditHotel.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-success">Izmeni</a>
                             <%}
                         %>
                         

@@ -38,6 +38,8 @@ public class Login extends HttpServlet {
                 request.setAttribute("prvoLogovanje", "False");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }    }
 
 

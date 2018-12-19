@@ -4,6 +4,7 @@ import Models.Klijent;
 import RepoPattern.KlijentRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -48,6 +49,8 @@ public class Registracija extends HttpServlet {
                 request.getRequestDispatcher("Registracija.jsp").forward(request, response);
             }
            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registracija.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
