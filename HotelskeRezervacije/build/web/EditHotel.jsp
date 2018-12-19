@@ -91,7 +91,14 @@
              
               </table> <br>
                <input type="submit" value ="Izmeni" class="btn btn-secondary">
+               <form action="BrisanjeHotela" method="post">
+                  <a class="delete_link btn btn-danger btn-large"  
+                                    href="${pageContext.request.contextPath}/BrisanjeHotela?Hotel_Id=<%= hotel.getHotelId()%>" >
+                                   <i class="fa fa-trash"> Obriši</i>                                  
+                  </a>
+               </form>
            </div>
         </form>
+               
     </body>
 </html>

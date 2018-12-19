@@ -32,6 +32,10 @@
         <servlet-name>EditHotel</servlet-name>
         <servlet-class>Controllers.EditHotel</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BrisanjeHotela</servlet-name>
+        <servlet-class>Controllers.BrisanjeHotela</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>EditHotel</servlet-name>
         <url-pattern>/EditHotel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BrisanjeHotela</servlet-name>
+        <url-pattern>/BrisanjeHotela</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

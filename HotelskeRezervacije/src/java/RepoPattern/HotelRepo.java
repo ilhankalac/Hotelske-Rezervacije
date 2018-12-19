@@ -205,5 +205,21 @@ public class HotelRepo {
             con.close();
         }
     }
+    public void brisanje (String Id) throws SQLException{
+        try {
+          
+            String delete = "delete from  hotel where id = " + Id;
+            PreparedStatement ps  = con.prepareStatement(delete);
+
+            ps.executeUpdate();
+  
+        } catch (SQLException ex) {
+            Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
+        }
+       
+    }
     
 }
