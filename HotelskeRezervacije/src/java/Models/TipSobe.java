@@ -7,15 +7,12 @@ package Models;
 public class TipSobe {
     private Integer Id;
     private String Naziv;
-    private String Opis;
-    private String KratkiOpis;
+    
     
     public TipSobe(){}
-    public TipSobe(Integer Id, String Naziv, String Opis, String KratkiOpis) {
+    public TipSobe(Integer Id, String Naziv) {
         this.Id = Id;
         this.Naziv = Naziv;
-        this.Opis = Opis;
-        this.KratkiOpis = KratkiOpis;
     }
     public int getTipSobeId(){
         return  this.Id;
@@ -29,19 +26,6 @@ public class TipSobe {
     }
     public void setNaziv(String Naziv) {
         this.Naziv = Naziv;
-    } 
-    
-    public String getOpis() {
-        return this.Opis;
-    }
-    public void setOpis(String Opis) {
-        this.Opis = Opis;
-    }
-    public String getKratkiOpis() {
-        return this.KratkiOpis;
-    }
-    public void setKratkiOpis(String KratkiOpis) {
-        this.KratkiOpis = KratkiOpis;
     } 
     
    

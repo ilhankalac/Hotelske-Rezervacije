@@ -13,21 +13,23 @@ public class Soba {
     private Blob Fotografija;
     private Integer TipSobeID;
     private Integer HotelID;
-    private String NazivHotelaSobe;
-    private String NazivTipaSobe;
+    private String Opis;
+    private String KratkiOpis;
+    
     public TipSobe TipSobe = new TipSobe();
     public Hotel Hotel = new Hotel();
     public Soba(){}
     
     public Soba(Integer Id, String BrojSobe, Blob Fotografija, Integer TipSobeID,
-            Integer HotelID, String NazivHotelaSobe, String NazivTipaSobe, TipSobe TipSobe) {
+            Integer HotelID, String NazivHotelaSobe,
+            String NazivTipaSobe, TipSobe TipSobe, String Opis, String KratkiOpis) {
         this.Id = Id;
         this.BrojSobe = BrojSobe;
         this.Fotografija = Fotografija;
         this.TipSobeID = TipSobeID;
         this.HotelID = HotelID;
-        this.NazivHotelaSobe = NazivHotelaSobe;
-        this.NazivTipaSobe = NazivTipaSobe;
+        this.Opis = Opis;
+        this.KratkiOpis = KratkiOpis;
 
     }
     public  void setSobaId(Integer Id){
@@ -79,4 +81,18 @@ public class Soba {
     }
     
     
+    public String getOpis() {
+        return this.Opis;
+    }
+    public void setOpis(String Opis) {
+        this.Opis = Opis;
+    }
+    public String getKratkiOpis() {
+        return this.KratkiOpis;
+    }
+    public void setKratkiOpis(String KratkiOpis) {
+        this.KratkiOpis = KratkiOpis;
+    } 
+    
+   
 }

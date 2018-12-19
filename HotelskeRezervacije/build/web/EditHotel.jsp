@@ -82,7 +82,7 @@
                 <div class="form-inline">
                     <td style="padding-top:9%"><label> Fotografija: </label></td>
                     <td style="padding-top:6%; padding-left:2%">
-                        <img height="180px" width="286px" src="PrikaziFotografije.jsp?hotelID=<%=hotel.getHotelId()%>" /> 
+                        <img height="180px" width="286px" src="FotografijeHotela.jsp?hotelID=<%=hotel.getHotelId()%>" /> 
                         <input type="file" class="form-control" placeholder="Fotografija" value="<%= hotel.getFotografija()%>"  name="file"></td>
                 </div>
                </tr>
@@ -93,7 +93,7 @@
                <input type="submit" value ="Izmeni" class="btn btn-secondary">
                <form action="BrisanjeHotela" method="post">
                   <a class="delete_link btn btn-danger btn-large"  
-                                    href="${pageContext.request.contextPath}/BrisanjeHotela?Hotel_Id=<%= hotel.getHotelId()%>" >
+                                    href="${pageContext.request.contextPath}/BrisanjeHotela?Hotel_Id=<%= hotel.getHotelId()%> %>" >
                                    <i class="fa fa-trash"> Obriši</i>                                  
                   </a>
                </form>
