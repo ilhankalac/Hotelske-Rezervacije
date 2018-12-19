@@ -26,7 +26,7 @@
            {
                {%>
                 <div class="card" style="width: 18rem; float:left; margin:7.5px">              
-                    <img height="180px" width="286px" src="PrikaziFotografije.jsp?hotelID=<%=hotel.getHotelId()%>" /> 
+                    <img height="180px" width="286px" src="FotografijeHotela.jsp?hotelID=<%=hotel.getHotelId()%>" /> 
                     <div class="card-body">
                         <h5 class="card-title"> <%=hotel.getNaziv()%></h5>
                         <p class="card-text">Država: <%=hotel.getDrzava()%> </p>

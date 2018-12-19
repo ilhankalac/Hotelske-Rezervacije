@@ -51,8 +51,7 @@
                       <th scope="col">Država</th>
                       <th scope="col">Grad</th>
                       <th scope="col">Rola</th> 
-                      <th scope="col">Poeni</th>
-                      <th scope="col">HotelID</th>
+                      <th scope="col">Poeni</th>                      
                       <th scope="col">Postanski Broj</th>
                       <th scope="col">Opcije</th>
                     </tr>
@@ -83,7 +82,6 @@
                       <td><%=klijent.getGrad()%> </td>
                       <td><%=Rola%> </td>
                       <td><%=klijent.getPoeni()%> </td>
-                      <td><%=klijent.getHotelID()%> </td>
                       <td><%=klijent.getPostanskiBroj()%> </td>
                       <td> 
                           

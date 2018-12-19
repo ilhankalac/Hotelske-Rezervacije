@@ -116,13 +116,6 @@
                <br>
                <tr>
                 <div class="form-inline">
-                    <td style="padding-top:9%"><label> HotelID: </label></td>
-                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="HotelID" value="<%= klijent.getHotelID()%>" name="HotelID"></td>
-                </div>
-               </tr>
-               <br>
-               <tr>
-                <div class="form-inline">
                     <td style="padding-top:9%"><label> Poštanski Broj: </label></td>
                     <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Poštanski Broj" value="<%= klijent.getPostanskiBroj()%>" name="PostanskiBroj"></td>
                 </div>

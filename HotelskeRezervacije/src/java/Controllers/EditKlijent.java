@@ -55,7 +55,6 @@ public class EditKlijent extends HttpServlet {
             klijent.setGrad(request.getParameter("Grad"));
             klijent.setRola(request.getParameter("Rola"));
             klijent.setPoeni(Double.parseDouble( request.getParameter("Poeni")));
-            klijent.setHotelID(Integer.parseInt(request.getParameter("HotelID")));
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
             
             

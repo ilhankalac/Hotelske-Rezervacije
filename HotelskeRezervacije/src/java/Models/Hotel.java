@@ -30,6 +30,9 @@ public class Hotel {
         this.Opis = Opis;
     }
     
+    public  void setHotelId(Integer Id){
+        this.Id = Id;
+    }
     public int getHotelId(){
         return  this.Id;
     }
@@ -41,10 +44,6 @@ public class Hotel {
         this.Naziv = Naziv;
     } 
     
-    
-    public  void setHotelId(Integer Id){
-        this.Id = Id;
-    }
     public String getGrad() {
         return this.Grad;
     }
@@ -76,7 +75,7 @@ public class Hotel {
         this.BrojZvezdica = BrojZvezdica;
     }
     
-     public Blob getFotografija() {
+    public Blob getFotografija() {
         return this.Fotografija;
     }
     public void setFotografija(Blob Fotografija) {

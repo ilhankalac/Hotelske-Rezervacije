@@ -40,8 +40,8 @@ public class KlijentRepo {
     public boolean insert(Klijent klijent) throws SQLException{
         try {
             String insertToKlijent = "INSERT INTO `klijenti`(Ime, Prezime, KIme, Sifra, Email, Telefon,"
-                    + " Adresa, Grad, Drzava, Poeni, HotelID, PostanskiBroj, RolaID)"
-                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + " Adresa, Grad, Drzava, Poeni, PostanskiBroj, RolaID)"
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             PreparedStatement pst = con.prepareStatement(insertToKlijent);
             
@@ -55,10 +55,8 @@ public class KlijentRepo {
             pst.setString(8, klijent.getGrad());
             pst.setString(9, klijent.getDrzava());
             pst.setDouble(10, 0.0);
-            //prilikom registracije klijentu se po difoltu dodeljuje  prvi hotel u tabeli
-            pst.setInt(11, 7);
-            pst.setString(12, klijent.getPostanskiBroj());
-            pst.setInt(13, 1);
+            pst.setString(11, klijent.getPostanskiBroj());
+            pst.setInt(12, 1);
             
             
            pst.executeUpdate();
@@ -117,7 +115,6 @@ public class KlijentRepo {
                  klijent.setDrzava(rs.getString("Drzava"));
                  klijent.setRola(Integer.toString(rs.getInt("RolaID")));
                  klijent.setPoeni(rs.getDouble("Poeni"));
-                 klijent.setHotelID(rs.getInt("HotelID"));
                  klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
                  klijenti.add(klijent);
              }
@@ -170,7 +167,6 @@ public class KlijentRepo {
                 klijent.setDrzava(rs.getString("Drzava"));
                 klijent.setRola(Integer.toString( rs.getInt("RolaID")));
                 klijent.setPoeni(rs.getDouble("Poeni"));
-                klijent.setHotelID(rs.getInt("HotelID"));
                 klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
         }
         
@@ -212,7 +208,6 @@ public class KlijentRepo {
                       + "Grad = ?,"
                       + "RolaID = ?,"
                       + "Poeni = ?,"
-                      + "HotelID = ?,"
                       + "PostanskiBroj = ?"
                       + " where id = ?";
          
@@ -229,9 +224,8 @@ public class KlijentRepo {
             pst.setString(8, klijent.getGrad()); 
             pst.setInt(9, Integer.parseInt(klijent.getRola()));
             pst.setDouble(10, klijent.getPoeni());
-            pst.setInt(11, klijent.getHotelID());
-            pst.setString(12, klijent.getPostanskiBroj());
-            pst.setInt(13, klijent.getKlijentId());
+            pst.setString(11, klijent.getPostanskiBroj());
+            pst.setInt(12, klijent.getKlijentId());
 
             pst.executeUpdate();
             
