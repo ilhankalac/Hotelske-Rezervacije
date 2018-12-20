@@ -15,7 +15,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%String Hotel_Id = request.getParameter("Hotel_Id"); %>
+        <%
+            String Hotel_Id = request.getParameter("Hotel_Id"); 
+            
+            if(Hotel_Id==null)
+                response.sendRedirect("Hoteli.jsp");
+        %>
         <jsp:include page="navbar.jsp" />  
         
         <a style="margin-top:20px; margin-left:40px" href="${pageContext.request.contextPath}/KreiranjeSoba.jsp?Hotel_Id=<%=Hotel_Id%>" class="btn btn-success">Dodaj novu sobu</a>

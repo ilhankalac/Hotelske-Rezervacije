@@ -131,7 +131,7 @@ public class HotelRepo {
     public Hotel select(String Id) throws SQLException{
         Hotel hotel = new Hotel();
         try {
-            String select = "select *from hotel where id = " + Id;
+            String select = "select * from hotel where id = " + Id;
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(select);
 
@@ -156,7 +156,7 @@ public class HotelRepo {
     public boolean update(Hotel hotel, Part part) throws SQLException, IOException{
         
         
-        String dodatakUpita = "Fotografija = ?,";
+        String fotografija = "Fotografija = ?,";
         
         String update = "update hotel "
                       + "set Naziv = ?,"
@@ -166,7 +166,7 @@ public class HotelRepo {
                       + "BrojZvezdica = ?,";
         
         if (part.getSize()!=0)
-            update += dodatakUpita;
+            update += fotografija;
     
         update += "Opis = ?"+
                   "where id = ?";      

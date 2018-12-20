@@ -32,12 +32,12 @@ public class TipSobeRepo {
         }
     }
    
-    public ArrayList<TipSobe> lista() throws SQLException{
+    public ArrayList<TipSobe> lista(String HotelID) throws SQLException{
         
         ArrayList<TipSobe> tipoviSoba = new ArrayList<TipSobe>();
         try {
            
-             String select = "select *from TipSobe";
+             String select = "select *from TipSobe where HotelID = " + HotelID;
         
              Statement st = con.createStatement();
              ResultSet rs = st.executeQuery(select);
@@ -45,7 +45,8 @@ public class TipSobeRepo {
              while(rs.next()){
                  TipSobe tipSobe = new TipSobe();
                  tipSobe.setTipSobeId(rs.getInt("Id"));
-                 tipSobe.setNaziv(rs.getString("Naziv"));  
+                 tipSobe.setNaziv(rs.getString("Naziv"));
+                 tipSobe.SetHotelID(rs.getInt("HotelID"));
                  tipoviSoba.add(tipSobe);
              }
  

@@ -1,14 +1,14 @@
 package Controllers;
 
-import Models.Hotel;
-import RepoPattern.HotelRepo;
-import java.io.File;
+import Models.Soba;
+import RepoPattern.SobeRepo;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,57 +18,53 @@ import javax.servlet.http.Part;
  *
  * @author Ilhan Kalac
  */
-
-
 @MultipartConfig(maxFileSize = 161772716)
-public class KreiranjeHotela extends HttpServlet {
-
+public class EditSoba extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+
     }
 
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-   
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        Soba soba = new Soba();
         
-        try{
-            Hotel hotel = new  Hotel();
-            hotel.setNaziv(request.getParameter("Naziv"));
-            hotel.setDrzava(request.getParameter("Drzava"));
-            hotel.setGrad(request.getParameter("Grad"));
-            hotel.setAdresa(request.getParameter("Adresa")); 
-            hotel.setBrojZvezdica(Integer.parseInt(request.getParameter("Zvezdice")));
-            hotel.setOpis(request.getParameter("Opis"));
-            //klasa koja pomaze  za insert fotografije u bazu
-            Part part = request.getPart("file");
+        soba.setSobaId(Integer.parseInt(request.getParameter("Soba_Id")));
+        soba.setBrojSobe(request.getParameter("BrojSobe"));
+        soba.TipSobe.setTipSobeId(Integer.parseInt(request.getParameter("TipSobe")));
+        soba.setOpis(request.getParameter("Opis"));
+        soba.setKratkiOpis(request.getParameter("KratkiOpis"));
+        
+        Part part = request.getPart("file");
+        
+        try {
             
+            String HotelID = new SobeRepo().update(soba, part);
 
-            if(new HotelRepo().insert(hotel, part)){
-                    response.sendRedirect("Hoteli.jsp");
+            
+            if(!(HotelID.equals(""))){
+                response.sendRedirect("Sobe.jsp?Hotel_Id=" + HotelID);
             }
-            else{
-                response.sendRedirect("Greska.jsp");
-            }
-        }catch(Exception  ex){
-             response.sendRedirect("Greska.jsp");
+        } catch (SQLException ex) {
+            Logger.getLogger(EditSoba.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
-    
+
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

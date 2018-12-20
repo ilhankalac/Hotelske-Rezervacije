@@ -33,7 +33,8 @@
               //  Rola = "Menadžer hotela";
         %>
          <form action="EditSoba" method="post" enctype="multipart/form-data">
-           <input value="<%= request.getParameter("Soba_Id")%>" name="Soba_Id" type="hidden">
+           <input value="<%=request.getParameter("Soba_Id")%>" name="Soba_Id" type="hidden">
+           <input value="<%=request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
            <div style="padding-left:5%">
               <table text-align: right">
                <tr>
@@ -50,13 +51,13 @@
                     </td>
                     <td style="padding-top:6%; padding-left:2%">
                        <select name="TipSobe">
-                                <%
-                                   for(TipSobe tipSobe: new TipSobeRepo().lista()){
-                                       {%> 
-                                           <option value="<%=tipSobe.getTipSobeId()%>"><%=tipSobe.getNaziv() %></option>
-                                       <%}
-                                   }
-                                %> 
+                            <option value="<%=soba.getTipSobeID() %>"><%=soba.TipSobe.getNaziv() %></option> 
+                            <%
+                               for(TipSobe tipSobe: new TipSobeRepo().lista(Integer.toString(soba.getHotelID()))){ 
+                                   if(!(soba.TipSobe.getNaziv().equals(tipSobe.getNaziv())))   
+                                    {%> <option value="<%=soba.getTipSobeID()%>"><%=tipSobe.getNaziv() %></option> <%}
+                               }
+                            %> 
                          </select>                        
                     </td>                 
                 </div>

@@ -18,7 +18,8 @@
     <body>
         <jsp:include page="navbar.jsp" />  
         <% 
-            Hotel hotel = new HotelRepo().select(request.getParameter("Hotel_Id"));
+            String HotelID = request.getParameter("Hotel_Id");
+            Hotel hotel = new HotelRepo().select(HotelID);
             
             
             //izmeni ovo da bude preko sesije ne ovako
@@ -93,7 +94,7 @@
                <input type="submit" value ="Izmeni" class="btn btn-secondary">
                <form action="BrisanjeHotela" method="post">
                   <a class="delete_link btn btn-danger btn-large"  
-                                    href="${pageContext.request.contextPath}/BrisanjeHotela?Hotel_Id=<%= hotel.getHotelId()%> %>" >
+                                    href="${pageContext.request.contextPath}/BrisanjeHotela?Hotel_Id=<%=HotelID %>" >
                                    <i class="fa fa-trash"> Obriši</i>                                  
                   </a>
                </form>

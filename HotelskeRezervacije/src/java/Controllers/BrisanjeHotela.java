@@ -2,11 +2,11 @@ package Controllers;
 
 import RepoPattern.HotelRepo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +23,8 @@ public class BrisanjeHotela extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try
         {
-            new HotelRepo().brisanje(request.getParameter("Hotel_Id"));
+            String HotelId=  request.getParameter("Hotel_Id");
+            new HotelRepo().brisanje(HotelId);
             response.sendRedirect("Hoteli.jsp");
             
         } catch (SQLException ex) {

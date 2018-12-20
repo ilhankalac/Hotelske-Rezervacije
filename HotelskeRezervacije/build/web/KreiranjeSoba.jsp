@@ -20,8 +20,9 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" /> 
-         <% ArrayList<TipSobe> tipoviSoba = new TipSobeRepo().lista(); 
+         <% 
             String HotelID = request.getParameter("Hotel_Id");
+            ArrayList<TipSobe> tipoviSoba = new TipSobeRepo().lista(HotelID);             
             Hotel hotel = new HotelRepo().select(HotelID);
          %>
          

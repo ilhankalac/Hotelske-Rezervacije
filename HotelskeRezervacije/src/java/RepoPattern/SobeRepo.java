@@ -193,4 +193,61 @@ public class SobeRepo {
         }
         return HotelID;
     }
+    
+    public String update(Soba soba, Part part) throws SQLException, IOException{
+        
+        String getHotelID ="select HotelID from sobe where ID = " + soba.getSobaId();
+        
+        
+        String fotografija = "Fotografija = ?,";
+        
+        String update = "update sobe "
+                      + "set BrojSobe = ?,"
+                      + "TipSobeID = ?,"
+                      + "KratkiOpis = ?,";
+        
+        if (part.getSize()!=0)
+            update += fotografija;
+    
+        update += "Opis = ? "+
+                  "where id = ?";      
+                
+         
+        try {
+            PreparedStatement pst = con.prepareStatement(update);
+
+            pst.setString(1, soba.getBrojSobe());
+            pst.setInt(2, soba.TipSobe.getTipSobeId());
+            pst.setString(3, soba.getKratkiOpis());
+
+            InputStream is;
+            
+            if(part.getSize()!=0){
+                is = part.getInputStream();
+                pst.setBlob(4, is);
+                pst.setString(5,soba.getOpis());
+                pst.setInt(6, soba.getSobaId());
+            }
+            else{
+                pst.setString(4, soba.getOpis());
+                pst.setInt(5, soba.getSobaId());
+            }
+            Statement st = con.createStatement();
+            ResultSet rs =st.executeQuery(getHotelID);
+            
+            String HotelID = "";
+            while(rs.next())
+                HotelID = rs.getString("HotelID");
+            
+            pst.executeUpdate();
+            
+            return HotelID;
+            
+        } catch (SQLException e) {
+          return "";
+        }
+        finally{
+            con.close();
+        }
+    }
 }
