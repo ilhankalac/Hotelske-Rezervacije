@@ -4,13 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/EditHotel.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/RepoPattern/SobeRepo.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/KreiranjeSoba.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/EditSoba.jsp</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/BrisanjeSoba.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Models/Soba.java</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/Sobe.jsp</file>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/RepoPattern/TipSobeRepo.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/RepoPattern/HotelRepo.java</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/KreiranjeHotela.java</file>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/BrisanjeHotela.java</file>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/EditHotel.jsp</file>
         </group>

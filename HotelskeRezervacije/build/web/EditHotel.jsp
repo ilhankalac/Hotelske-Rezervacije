@@ -4,6 +4,8 @@
     Author     : Ilhan Kalac
 --%>
 
+<%@page import="RepoPattern.TipSobeRepo"%>
+<%@page import="Models.TipSobe"%>
 <%@page import="Models.Hotel"%>
 <%@page import="RepoPattern.HotelRepo"%>
 <%@page import="Models.Klijent"%>
@@ -33,10 +35,13 @@
             //else
               //  Rola = "Menadžer hotela";
         %>
+        <div class="row">
+         <div class="span6" style="margin-left:10%">
+         <h2>Kreiranje hotela </h2>
          <form action="EditHotel" method="post" enctype="multipart/form-data">
            <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
            <div style="padding-left:5%">
-              <table style="margin-top: -14%; text-align: right">
+              <table style="margin-top: -14%; text-align: right; display:inline-block">
                <tr>
                  <div class="form-inline">
                   <td style="padding-top:2%"><label>Naziv: </label></td>
@@ -100,6 +105,50 @@
                </form>
            </div>
         </form>
+       
+         </div>
+        <div class="jumbotron" style="margin-bottom:  30%; margin-left:10%; margin-top: 10%">                           
+            <div class="span6">
+                <h2>Kreiraj novi tip sobe za ovaj hotel</h2>
+              <form action="KreiranjeTipaSoba" method="post">
+               <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
+               <div style="padding-left:5%">
+                  <table style=" text-align: right; float:left;" >
+                   <tr>
+                     <div class="form-inline">
+                      <td style="padding-top:2%"><label>Naziv: </label></td>
+                      <td style="padding-left:2%"><input type="text" class="form-control" placeholder="Naziv"   name="Naziv"></td>
+                      <td style="padding-top:2%">  <input type="submit" style="float:left; margin-left:10%" value ="Kreiraj"  class="btn btn-success" ><br> <br> </td>
+                     </div>
+                   </tr>
+                   
+                  </table> <br><br>
+                
+              </form> 
+               <form action="BrisanjeTipovaSoba" method="post"> 
+                <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
+                 <%for (TipSobe tipSobe:  new TipSobeRepo().lista(HotelID)){  {%>                   
+                  <br>
+                   <table>
+                    <div class="input-group">
+
+                             <div class="input-group-prepend">
+                           <div class="input-group-text">
+                           <input type="checkbox" name="TipSobe" value="<%=tipSobe.getTipSobeId() %>" aria-label="Radio button for following text input">
+                           </div>
+                         </div>
+                         <input type="text" class="form-control" value="<%=tipSobe.getNaziv()%>" aria-label="Text input with radio button">
+                     </div>
+                   <%} }  %>  <br>
+                   
+                      <td style="padding-top:2%">  <input type="submit" style="float:left; margin-left:10%" value ="Obriši"  class="btn btn-danger" ><br> <br> </td>                                
+                     
+                   </form>
+                    </div>
+               </table>                       
+            </div>  
                
+         </div>                               
+      </div>                            
     </body>
 </html>

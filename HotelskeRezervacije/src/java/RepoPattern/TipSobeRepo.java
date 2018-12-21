@@ -1,8 +1,10 @@
 package RepoPattern;
 
 import Models.TipSobe;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -58,7 +60,44 @@ public class TipSobeRepo {
         }
         return tipoviSoba; 
     }
-    
+    public boolean insert(TipSobe tipSobe) throws SQLException, IOException{
+        String insert = "INSERT INTO `TipSobe`(`Naziv`, `HotelID`) "
+                      + "VALUES (?,?)";
+        try {
+           
+            PreparedStatement pst = con.prepareStatement(insert);
+            
+            pst.setString(1, tipSobe.getNaziv());
+            pst.setInt(2, tipSobe.getHotelID());
+            
+ 
+            pst.executeUpdate();
+           
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+        finally{
+            con.close();
+        }
+    }
+    public boolean brisanje (String Niz_ID) throws SQLException{
+        try {
+            
+            String delete = "delete from  TipSobe where id in (" + Niz_ID +")";
+            PreparedStatement ps  = con.prepareStatement(delete);
+
+            ps.executeUpdate();
+            return true;
+  
+        } catch (SQLException ex) {
+            Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
+        }
+       return false;
+    }
     
     
     

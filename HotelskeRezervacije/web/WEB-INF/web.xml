@@ -44,6 +44,14 @@
         <servlet-name>EditSoba</servlet-name>
         <servlet-class>Controllers.EditSoba</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>KreiranjeTipaSoba</servlet-name>
+        <servlet-class>Controllers.KreiranjeTipaSoba</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BrisanjeTipovaSoba</servlet-name>
+        <servlet-class>Controllers.BrisanjeTipovaSoba</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>KlijentController</servlet-name>
         <url-pattern>/KlijentController</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>EditSoba</servlet-name>
         <url-pattern>/EditSoba</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>KreiranjeTipaSoba</servlet-name>
+        <url-pattern>/KreiranjeTipaSoba</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BrisanjeTipovaSoba</servlet-name>
+        <url-pattern>/BrisanjeTipovaSoba</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
