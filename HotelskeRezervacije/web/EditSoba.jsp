@@ -55,7 +55,7 @@
                             <%
                                for(TipSobe tipSobe: new TipSobeRepo().lista(Integer.toString(soba.getHotelID()))){ 
                                    if(!(soba.TipSobe.getNaziv().equals(tipSobe.getNaziv())))   
-                                    {%> <option value="<%=soba.getTipSobeID()%>"><%=tipSobe.getNaziv() %></option> <%}
+                                    {%> <option value="<%=tipSobe.getTipSobeId() %>"><%=tipSobe.getNaziv() %></option> <%}
                                }
                             %> 
                          </select>                        
@@ -73,6 +73,18 @@
                 <div class="form-inline">
                     <td style="padding-top:9%"><label> Kratak opis: </label></td>
                     <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="KratkiOpis" value="<%= soba.getKratkiOpis() %>"  name="KratkiOpis"></td>
+                </div>
+               </tr>
+                <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Cena: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Cena" value="<%= soba.getCena()%>"  name="Cena"></td>
+                </div>
+               </tr>
+               <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Kapacitet: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Kapacitet" value="<%= soba.getKapacitet()%>"  name="Kapacitet"></td>
                 </div>
                </tr>
                <tr>

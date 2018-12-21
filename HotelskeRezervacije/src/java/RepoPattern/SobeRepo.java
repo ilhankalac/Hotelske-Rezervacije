@@ -207,7 +207,9 @@ public class SobeRepo {
         String update = "update sobe "
                       + "set BrojSobe = ?,"
                       + "TipSobeID = ?,"
-                      + "KratkiOpis = ?,";
+                      + "KratkiOpis = ?,"
+                      + "Cena = ?,"
+                      + "Kapacitet = ?,";
         
         if (part.getSize()!=0)
             update += fotografija;
@@ -222,18 +224,19 @@ public class SobeRepo {
             pst.setString(1, soba.getBrojSobe());
             pst.setInt(2, soba.TipSobe.getTipSobeId());
             pst.setString(3, soba.getKratkiOpis());
-
+            pst.setDouble(4, soba.getCena());
+            pst.setInt(5, soba.getKapacitet());
             InputStream is;
             
             if(part.getSize()!=0){
                 is = part.getInputStream();
-                pst.setBlob(4, is);
-                pst.setString(5,soba.getOpis());
-                pst.setInt(6, soba.getSobaId());
+                pst.setBlob(6, is);
+                pst.setString(7,soba.getOpis());
+                pst.setInt(8, soba.getSobaId());
             }
             else{
-                pst.setString(4, soba.getOpis());
-                pst.setInt(5, soba.getSobaId());
+                pst.setString(6, soba.getOpis());
+                pst.setInt(7, soba.getSobaId());
             }
             Statement st = con.createStatement();
             ResultSet rs =st.executeQuery(getHotelID);

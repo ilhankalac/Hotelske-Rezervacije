@@ -45,6 +45,8 @@ public class EditSoba extends HttpServlet {
         soba.TipSobe.setTipSobeId(Integer.parseInt(request.getParameter("TipSobe")));
         soba.setOpis(request.getParameter("Opis"));
         soba.setKratkiOpis(request.getParameter("KratkiOpis"));
+        soba.setCena(Double.parseDouble(request.getParameter("Cena")));
+        soba.setKapacitet(Integer.parseInt(request.getParameter("Kapacitet")));
         
         Part part = request.getPart("file");
         
