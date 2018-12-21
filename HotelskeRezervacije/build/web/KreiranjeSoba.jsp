@@ -43,6 +43,9 @@
              <br> </br>
              Opis: <input type="text" name="Opis"> <br> <br> 
              Kratki opis: <input type="text" name="KratkiOpis"> <br> <br> 
+             Cena: <input type="text" name="Cena"> <br> <br>
+             Kapacitet: <input type="text" name="Kapacitet"> <br> <br>
+             
              Fotografija: <input type="file" name="file"> <br> <br>
              <input type="submit" value="Kreiraj sobu">
              

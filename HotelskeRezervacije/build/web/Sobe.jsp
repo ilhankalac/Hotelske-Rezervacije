@@ -41,6 +41,8 @@
                             <p class="card-text">Tip sobe: <%=soba.getTipSobe().getNaziv()%> </p>
                             <p class="card-text">Opis: <%=soba.getOpis()%> </p>
                             <p class="card-text">Kratak opis: <%=soba.getKratkiOpis()%> </p>
+                            <p class="card-text">Cena: <%=soba.getCena()%> € </p>
+                            <p class="card-text">Kapacitet: <%=soba.getKapacitet()%> </p>
                                                        <a href="#" class="btn btn-primary">Rezerviši</a>
                             <% if (IDk.equals("2")) {%> 
                                 <a href="${pageContext.request.contextPath}/EditSoba.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-success">Izmeni</a>

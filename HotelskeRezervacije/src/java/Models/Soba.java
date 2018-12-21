@@ -15,6 +15,8 @@ public class Soba {
     private Integer HotelID;
     private String Opis;
     private String KratkiOpis;
+    private Double Cena;
+    private Integer Kapacitet;
     
     public TipSobe TipSobe = new TipSobe();
     public Hotel Hotel = new Hotel();
@@ -22,7 +24,8 @@ public class Soba {
     
     public Soba(Integer Id, String BrojSobe, Blob Fotografija, Integer TipSobeID,
             Integer HotelID, String NazivHotelaSobe,
-            String NazivTipaSobe, TipSobe TipSobe, String Opis, String KratkiOpis) {
+            String NazivTipaSobe, TipSobe TipSobe, String Opis, String KratkiOpis, Integer Kapacitet,
+            Double Cena) {
         this.Id = Id;
         this.BrojSobe = BrojSobe;
         this.Fotografija = Fotografija;
@@ -30,6 +33,7 @@ public class Soba {
         this.HotelID = HotelID;
         this.Opis = Opis;
         this.KratkiOpis = KratkiOpis;
+        this.Kapacitet = Kapacitet;
 
     }
     public  void setSobaId(Integer Id){
@@ -64,9 +68,7 @@ public class Soba {
     public int getTipSobeID(){
         return  this.TipSobeID;
     }
-    
-    
-    
+
     public TipSobe getTipSobe(){
         return this.TipSobe;
     }
@@ -93,6 +95,21 @@ public class Soba {
     public void setKratkiOpis(String KratkiOpis) {
         this.KratkiOpis = KratkiOpis;
     } 
+    
+    public Double getCena(){
+        return this.Cena;
+    }
+    public void setCena(Double Cena){
+        this.Cena = Cena;
+    }
+    public Integer getKapacitet(){
+        return this.Kapacitet;
+    }
+    public void setKapacitet(Integer Kapacitet){
+        this.Kapacitet = Kapacitet;
+    }
+    
+    
     
    
 }

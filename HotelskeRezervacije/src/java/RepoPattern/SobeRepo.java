@@ -48,7 +48,7 @@ public class SobeRepo {
            
              String select = "select s.Id,s.TipSobeID, s.HotelID, s.BrojSobe, s.Fotografija,"
                             + " h.Naziv as 'NazivHotela', ts.Naziv as 'NazivTipaSobe', s.KratkiOpis as 'KratkiOpis',"
-                            + "s.Opis as 'Opis' "
+                            + "s.Opis as 'Opis',s.Cena as 'Cena', s.Kapacitet as 'Kapacitet' "
                             + "from Sobe s "
                             + "join TipSobe ts on s.TipSobeID = ts.id "
                             + "join Hotel h on h.Id = s.HotelID "
@@ -63,13 +63,13 @@ public class SobeRepo {
                  soba.setBrojSobe(rs.getString("BrojSobe"));
                  soba.setTipSobeID(Integer.parseInt(rs.getString("TipSobeID")));
                  soba.setHotelID(Integer.parseInt(rs.getString("HotelID")));
-                 soba.setFotografija(rs.getBlob("Fotografija"));
-                 
-                 soba.Hotel.setNaziv(rs.getString("NazivHotela"));
-                 
+                 soba.setFotografija(rs.getBlob("Fotografija"));     
+                 soba.Hotel.setNaziv(rs.getString("NazivHotela"));                 
                  soba.TipSobe.setNaziv(rs.getString("NazivTipaSobe"));
                  soba.setKratkiOpis(rs.getString("KratkiOpis"));
                  soba.setOpis(rs.getString("Opis"));
+                 soba.setCena(rs.getDouble("Cena"));
+                 soba.setKapacitet(rs.getInt("Kapacitet"));
                  sobe.add(soba);
              }
              
@@ -82,8 +82,8 @@ public class SobeRepo {
         return sobe; 
     }
     public boolean insert(Soba soba, Part part) throws SQLException, IOException{
-        String insert = "INSERT INTO `sobe`(`BrojSobe`, `TipSobeID`, `HotelID`, `Fotografija`, Opis, KratkiOpis) "
-                      + "VALUES (?,?,?,?,?,?)";
+        String insert = "INSERT INTO `sobe`(`BrojSobe`, `TipSobeID`, `HotelID`, `Fotografija`, Opis, KratkiOpis,  Cena,  Kapacitet) "
+                      + "VALUES (?,?,?,?,?,?,?,?)";
         try {
            
             PreparedStatement pst = con.prepareStatement(insert);
@@ -96,6 +96,8 @@ public class SobeRepo {
             pst.setBlob(4, is);
             pst.setString(5, soba.getOpis());
             pst.setString(6, soba.getKratkiOpis());
+            pst.setDouble(7, soba.getCena());
+            pst.setDouble(8, soba.getKapacitet());
             
             pst.executeUpdate();
            
@@ -138,7 +140,7 @@ public class SobeRepo {
         try {
             String select = "select s.Id,s.TipSobeID, s.HotelID, s.BrojSobe, s.Fotografija,"
                             + " h.Naziv as 'NazivHotela', ts.Naziv as 'NazivTipaSobe', s.KratkiOpis as 'KratkiOpis',"
-                            + "s.Opis as 'Opis' "
+                            + "s.Opis as 'Opis',s.Cena as 'Cena', s.Kapacitet as 'Kapacitet' "
                             + "from Sobe s "
                             + "join TipSobe ts on s.TipSobeID = ts.id "
                             + "join Hotel h on h.Id = s.HotelID "
@@ -157,7 +159,8 @@ public class SobeRepo {
                  soba.TipSobe.setNaziv(rs.getString("NazivTipaSobe"));
                  soba.setKratkiOpis(rs.getString("KratkiOpis"));
                  soba.setOpis(rs.getString("Opis"));
-                 
+                 soba.setCena(rs.getDouble("Cena"));
+                 soba.setKapacitet(rs.getInt("Kapacitet"));
              }
         } catch (SQLException ex) {
            Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);

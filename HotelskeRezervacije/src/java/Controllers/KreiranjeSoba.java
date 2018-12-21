@@ -40,6 +40,8 @@ public class KreiranjeSoba extends HttpServlet {
             soba.setHotelID(Integer.parseInt(request.getParameter("Hotel_Id")));
             soba.setOpis(request.getParameter("Opis"));
             soba.setKratkiOpis(request.getParameter("KratkiOpis"));
+            soba.setCena(Double.parseDouble(request.getParameter("Cena")));
+            soba.setKapacitet(Integer.parseInt(request.getParameter("Kapacitet")));
             //klasa koja pomaze  za insert fotografije u bazu
             Part part = request.getPart("file");
             
