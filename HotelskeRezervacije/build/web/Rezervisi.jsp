@@ -23,9 +23,23 @@
         <% int sobaMaxKapacitet = new SobeRepo().maxKapacitetSobe(request.getParameter("Soba_Id"));%>
        
          <form action = "KreiranjeRezervacije" method="post" >
+            
+             <div style=" margin-left:20%">
              <div class="row">
-                 <div class="span6" style="margin-left:10%">
+                 <div class="span6" style="margin-left:10%; margin-top:5% ;  padding:2%; margin-bottom:30%; background:white">
+                    Datum dolaska:  
+                     <input type="date" name="DatumDolaska" class="form-control" style="width:250px" onkeydown="return false">  
+                     Datum odlaska:  
 
+
+                     <input type="date" name="DatumOdlaska" class="form-control" style="width:250px" onkeydown="return false">  
+                      <script type="text/javascript">
+                         $(function () {
+                             $('#DatumDolaska').datetimepicker({
+                                 format: 'LT'
+                             });
+                         });
+                     </script> <br>
                     <input type="hidden" value="<%=request.getParameter("Soba_Id")%>" name="Soba_Id">
                     Broj dece: 
                    <select name="BrojDece" class="custom-select" style="width:50px">
@@ -50,22 +64,10 @@
                              }
                           %>
                        </select>
-                       <br> </br>
-                       Datum dolaska:  
-                       <input type="date" name="DatumDolaska" class="form-control" style="width:250px" onkeydown="return false">  
-                       Datum odlaska:  
-
-
-                       <input type="date" name="DatumOdlaska" class="form-control" style="width:250px" onkeydown="return false">  
-                        <script type="text/javascript">
-                           $(function () {
-                               $('#DatumDolaska').datetimepicker({
-                                   format: 'LT'
-                               });
-                           });
-                       </script>
+                       <br> </br> <br> <br>
+                        <a href="#" class="btn btn-success">Idi na plaćanje</a>
                        </div>
-                        <div class="jumbotron" style="margin-bottom:  30%; margin-left:10%; background-color: ">
+                        <div class="jumbotron" style="margin-bottom:  30%; background-color:white; ">
                              <div class="span6">
                                 <% 
                               String IDk = "";
@@ -76,6 +78,7 @@
                                IDk = (String)request.getSession().getAttribute("UlogovanaRola");
 
                                     {%>
+                                    <h5> Izabrana soba</h5>
                                      <div class="card" style="width: 18rem; float:left; margin:7.5px">              
                                         <img height="180px" width="286px" src="FotografijeSoba.jsp?SobaId=<%=soba.getSobaId()%>" />  
                                         <div class="card-body">
@@ -94,6 +97,7 @@
                             </div>
                         </div>
                 </div>
+             </div>
          </form>
     </body>
 </html>
