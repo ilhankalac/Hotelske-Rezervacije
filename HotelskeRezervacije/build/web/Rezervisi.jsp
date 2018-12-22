@@ -65,7 +65,7 @@
                           %>
                        </select>
                        <br> </br> <br> <br>
-                        <a href="#" class="btn btn-success">Idi na plaćanje</a>
+                        <a href="Placanje.jsp" class="btn btn-success">Idi na plaćanje</a>
                        </div>
                         <div class="jumbotron" style="margin-bottom:  30%; background-color:white; ">
                              <div class="span6">
