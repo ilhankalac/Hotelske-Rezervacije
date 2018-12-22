@@ -16,13 +16,13 @@ public class Rezervacija {
     private Double Novac;
     private Integer BrojOdraslih;
     private Integer BrojDece;
-    private Integer TipSobeID;
+    private Integer SobaID;
     private Integer KlijentID;
     private boolean StatusRezervacije;
 
     public Rezervacija(){}
     public Rezervacija(Integer Id, Date DatumDolaska, Date DatumOdlaska, Time VremeOdlaska, 
-            Double Novac, Integer BrojOdraslih, Integer BrojDece, Integer TipSobeID, 
+            Double Novac, Integer BrojOdraslih, Integer BrojDece, Integer SobaID, 
             Integer KlijentID, boolean StatusRezervacije) {
         this.Id = Id;
         this.DatumDolaska = DatumDolaska;
@@ -32,7 +32,7 @@ public class Rezervacija {
         this.BrojOdraslih = BrojOdraslih;
         this.BrojDece = BrojDece;
         this.StatusRezervacije = StatusRezervacije;
-        this.TipSobeID = TipSobeID;
+        this.SobaID = SobaID;
         this.KlijentID = KlijentID;
         
     }
@@ -91,12 +91,12 @@ public class Rezervacija {
     public void setStatusRezervacije(boolean StatusRezervacije) {
         this.StatusRezervacije = StatusRezervacije;
     } 
-    public Integer getTipSobeID(){
-        return  this.TipSobeID;
+    public Integer getSobaID(){
+        return  this.SobaID;
     }
     
-    public  void setTipSobeID(Integer TipSobeID){
-        this.TipSobeID = TipSobeID;
+    public  void setSobaID(Integer SobaID){
+        this.SobaID = SobaID;
     }
     public Integer getKlijentID(){
         return  this.KlijentID;

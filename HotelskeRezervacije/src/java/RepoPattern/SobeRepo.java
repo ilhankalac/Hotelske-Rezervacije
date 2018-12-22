@@ -256,4 +256,22 @@ public class SobeRepo {
             con.close();
         }
     }
+    public int maxKapacitetSobe(String Id){
+        Statement stmt;
+        int maxKapacitet = 0;
+            try {
+
+                stmt = con.createStatement();
+             
+                ResultSet rs = stmt.executeQuery("select max(Kapacitet) as 'Kapacitet' from sobe where Id = " +Id);
+                while (rs.next()) 
+                    maxKapacitet = rs.getInt("Kapacitet");                
+            } catch (SQLException ex) {
+
+            }
+        
+        
+        return maxKapacitet;
+        
+    }
 }
