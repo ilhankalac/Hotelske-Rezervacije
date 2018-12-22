@@ -274,4 +274,5 @@ public class SobeRepo {
         return maxKapacitet;
         
     }
+    
 }
