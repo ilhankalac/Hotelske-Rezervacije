@@ -176,6 +176,35 @@ public class KlijentRepo {
       
         return klijent;
     }
+    public Klijent selectByUsername(String Username) throws SQLException{
+
+        Klijent klijent = new Klijent();
+        try {
+            String select = "select * from klijenti where Kime = '" + Username +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(select);
+
+            while(rs.next()){
+                klijent.setKlijentId(rs.getInt("Id"));
+                klijent.setIme(rs.getString("Ime"));
+                klijent.setPrezime(rs.getString("Prezime"));
+                klijent.setKIme(rs.getString("KIme"));
+                klijent.setEmail(rs.getString("Email"));
+                klijent.setTelefon(rs.getString("Telefon"));
+                klijent.setAdresa(rs.getString("Adresa"));
+                klijent.setGrad(rs.getString("Grad"));
+                klijent.setDrzava(rs.getString("Drzava"));
+                klijent.setRola(Integer.toString( rs.getInt("RolaID")));
+                klijent.setPoeni(rs.getDouble("Poeni"));
+                klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
+        }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        return klijent;
+    }
     public String Rola(String username, String password) throws SQLException{
         
         String select = "select RolaID from klijenti where sifra = '"+ password + "' and KIme = '" + username + "'";

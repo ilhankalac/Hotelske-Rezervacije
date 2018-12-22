@@ -24,22 +24,17 @@
        
          <form action = "KreiranjeRezervacije" method="post" >
             
+           
              <div style=" margin-left:20%">
              <div class="row">
                  <div class="span6" style="margin-left:10%; margin-top:5% ;  padding:2%; margin-bottom:30%; background:white">
                     Datum dolaska:  
-                     <input type="date" name="DatumDolaska" class="form-control" style="width:250px" onkeydown="return false">  
+                     <input type="date" name="DatumDolaska" class="form-control" style="width:250px" onkeydown="return false">                      
                      Datum odlaska:  
-
-
                      <input type="date" name="DatumOdlaska" class="form-control" style="width:250px" onkeydown="return false">  
-                      <script type="text/javascript">
-                         $(function () {
-                             $('#DatumDolaska').datetimepicker({
-                                 format: 'LT'
-                             });
-                         });
-                     </script> <br>
+                      <br>
+                    Vreme odlaska:
+                    <input type="time" name="VremeOdlaska" class="form-control" style="width:250px" onkeydown="return false">  <br> 
                     <input type="hidden" value="<%=request.getParameter("Soba_Id")%>" name="Soba_Id">
                     Broj dece: 
                    <select name="BrojDece" class="custom-select" style="width:50px">
@@ -65,7 +60,7 @@
                           %>
                        </select>
                        <br> </br> <br> <br>
-                        <a href="Placanje.jsp" class="btn btn-success">Idi na plaćanje</a>
+                        <input type="submit" value="Idi na plaćanje" class="btn btn-success"></a>
                        </div>
                         <div class="jumbotron" style="margin-bottom:  30%; background-color:white; ">
                              <div class="span6">
@@ -98,6 +93,7 @@
                         </div>
                 </div>
              </div>
+                           
          </form>
     </body>
 </html>

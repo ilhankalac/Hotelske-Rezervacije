@@ -52,6 +52,14 @@
         <servlet-name>BrisanjeTipovaSoba</servlet-name>
         <servlet-class>Controllers.BrisanjeTipovaSoba</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>KreiranjeRezervacije</servlet-name>
+        <servlet-class>Controllers.KreiranjeRezervacije</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Naplacivanje</servlet-name>
+        <servlet-class>Controllers.Naplacivanje</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>KlijentController</servlet-name>
         <url-pattern>/KlijentController</url-pattern>
@@ -103,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>BrisanjeTipovaSoba</servlet-name>
         <url-pattern>/BrisanjeTipovaSoba</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>KreiranjeRezervacije</servlet-name>
+        <url-pattern>/KreiranjeRezervacije</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Naplacivanje</servlet-name>
+        <url-pattern>/Naplacivanje</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

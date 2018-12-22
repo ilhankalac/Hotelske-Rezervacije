@@ -1,6 +1,5 @@
 package Models;
 
-import java.sql.Date;
 import java.sql.Time;
 
 /**
@@ -10,9 +9,9 @@ import java.sql.Time;
 public class Rezervacija {
 
     private Integer Id;
-    private Date DatumDolaska;
-    private Date DatumOdlaska;
-    private Time VremeOdlaska;
+    private String DatumDolaska;
+    private String DatumOdlaska;
+    private String VremeOdlaska;
     private Double Novac;
     private Integer BrojOdraslih;
     private Integer BrojDece;
@@ -21,7 +20,7 @@ public class Rezervacija {
     private boolean StatusRezervacije;
 
     public Rezervacija(){}
-    public Rezervacija(Integer Id, Date DatumDolaska, Date DatumOdlaska, Time VremeOdlaska, 
+    public Rezervacija(Integer Id, String DatumDolaska, String DatumOdlaska, String VremeOdlaska, 
             Double Novac, Integer BrojOdraslih, Integer BrojDece, Integer SobaID, 
             Integer KlijentID, boolean StatusRezervacije) {
         this.Id = Id;
@@ -45,22 +44,22 @@ public class Rezervacija {
         this.Id = Id;
     }
     
-    public Date getDatumDolaska(){
+    public String getDatumDolaska(){
         return this.DatumDolaska;
     }
-    public void setDatumDolaska(Date DatumDolaska){
+    public void setDatumDolaska(String DatumDolaska){
         this.DatumDolaska = DatumDolaska;
     }
-    public Date getDatumOdlaska(){
+    public String getDatumOdlaska(){
         return this.DatumOdlaska;
     }
-    public void setDatumOdlaska(Date DatumOdlaska){
+    public void setDatumOdlaska(String DatumOdlaska){
         this.DatumOdlaska = DatumOdlaska;
     }
-    public Time getVremeOdlaska(){
+    public String getVremeOdlaska(){
         return this.VremeOdlaska;
     }
-    public void setVremeOdlaska(Time VremeOdlaska){
+    public void setVremeOdlaska(String VremeOdlaska){
         this.VremeOdlaska = VremeOdlaska;
     }
     
