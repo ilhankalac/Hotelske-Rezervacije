@@ -30,26 +30,35 @@
         <% int sobaMaxKapacitet = new SobeRepo().maxKapacitetSobe(request.getParameter("Soba_Id"));%>
        
          <form action = "KreiranjeRezervacije" method="post" >
-            
-             <div class="list-group">
+             <div style=" margin-left:5%">
+             <div class="row">
+                 <div class="span6" style="margin-top: 7%">
+             <div class="list-group" style="width: 300px">
                 <button type="button" class="list-group-item list-group-item-action" style="background-color: red">
                   Trenutne rezervacije sobe
                 </button>
                  <% 
                      int brojac = 1;
                      for(Rezervacija rezervacija: aktivneRezervacije){ 
+                        int godinaDolaska =Integer.parseInt(rezervacija.getDatumDolaska().substring(0, 4));
+                        int mesecDolaska =Integer.parseInt( rezervacija.getDatumDolaska().substring(5, 7));
+                        int danDolaska = Integer.parseInt(rezervacija.getDatumDolaska().substring(8, 10));
+
+                        int godinaOdlaska =Integer.parseInt( rezervacija.getDatumOdlaska().substring(0, 4));
+                        int mesecOdlaska = Integer.parseInt(rezervacija.getDatumOdlaska().substring(5, 7));
+                        int danOdlaska =Integer.parseInt( rezervacija.getDatumOdlaska().substring(8, 10));
                         {%> 
+                        
                             <button type="button" class="list-group-item list-group-item-action"> <%=brojac++%>.
-                               <%=rezervacija.getDatumDolaska()%> - <%=rezervacija.getDatumOdlaska()%> : <%=rezervacija.getVremeOdlaska()%></button>
+                               <%=danDolaska%>.<%=mesecDolaska%>.<%=godinaDolaska%> - <%=danOdlaska%>.<%=mesecOdlaska%>.<%=godinaOdlaska%> : <%=rezervacija.getVremeOdlaska()%> </button>
                         <%}                        
                      }
                  %>
                 
                
               </div>
-             <div style=" margin-left:20%">
-             <div class="row">
-                 <div class="span6" style="margin-left:10%; margin-top:5% ;  padding:2%; margin-bottom:30%; background:white">
+             </div>
+                 <div class="span6" style="margin-left:5%; margin-top:4.5% ;  padding:2%; margin-bottom:30%; background:white">
                     Datum dolaska:  
                      <input type="date" name="DatumDolaska" class="form-control" style="width:250px" onkeydown="return false">                      
                      Datum odlaska:  
