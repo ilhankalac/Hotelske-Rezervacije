@@ -1,6 +1,7 @@
 
 package RepoPattern;
 
+import Models.Datumi;
 import Models.Rezervacija;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -120,7 +120,9 @@ public class RezervacijaRepo {
                     + " where DatumDolaska = "+rezervacija.getDatumDolaska()
                     + " and DatumOdlaska = "+rezervacija.getDatumOdlaska();
 
-             if(proveraUnosaDatuma(rezervacija)){
+             if(logickiUnosDatuma(rezervacija) && (proveraDostupnihTermina(rezervacija, listaRezervisanihDatuma(rezervacija)))){
+                 
+                 
                 st = con.createStatement();
                 ResultSet rs = st.executeQuery(upit);
 
@@ -138,7 +140,7 @@ public class RezervacijaRepo {
              return false;
          }           
     }
-    public boolean proveraUnosaDatuma(Rezervacija rezervacija){
+    public boolean logickiUnosDatuma(Rezervacija rezervacija){
         
         int godinaDolaska =Integer.parseInt(rezervacija.getDatumDolaska().substring(0, 4));
         int mesecDolaska =Integer.parseInt( rezervacija.getDatumDolaska().substring(5, 7));
@@ -162,4 +164,54 @@ public class RezervacijaRepo {
         
         return true;
     }
+    
+    public ArrayList<Datumi> listaRezervisanihDatuma(Rezervacija rezervacija){
+        
+        Statement st;
+         try {
+             String upit = "select DatumDolaska, DatumOdlaska "
+                    + "from rezervacije where StatusRezervacije = 1";
+             ArrayList<Datumi> datumi = new ArrayList<>();
+             
+             
+             if(logickiUnosDatuma(rezervacija)){
+                 
+                st = con.createStatement();
+                ResultSet rs = st.executeQuery(upit);
+
+                while(rs.next()){
+                   Datumi datum = new Datumi(rs.getString("DatumDolaska"), rs.getString("DatumOdlaska"));
+                   datumi.add(datum);
+                }
+                
+                return  datumi;
+             }
+             else
+                 return  null;
+         } catch (SQLException ex) {
+             
+             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
+             return null;
+         }           
+
+    }
+    public boolean proveraDostupnihTermina(Rezervacija rezervacija, ArrayList<Datumi> listaRezervisanihDatuma){
+
+        
+        for(int i = 0; i < listaRezervisanihDatuma.size(); i++){
+            if(i == listaRezervisanihDatuma.size()-1)
+                if(rezervacija.getDatumDolaska().compareTo(listaRezervisanihDatuma.get(i).getDatumOdlaska()) > 0)
+                    return true;
+                else
+                    return false;
+
+            if( rezervacija.getDatumDolaska().compareTo(listaRezervisanihDatuma.get(i).getDatumOdlaska()) > 0
+                && rezervacija.getDatumOdlaska().compareTo(listaRezervisanihDatuma.get(i+1).getDatumDolaska()) < 0 )  
+                   
+            return true;
+        }
+        return false;
+    }
+    
+    
 }
