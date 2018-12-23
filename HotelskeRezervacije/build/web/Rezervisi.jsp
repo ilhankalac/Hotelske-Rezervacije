@@ -24,8 +24,6 @@
     <body>
         <%
             ArrayList<Rezervacija> aktivneRezervacije = new RezervacijaRepo().aktivneRezervacije(request.getParameter("Soba_Id"));
-        
-        
         %>
         
          <jsp:include page="navbar.jsp" />  
@@ -121,3 +119,17 @@
          </form>
     </body>
 </html>
+ <%
+            String rezultat =(String) request.getAttribute("Greska");
+            
+            if(rezultat!=null)
+            if(rezultat.equals("False")){%>
+            <script type="text/javascript">
+                    swal("Neispravno popunjeni podaci rezervacije", "Rezervacija nije uspela", "error")
+                    .then(function() {
+                       
+                    });
+
+            </script> <%}       
+  %>
+            

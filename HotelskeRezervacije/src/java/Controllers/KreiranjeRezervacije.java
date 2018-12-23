@@ -61,10 +61,18 @@ public class KreiranjeRezervacije extends HttpServlet {
 
             try {
                 
-                Cookie cookie = new Cookie("Rezervacija_Id",  new RezervacijaRepo().insert(rezervacija).toString());
-                cookie.setMaxAge(1000);
-                response.addCookie(cookie);
-                response.sendRedirect("Placanje.jsp");
+                if(new RezervacijaRepo().dostupna(rezervacija)){
+                    Cookie cookie = new Cookie("Rezervacija_Id",  new RezervacijaRepo().insert(rezervacija).toString());
+                    cookie.setMaxAge(1000);
+                    response.addCookie(cookie);
+                    response.sendRedirect("Placanje.jsp");
+                }
+                else{
+                    request.setAttribute("Greska", "False");
+                    request.getRequestDispatcher("Rezervisi.jsp?Soba_Id="+soba.getSobaId()).forward(request, response);
+                }
+                
+                
             } 
             catch (SQLException ex) {
                 Logger.getLogger(KreiranjeRezervacije.class.getName()).log(Level.SEVERE, null, ex);

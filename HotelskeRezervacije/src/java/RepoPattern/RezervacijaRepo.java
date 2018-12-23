@@ -85,11 +85,12 @@ public class RezervacijaRepo {
     }
     public ArrayList<Rezervacija>  aktivneRezervacije(String Id){
         
-        String upit = "select Id, datumOdlaska, datumDolaska, VremeOdlaska, StatusRezervacije from  rezervacije "
-                    + "where StatusRezervacije = 1 and datumDolaska > now() and sobaId = "+Id;
+        
         ArrayList<Rezervacija> rezervacije = new ArrayList<>();
         Statement st;
         try {
+            String upit = "select Id, datumOdlaska, datumDolaska, VremeOdlaska, StatusRezervacije from  rezervacije "
+                    + "where StatusRezervacije = 1 and datumDolaska > now() and sobaId = "+Id;
             
             st = con.createStatement();
             ResultSet rs = st.executeQuery(upit);
@@ -108,5 +109,57 @@ public class RezervacijaRepo {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rezervacije;
+    }
+    public boolean  dostupna(Rezervacija rezervacija){
+        
+        
+        Statement st;
+         try {
+             String upit = "select id "
+                    + "from rezervacije "
+                    + " where DatumDolaska = "+rezervacija.getDatumDolaska()
+                    + " and DatumOdlaska = "+rezervacija.getDatumOdlaska();
+
+             if(proveraUnosaDatuma(rezervacija)){
+                st = con.createStatement();
+                ResultSet rs = st.executeQuery(upit);
+
+                while(rs.next()){
+                    return false;
+                }
+                
+                return  true;
+             }
+             else
+                 return  false;
+         } catch (SQLException ex) {
+             
+             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
+             return false;
+         }           
+    }
+    public boolean proveraUnosaDatuma(Rezervacija rezervacija){
+        
+        int godinaDolaska =Integer.parseInt(rezervacija.getDatumDolaska().substring(0, 4));
+        int mesecDolaska =Integer.parseInt( rezervacija.getDatumDolaska().substring(5, 7));
+        int danDolaska = Integer.parseInt(rezervacija.getDatumDolaska().substring(8, 10));
+        
+        int godinaOdlaska =Integer.parseInt( rezervacija.getDatumOdlaska().substring(0, 4));
+        int mesecOdlaska = Integer.parseInt(rezervacija.getDatumOdlaska().substring(5, 7));
+        int danOdlaska =Integer.parseInt( rezervacija.getDatumOdlaska().substring(8, 10));
+        
+        if (godinaDolaska > godinaOdlaska)
+            return  false;
+        
+        if(godinaDolaska == godinaOdlaska)
+            if(mesecDolaska > mesecOdlaska)
+                return  false;
+        
+        
+        if(mesecDolaska == mesecOdlaska)
+            if(danDolaska > danOdlaska)
+                return false;
+        
+        return true;
     }
 }
