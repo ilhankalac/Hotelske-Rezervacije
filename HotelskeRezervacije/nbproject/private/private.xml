@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/RepoPattern/SobeRepo.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/KreiranjeHotela.jsp</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/EditSoba.jsp</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/Rezervisi.jsp</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/EditKlijent.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/Sobe.jsp</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Models/Soba.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/EditSoba.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Models/Rezervacija.java</file>
-            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Models/TipSobe.java</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/KreiranjeRezervacije.java</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/Naplacivanje.java</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/RepoPattern/RezervacijaRepo.java</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/Placanje.jsp</file>
         </group>
     </open-files>
 </project-private>

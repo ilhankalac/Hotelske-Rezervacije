@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="Hoteli.jsp">Hoteli <span class="sr-only">(current)</span></a>
                 </li>
                 <%
                  if (!pom){%>

@@ -4,6 +4,9 @@
     Author     : Ilhan Kalac
 --%>
 
+<%@page import="RepoPattern.RezervacijaRepo"%>
+<%@page import="Models.Rezervacija"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Models.Soba"%>
 <%@page import="RepoPattern.SobeRepo"%>
 <%@page import="RepoPattern.SobeRepo"%>
@@ -19,12 +22,33 @@
         <title>Rezerviši</title>
         </head>
     <body>
+        <%
+            ArrayList<Rezervacija> aktivneRezervacije = new RezervacijaRepo().aktivneRezervacije(request.getParameter("Soba_Id"));
+        
+        
+        %>
+        
          <jsp:include page="navbar.jsp" />  
         <% int sobaMaxKapacitet = new SobeRepo().maxKapacitetSobe(request.getParameter("Soba_Id"));%>
        
          <form action = "KreiranjeRezervacije" method="post" >
             
-           
+             <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action" style="background-color: red">
+                  Trenutne rezervacije sobe
+                </button>
+                 <% 
+                     int brojac = 1;
+                     for(Rezervacija rezervacija: aktivneRezervacije){ 
+                        {%> 
+                            <button type="button" class="list-group-item list-group-item-action"> <%=brojac++%>.
+                               <%=rezervacija.getDatumDolaska()%> - <%=rezervacija.getDatumOdlaska()%> : <%=rezervacija.getVremeOdlaska()%></button>
+                        <%}                        
+                     }
+                 %>
+                
+               
+              </div>
              <div style=" margin-left:20%">
              <div class="row">
                  <div class="span6" style="margin-left:10%; margin-top:5% ;  padding:2%; margin-bottom:30%; background:white">

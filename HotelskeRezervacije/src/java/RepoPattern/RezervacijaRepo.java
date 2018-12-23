@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,7 +70,7 @@ public class RezervacijaRepo {
             con.close();
         }
     }
-    public boolean  update(String Id) throws SQLException{
+    public boolean  updateStatusRezervacije(String Id) throws SQLException{
          String update = "update rezervacije  set StatusRezervacije = 1 where Id = ?";
           try {
             PreparedStatement pst = con.prepareStatement(update);
@@ -82,5 +83,30 @@ public class RezervacijaRepo {
           return false;
         }
     }
-    
+    public ArrayList<Rezervacija>  aktivneRezervacije(String Id){
+        
+        String upit = "select Id, datumOdlaska, datumDolaska, VremeOdlaska, StatusRezervacije from  rezervacije "
+                    + "where StatusRezervacije = 1 and datumDolaska > now() and sobaId = "+Id;
+        ArrayList<Rezervacija> rezervacije = new ArrayList<>();
+        Statement st;
+        try {
+            
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(upit);
+            
+            while(rs.next()){
+                Rezervacija  rezervacija = new Rezervacija();
+                rezervacija.setRezervacijaId(rs.getInt("Id"));
+                rezervacija.setDatumOdlaska(rs.getString("datumOdlaska"));
+                rezervacija.setDatumDolaska(rs.getString("datumDolaska"));
+                rezervacija.setVremeOdlaska(rs.getString("VremeOdlaska"));
+                rezervacija.setStatusRezervacije(rs.getBoolean("StatusRezervacije"));
+                rezervacije.add(rezervacija);
+             }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rezervacije;
+    }
 }

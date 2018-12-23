@@ -55,8 +55,35 @@
                    <input type="submit" value="Potvrdi plaćanje" class="button btn-success"> <br> <br>
                </div>
            </div>
-        
+            
+                       
+           <%  if(request.getAttribute("poruka")!=null){
+                if (request.getAttribute("poruka").equals("True")){ 
+                    {%> 
+                             <script type="text/javascript">
+                         swal("Dobar  posao", "Rezervacija uspela", "success")
+                         .then(function() {
+                             window.location = "index.jsp";
+                         });
+                     <%}
+                } 
+                    else if(request.getAttribute("poruka").equals("False")){
+                         {%> 
+                             <script type="text/javascript">
+                         swal("Dobar  posao", "Rezervacija uspešna", "success")
+                         .then(function() {
+                             window.location = "index.jsp";
+                         });
+                     <%}
+                    }
+              }
+            %>
+           
+                   
+            
+
+           </script>
         </form>
-       
+      
     </body>
 </html>

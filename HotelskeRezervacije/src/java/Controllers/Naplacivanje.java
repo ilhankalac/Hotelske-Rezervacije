@@ -52,10 +52,14 @@ public class Naplacivanje extends HttpServlet {
                 if(cookie.getName().equals("Rezervacija_Id"))
                       Rezervacija_Id = cookie.getValue();
             }
-            
-            
-            if(new RezervacijaRepo().update(Rezervacija_Id)){
-                response.sendRedirect("Nedje.jsp");
+
+            if(new RezervacijaRepo().updateStatusRezervacije(Rezervacija_Id)){                
+                request.setAttribute("poruka", "True");
+                request.getRequestDispatcher("Placanje.jsp").forward(request, response);
+            }
+            else{
+                request.setAttribute("poruka", "False");
+                request.getRequestDispatcher("Placanje.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Naplacivanje.class.getName()).log(Level.SEVERE, null, ex);
