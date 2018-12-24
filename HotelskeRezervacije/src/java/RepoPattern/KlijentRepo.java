@@ -114,7 +114,7 @@ public class KlijentRepo {
                  klijent.setGrad(rs.getString("Grad"));
                  klijent.setDrzava(rs.getString("Drzava"));
                  klijent.setRola(Integer.toString(rs.getInt("RolaID")));
-                 klijent.setPoeni(rs.getDouble("Poeni"));
+                 klijent.setPoeni(rs.getInt("Poeni"));
                  klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
                  klijenti.add(klijent);
              }
@@ -166,7 +166,7 @@ public class KlijentRepo {
                 klijent.setGrad(rs.getString("Grad"));
                 klijent.setDrzava(rs.getString("Drzava"));
                 klijent.setRola(Integer.toString( rs.getInt("RolaID")));
-                klijent.setPoeni(rs.getDouble("Poeni"));
+                klijent.setPoeni(rs.getInt("Poeni"));
                 klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
         }
         
@@ -195,7 +195,7 @@ public class KlijentRepo {
                 klijent.setGrad(rs.getString("Grad"));
                 klijent.setDrzava(rs.getString("Drzava"));
                 klijent.setRola(Integer.toString( rs.getInt("RolaID")));
-                klijent.setPoeni(rs.getDouble("Poeni"));
+                klijent.setPoeni(rs.getInt("Poeni"));
                 klijent.setPostanskiBroj(rs.getString("PostanskiBroj"));
         }
         

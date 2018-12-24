@@ -48,7 +48,8 @@ public class SobeRepo {
            
              String select = "select s.Id,s.TipSobeID, s.HotelID, s.BrojSobe, s.Fotografija,"
                             + " h.Naziv as 'NazivHotela', ts.Naziv as 'NazivTipaSobe', s.KratkiOpis as 'KratkiOpis',"
-                            + "s.Opis as 'Opis',s.Cena as 'Cena', s.Kapacitet as 'Kapacitet' "
+                            + "s.Opis as 'Opis',s.Cena as 'Cena', s.Kapacitet as 'Kapacitet', s.Poeni as 'Poeni',"
+                            + "s.CenaUPoenima as 'CenaUPoenima'"
                             + "from Sobe s "
                             + "join TipSobe ts on s.TipSobeID = ts.id "
                             + "join Hotel h on h.Id = s.HotelID "
@@ -70,6 +71,8 @@ public class SobeRepo {
                  soba.setOpis(rs.getString("Opis"));
                  soba.setCena(rs.getDouble("Cena"));
                  soba.setKapacitet(rs.getInt("Kapacitet"));
+                 soba.setPoeni(rs.getInt("Poeni"));
+                 soba.setCenaUPoenima(rs.getInt("CenaUPoenima"));
                  sobe.add(soba);
              }
              
@@ -82,8 +85,9 @@ public class SobeRepo {
         return sobe; 
     }
     public boolean insert(Soba soba, Part part) throws SQLException, IOException{
-        String insert = "INSERT INTO `sobe`(`BrojSobe`, `TipSobeID`, `HotelID`, `Fotografija`, Opis, KratkiOpis,  Cena,  Kapacitet) "
-                      + "VALUES (?,?,?,?,?,?,?,?)";
+        String insert = "INSERT INTO `sobe`(`BrojSobe`, `TipSobeID`, `HotelID`, `Fotografija`,"
+                      + " Opis, KratkiOpis,  Cena,  Kapacitet, Poeni, CenaUPoenima) "
+                      + "VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
            
             PreparedStatement pst = con.prepareStatement(insert);
@@ -98,7 +102,8 @@ public class SobeRepo {
             pst.setString(6, soba.getKratkiOpis());
             pst.setDouble(7, soba.getCena());
             pst.setDouble(8, soba.getKapacitet());
-            
+            pst.setInt(9, soba.getPoeni());
+            pst.setInt(10, soba.getCenaUPoenima());
             pst.executeUpdate();
            
             return true;
@@ -140,7 +145,8 @@ public class SobeRepo {
         try {
             String select = "select s.Id,s.TipSobeID, s.HotelID, s.BrojSobe, s.Fotografija,"
                             + " h.Naziv as 'NazivHotela', ts.Naziv as 'NazivTipaSobe', s.KratkiOpis as 'KratkiOpis',"
-                            + "s.Opis as 'Opis',s.Cena as 'Cena', s.Kapacitet as 'Kapacitet' "
+                            + "s.Opis as 'Opis',s.Cena as 'Cena', s.Kapacitet as 'Kapacitet', s.Poeni as 'Poeni',"
+                            + "s.CenaUPoenima as 'CenaUPoenima' "
                             + "from Sobe s "
                             + "join TipSobe ts on s.TipSobeID = ts.id "
                             + "join Hotel h on h.Id = s.HotelID "
@@ -161,6 +167,8 @@ public class SobeRepo {
                  soba.setOpis(rs.getString("Opis"));
                  soba.setCena(rs.getDouble("Cena"));
                  soba.setKapacitet(rs.getInt("Kapacitet"));
+                 soba.setPoeni(rs.getInt("Poeni"));
+                 soba.setCenaUPoenima(rs.getInt("CenaUPoenima"));
              }
         } catch (SQLException ex) {
            Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
@@ -209,8 +217,9 @@ public class SobeRepo {
                       + "TipSobeID = ?,"
                       + "KratkiOpis = ?,"
                       + "Cena = ?,"
-                      + "Kapacitet = ?,";
-        
+                      + "Kapacitet = ?,"
+                      + "Poeni = ?,"
+                      + "CenaUPoenima = ?,";
         if (part.getSize()!=0)
             update += fotografija;
     
@@ -226,17 +235,19 @@ public class SobeRepo {
             pst.setString(3, soba.getKratkiOpis());
             pst.setDouble(4, soba.getCena());
             pst.setInt(5, soba.getKapacitet());
+            pst.setInt(6, soba.getPoeni());
+            pst.setInt(7,soba.getCenaUPoenima());
             InputStream is;
             
             if(part.getSize()!=0){
                 is = part.getInputStream();
-                pst.setBlob(6, is);
-                pst.setString(7,soba.getOpis());
-                pst.setInt(8, soba.getSobaId());
+                pst.setBlob(8, is);
+                pst.setString(9,soba.getOpis());
+                pst.setInt(10, soba.getSobaId());
             }
             else{
-                pst.setString(6, soba.getOpis());
-                pst.setInt(7, soba.getSobaId());
+                pst.setString(8, soba.getOpis());
+                pst.setInt(9, soba.getSobaId());
             }
             Statement st = con.createStatement();
             ResultSet rs =st.executeQuery(getHotelID);

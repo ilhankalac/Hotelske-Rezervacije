@@ -43,8 +43,8 @@ public class RezervacijaRepo {
     public Integer insert(Rezervacija rezervacija) throws SQLException{
         Integer LastID = 0;
         String insert = "INSERT INTO `Rezervacije`( `DatumDolaska`, `DatumOdlaska`, `Novac`, "
-                + "`BrojOdraslih`, `BrojDece`, `SobaID`, `KlijentID`, `VremeOdlaska`, `StatusRezervacije`)"
-                + " VALUES (?,?,?,?,?,?,?,?,?)";
+                + "`BrojOdraslih`, `BrojDece`, `SobaID`, `KlijentID`, `VremeOdlaska`, `StatusRezervacije`, Poeni)"
+                + " VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
            
             PreparedStatement pst = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
@@ -58,7 +58,7 @@ public class RezervacijaRepo {
             pst.setInt(7, rezervacija.getKlijentID());
             pst.setString(8, rezervacija.getVremeOdlaska());
             pst.setBoolean(9, rezervacija.getStatusRezervacije());
-
+            pst.setInt(10, 0);
             pst.executeUpdate();
 
             //sa ovim se uzima ID poslednjeg inserta u tabeli rezervacije
@@ -141,21 +141,28 @@ public class RezervacijaRepo {
                     + "from rezervacije "
                     + " where DatumDolaska = "+rezervacija.getDatumDolaska()
                     + " and DatumOdlaska = "+rezervacija.getDatumOdlaska();
+             
+             ArrayList<Datumi> listaDatuma =  listaRezervisanihDatuma(rezervacija);
+             
+             if(listaDatuma.size()!=0){
+                 if(logickiUnosDatuma(rezervacija) && (proveraDostupnihTermina(rezervacija, listaDatuma))){
 
-             if(logickiUnosDatuma(rezervacija) && (proveraDostupnihTermina(rezervacija, listaRezervisanihDatuma(rezervacija)))){
-                 
-                 
-                st = con.createStatement();
-                ResultSet rs = st.executeQuery(upit);
 
-                while(rs.next()){
-                    return false;
+                   st = con.createStatement();
+                   ResultSet rs = st.executeQuery(upit);
+
+                   while(rs.next()){
+                       return false;
+                   }
+
+                   return  true;
                 }
-                
-                return  true;
+                else
+                    return  false;
              }
              else
-                 return  false;
+                 return true;
+                
          } catch (SQLException ex) {
              
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
@@ -198,24 +205,23 @@ public class RezervacijaRepo {
         Statement st;
          try {
              String upit = "select DatumDolaska, DatumOdlaska "
-                    + "from rezervacije where StatusRezervacije = 1";
+                    + "from rezervacije where StatusRezervacije = 1 and SobaId = " + rezervacija.getSobaID();
              ArrayList<Datumi> datumi = new ArrayList<>();
              
              
-             if(logickiUnosDatuma(rezervacija)){
+             
                  
-                st = con.createStatement();
-                ResultSet rs = st.executeQuery(upit);
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(upit);
 
-                while(rs.next()){
-                   Datumi datum = new Datumi(rs.getString("DatumDolaska"), rs.getString("DatumOdlaska"));
-                   datumi.add(datum);
-                }
-                
-                return  datumi;
-             }
-             else
-                 return  null;
+            while(rs.next()){
+               Datumi datum = new Datumi(rs.getString("DatumDolaska"), rs.getString("DatumOdlaska"));
+               datumi.add(datum);
+            }
+
+            return  datumi;
+
+          
          } catch (SQLException ex) {
              
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);

@@ -16,7 +16,7 @@ public class Klijent {
     private String Grad;
     private String Drzava;
     private String Rola;
-    private Double Poeni;
+    private Integer Poeni;
     private String PostanskiBroj;
     private Integer HotelID;
 
@@ -25,7 +25,7 @@ public class Klijent {
 
     public Klijent(Integer Id, String Ime, String Prezime, String KIme, String Sifra, 
             String Email, String Telefon, String Adresa, String Grad,
-            String Drzava, String Rola, Double Poeni,String PostanskiBroj, Integer HotelID) {
+            String Drzava, String Rola, Integer Poeni,String PostanskiBroj, Integer HotelID) {
         this.Id = Id;
         this.Ime = Ime;
         this.Prezime = Prezime;
@@ -114,22 +114,13 @@ public class Klijent {
         this.Rola = Rola;
     }  
     
-    public Double getPoeni(){
-        return this.Poeni;
-    }
-    
-    public void setPoeni(Double Poeni) {
-        this.Poeni = Poeni;
-    } 
+ 
      public String getPostanskiBroj() {
         return this.PostanskiBroj ;
     }
     public void setPostanskiBroj(String PostanskiBroj) {
         this.PostanskiBroj = PostanskiBroj;
     } 
-    
-    
-    
     
     public int getHotelID(){
         return  this.HotelID;
@@ -138,5 +129,14 @@ public class Klijent {
     public  void setHotelID(Integer HotelID){
         this.HotelID = HotelID;
     }
+
+    public Integer getPoeni(){
+        return this.Poeni;
+    }
+    
+    public void setPoeni(Integer Poeni) {
+        this.Poeni = Poeni;
+    } 
+    
     
 }

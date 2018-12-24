@@ -58,7 +58,15 @@
                           <%}
                         }
                      %>
+
                    <input type="submit" value="Potvrdi plaćanje" class="button btn-success"> <br> <br>
+                   
+                   <hr>
+                   <h4>Ili platite Starling poenima</h4>
+                    <input type="submit" value="Plati - broj poena" class="button btn-warning"> <br> <br>  
+                     
+                     
+                  
                </div>
            </div>
             

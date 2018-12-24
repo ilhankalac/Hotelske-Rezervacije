@@ -17,7 +17,8 @@ public class Soba {
     private String KratkiOpis;
     private Double Cena;
     private Integer Kapacitet;
-    
+    private Integer Poeni;
+    private Integer CenaUPoenima;
     public TipSobe TipSobe = new TipSobe();
     public Hotel Hotel = new Hotel();
     public Soba(){}
@@ -25,7 +26,7 @@ public class Soba {
     public Soba(Integer Id, String BrojSobe, Blob Fotografija, Integer TipSobeID,
             Integer HotelID, String NazivHotelaSobe,
             String NazivTipaSobe, TipSobe TipSobe, String Opis, String KratkiOpis, Integer Kapacitet,
-            Double Cena) {
+            Double Cena,Integer Poeni, Integer CenaUPoenima) {
         this.Id = Id;
         this.BrojSobe = BrojSobe;
         this.Fotografija = Fotografija;
@@ -34,6 +35,8 @@ public class Soba {
         this.Opis = Opis;
         this.KratkiOpis = KratkiOpis;
         this.Kapacitet = Kapacitet;
+        this.Poeni = Poeni;
+        this.CenaUPoenima = CenaUPoenima;
 
     }
     public  void setSobaId(Integer Id){
@@ -109,7 +112,18 @@ public class Soba {
         this.Kapacitet = Kapacitet;
     }
     
-    
-    
+    public Integer getPoeni(){
+        return this.Poeni;
+    }
+    public void setPoeni(Integer Poeni){
+        this.Poeni = Poeni;
+        
+    }
+     public  void setCenaUPoenima(Integer CenaUPoenima){
+        this.CenaUPoenima = CenaUPoenima;
+    }
+    public Integer getCenaUPoenima(){
+        return  this.CenaUPoenima;
+    }
    
 }

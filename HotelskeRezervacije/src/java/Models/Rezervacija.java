@@ -20,11 +20,12 @@ public class Rezervacija {
     private boolean StatusRezervacije;
     public Soba soba = new Soba();
     public Klijent klijent = new Klijent();
+    private Integer Poeni;
 
     public Rezervacija(){}
     public Rezervacija(Integer Id, String DatumDolaska, String DatumOdlaska, String VremeOdlaska, 
             Double Novac, Integer BrojOdraslih, Integer BrojDece, Integer SobaID, 
-            Integer KlijentID, boolean StatusRezervacije) {
+            Integer KlijentID, boolean StatusRezervacije, Integer Poeni) {
         this.Id = Id;
         this.DatumDolaska = DatumDolaska;
         this.DatumOdlaska = DatumOdlaska;
@@ -35,6 +36,7 @@ public class Rezervacija {
         this.StatusRezervacije = StatusRezervacije;
         this.SobaID = SobaID;
         this.KlijentID = KlijentID;
+        this.Poeni = Poeni;
         
     }
     
@@ -106,4 +108,12 @@ public class Rezervacija {
     public  void setKlijentID(Integer KlijentID){
         this.KlijentID = KlijentID;
     }
+    
+    public Integer getPoeni(){
+        return this.Poeni;
+    }
+    public void setPoeni(Integer Poeni){
+        this.Poeni = Poeni;
+    }
+    
 }

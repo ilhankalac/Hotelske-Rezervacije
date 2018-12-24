@@ -83,6 +83,18 @@
                </tr>
                <tr>
                 <div class="form-inline">
+                    <td style="padding-top:9%"><label> Cena sa poenima: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Cena sa poenima" value="<%= soba.getCenaUPoenima()%>"  name="CenaUPoenima"></td>
+                </div>
+               </tr>
+                <tr>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Poeni: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Poeni" value="<%= soba.getPoeni()%>"  name="Poeni"></td>
+                </div>
+               </tr>
+               <tr>
+                <div class="form-inline">
                     <td style="padding-top:9%"><label> Kapacitet: </label></td>
                     <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Kapacitet" value="<%= soba.getKapacitet()%>"  name="Kapacitet"></td>
                 </div>

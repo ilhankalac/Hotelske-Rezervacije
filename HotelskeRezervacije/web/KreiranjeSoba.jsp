@@ -44,8 +44,9 @@
              Opis: <input type="text" name="Opis"> <br> <br> 
              Kratki opis: <input type="text" name="KratkiOpis"> <br> <br> 
              Cena: <input type="text" name="Cena"> <br> <br>
+             Cena u poenima: <input type="text" name="CenaUPoenima"> <br> <br>
              Kapacitet: <input type="text" name="Kapacitet"> <br> <br>
-             
+             Poeni: <input type="text" name="Poeni"> <br> <br>
              Fotografija: <input type="file" name="file"> <br> <br>
              <input type="submit" value="Kreiraj sobu">
              

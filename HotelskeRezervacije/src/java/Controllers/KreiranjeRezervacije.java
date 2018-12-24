@@ -57,12 +57,19 @@ public class KreiranjeRezervacije extends HttpServlet {
             rezervacija.setStatusRezervacije(false);
             rezervacija.setKlijentID(klijent.getKlijentId());
             
-            double racun = (new  RezervacijaRepo().brojDana(rezervacija)) *Double.parseDouble(request.getParameter("CenaSobe"));
+            long brojDana = new  RezervacijaRepo().brojDana(rezervacija);
+            double racun = brojDana * Double.parseDouble(request.getParameter("CenaSobe"));
             rezervacija.setNovac(racun);
+
+            //Integer Poeni = Math.round(brojDana * soba.getCena());
+            rezervacija.setPoeni(soba.getPoeni());
+            
+            
             try {
                 
                 if(new RezervacijaRepo().dostupna(rezervacija)){
-                    Cookie cookie = new Cookie("Rezervacija_Id",  new RezervacijaRepo().insert(rezervacija).toString());
+                    String Rezervacija_Id =  new RezervacijaRepo().insert(rezervacija).toString();
+                    Cookie cookie = new Cookie("Rezervacija_Id", Rezervacija_Id);
                     cookie.setMaxAge(1000);
                     response.addCookie(cookie);
                     request.setAttribute("Racun", racun);
