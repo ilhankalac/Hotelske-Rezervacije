@@ -1,6 +1,7 @@
 
 package RepoPattern;
 
+import Controllers.BrisanjeRezervacije;
 import Models.Datumi;
 import Models.Rezervacija;
 import java.sql.Connection;
@@ -253,4 +254,64 @@ public class RezervacijaRepo {
     }
     
     
+    public ArrayList<Rezervacija> lista() throws SQLException{
+        
+        ArrayList<Rezervacija> rezervacije = new ArrayList<Rezervacija>();
+        try {
+           
+             String select = "select r.Id, r.DatumDolaska, r.DatumOdlaska, r.Novac, r.BrojOdraslih, r.BrojDece, r.SobaID, "
+                             + " r.KlijentID, r.VremeOdlaska, r.StatusRezervacije, s.BrojSobe as 'BrojSobe', k.Ime as 'ime', k.Prezime as 'prezime' "
+                             + " from rezervacije r join sobe s on r.sobaId = s.Id join klijenti k on r.KlijentId = k.Id";
+                            
+        
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(select);
+             
+             while(rs.next()){
+                 Rezervacija rezervacija = new Rezervacija();
+                 rezervacija.setRezervacijaId(rs.getInt("Id"));
+                 rezervacija.setDatumDolaska(rs.getString("DatumDolaska"));
+                 rezervacija.setDatumOdlaska(rs.getString("DatumOdlaska"));
+                 rezervacija.setNovac(rs.getDouble("Novac"));
+                 rezervacija.setBrojOdraslih(rs.getInt("BrojOdraslih"));
+                 rezervacija.setBrojDece(rs.getInt("BrojDece"));
+                 rezervacija.setSobaID(rs.getInt("SobaID"));
+                 rezervacija.setKlijentID(rs.getInt("KlijentID"));
+                 rezervacija.setVremeOdlaska(rs.getString("VremeOdlaska"));
+                 rezervacija.setStatusRezervacije(rs.getBoolean("StatusRezervacije"));
+                 rezervacija.soba.setBrojSobe(rs.getString("BrojSobe"));
+                 rezervacija.klijent.setIme(rs.getString("ime"));
+                 rezervacija.klijent.setPrezime(rs.getString("prezime"));
+                 rezervacije.add(rezervacija);
+             }
+ 
+        } catch (SQLException ex) {
+            Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
+        }
+        
+        
+        return rezervacije; 
+    }
+    
+    public boolean brisanje(String Id) throws SQLException{
+       
+        try {
+            
+            String delete = "delete from  rezervacije where id = " + Id;
+ 
+            PreparedStatement ps  = con.prepareStatement(delete);
+            
+            ps.executeUpdate();
+  
+        } catch (SQLException ex) {
+           Logger.getLogger(BrisanjeRezervacije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
+        }
+      return true;
+    }
 }

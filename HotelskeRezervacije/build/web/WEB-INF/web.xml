@@ -60,6 +60,10 @@
         <servlet-name>Naplacivanje</servlet-name>
         <servlet-class>Controllers.Naplacivanje</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BrisanjeRezervacije</servlet-name>
+        <servlet-class>Controllers.BrisanjeRezervacije</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>KlijentController</servlet-name>
         <url-pattern>/KlijentController</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>Naplacivanje</servlet-name>
         <url-pattern>/Naplacivanje</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BrisanjeRezervacije</servlet-name>
+        <url-pattern>/BrisanjeRezervacije</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

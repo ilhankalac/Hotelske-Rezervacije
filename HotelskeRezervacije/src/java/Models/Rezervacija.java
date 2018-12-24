@@ -18,6 +18,8 @@ public class Rezervacija {
     private Integer SobaID;
     private Integer KlijentID;
     private boolean StatusRezervacije;
+    public Soba soba = new Soba();
+    public Klijent klijent = new Klijent();
 
     public Rezervacija(){}
     public Rezervacija(Integer Id, String DatumDolaska, String DatumOdlaska, String VremeOdlaska, 
