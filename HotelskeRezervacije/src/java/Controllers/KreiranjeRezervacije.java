@@ -50,29 +50,28 @@ public class KreiranjeRezervacije extends HttpServlet {
             
             rezervacija.setDatumDolaska(request.getParameter("DatumDolaska"));
             rezervacija.setDatumOdlaska(request.getParameter("DatumOdlaska"));
-            rezervacija.setNovac(soba.getCena());
             rezervacija.setBrojOdraslih(Integer.parseInt(request.getParameter("BrojOdraslih")));
             rezervacija.setBrojDece(Integer.parseInt(request.getParameter("BrojDece")));
             rezervacija.setSobaID(Integer.parseInt(request.getParameter("Soba_Id")));
             rezervacija.setVremeOdlaska(request.getParameter("VremeOdlaska"));
             rezervacija.setStatusRezervacije(false);
-            rezervacija.setNovac(0);
             rezervacija.setKlijentID(klijent.getKlijentId());
-
+            
+            double racun = (new  RezervacijaRepo().brojDana(rezervacija)) *Double.parseDouble(request.getParameter("CenaSobe"));
+            rezervacija.setNovac(racun);
             try {
                 
                 if(new RezervacijaRepo().dostupna(rezervacija)){
                     Cookie cookie = new Cookie("Rezervacija_Id",  new RezervacijaRepo().insert(rezervacija).toString());
                     cookie.setMaxAge(1000);
                     response.addCookie(cookie);
-                    response.sendRedirect("Placanje.jsp");
+                    request.setAttribute("Racun", racun);
+                    request.getRequestDispatcher("Placanje.jsp").forward(request, response);
                 }
                 else{
                     request.setAttribute("Greska", "False");
                     request.getRequestDispatcher("Rezervisi.jsp?Soba_Id="+soba.getSobaId()).forward(request, response);
                 }
-                
-                
             } 
             catch (SQLException ex) {
                 Logger.getLogger(KreiranjeRezervacije.class.getName()).log(Level.SEVERE, null, ex);

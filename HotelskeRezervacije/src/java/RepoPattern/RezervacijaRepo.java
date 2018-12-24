@@ -9,9 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,7 +75,23 @@ public class RezervacijaRepo {
             con.close();
         }
     }
+    public long brojDana(Rezervacija rezervacija){
+
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            Date date1 = myFormat.parse(rezervacija.getDatumDolaska());
+            Date date2 = myFormat.parse(rezervacija.getDatumOdlaska());
+            long brojDana =  Math.abs(date2.getTime() - date1.getTime());
+            
+            return TimeUnit.DAYS.convert(brojDana, TimeUnit.MILLISECONDS);
+
+        }catch(ParseException e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
     public boolean  updateStatusRezervacije(String Id) throws SQLException{
+        
          String update = "update rezervacije  set StatusRezervacije = 1 where Id = ?";
           try {
             PreparedStatement pst = con.prepareStatement(update);

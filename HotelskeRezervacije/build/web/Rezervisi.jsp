@@ -115,6 +115,7 @@
                                              <p class="card-text">Kratak opis: <%=soba.getKratkiOpis()%> </p>
                                              <p class="card-text">Cena: <%=soba.getCena()%> € </p>
                                              <p class="card-text">Kapacitet: <%=soba.getKapacitet()%> </p>
+                                             <input type="hidden" value="<%=soba.getCena()%>" name="CenaSobe"> 
                                          </div>   
                                      </div>  
                                     <%}

@@ -52,6 +52,12 @@
 
                    </select>
                      <br> <br>  
+                     <% if(request.getAttribute("Racun")!=null){ 
+                         {%>
+                             <h2>Račun: <%=request.getAttribute("Racun")%> EUR.</h2> 
+                          <%}
+                        }
+                     %>
                    <input type="submit" value="Potvrdi plaćanje" class="button btn-success"> <br> <br>
                </div>
            </div>
