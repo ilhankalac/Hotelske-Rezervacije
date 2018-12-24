@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -142,6 +144,12 @@ public class RezervacijaRepo {
     }
     public boolean logickiUnosDatuma(Rezervacija rezervacija){
         
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        
+        // proverava se da li je korisnik uneo negativan datum
+        if (rezervacija.getDatumDolaska().compareTo(timeStamp) < 0)
+            return false;
+        
         int godinaDolaska =Integer.parseInt(rezervacija.getDatumDolaska().substring(0, 4));
         int mesecDolaska =Integer.parseInt( rezervacija.getDatumDolaska().substring(5, 7));
         int danDolaska = Integer.parseInt(rezervacija.getDatumDolaska().substring(8, 10));
@@ -196,7 +204,19 @@ public class RezervacijaRepo {
 
     }
     public boolean proveraDostupnihTermina(Rezervacija rezervacija, ArrayList<Datumi> listaRezervisanihDatuma){
-
+        
+        if(listaRezervisanihDatuma.size()== 0)
+            return true;
+        
+        if(listaRezervisanihDatuma.size()==1){
+            if((rezervacija.getDatumDolaska().compareTo(listaRezervisanihDatuma.get(0).getDatumDolaska()) < 0
+               && rezervacija.getDatumOdlaska().compareTo(listaRezervisanihDatuma.get(0).getDatumDolaska()) < 0 )
+               || (rezervacija.getDatumDolaska().compareTo(listaRezervisanihDatuma.get(0).getDatumOdlaska()) > 0 ))
+                return true;
+            else
+                return false;
+        }
+        
         
         for(int i = 0; i < listaRezervisanihDatuma.size(); i++){
             if(i == listaRezervisanihDatuma.size()-1)
