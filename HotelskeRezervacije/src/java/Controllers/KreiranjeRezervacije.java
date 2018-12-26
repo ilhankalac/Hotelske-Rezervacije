@@ -73,6 +73,8 @@ public class KreiranjeRezervacije extends HttpServlet {
                     cookie.setMaxAge(1000);
                     response.addCookie(cookie);
                     request.setAttribute("Racun", racun);
+                    request.setAttribute("CenaUPoenima", soba.getCenaUPoenima());
+                    request.setAttribute("BrojPoena", soba.getPoeni());
                     request.getRequestDispatcher("Placanje.jsp").forward(request, response);
                 }
                 else{

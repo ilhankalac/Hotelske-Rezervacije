@@ -92,8 +92,7 @@ public class KlijentRepo {
       
         return false;
     }
-    public ArrayList<Klijent> lista() throws SQLException{
-        
+    public ArrayList<Klijent> lista() throws SQLException{ 
         ArrayList<Klijent> klijenti = new ArrayList<Klijent>();
         try {
            
@@ -206,7 +205,6 @@ public class KlijentRepo {
         return klijent;
     }
     public String Rola(String username, String password) throws SQLException{
-        
         String select = "select RolaID from klijenti where sifra = '"+ password + "' and KIme = '" + username + "'";
         Statement st;
         try {
@@ -225,7 +223,6 @@ public class KlijentRepo {
         return "Greska";
     }
     public boolean update(Klijent klijent) throws SQLException{
-        
         String update = "update klijenti "
                       + "set Ime = ?,"
                       + "Prezime = ?,"
@@ -264,5 +261,49 @@ public class KlijentRepo {
           return false;
         }
     }
-    
+    public boolean updatePoeniNakonPlacanjaNovcem(String Username, Integer BrojPoena){
+        String update = "update klijenti "
+                      + "set Poeni = Poeni + " + BrojPoena 
+                      + " where KIme = '" + Username +"'";
+         
+        try {
+            PreparedStatement pst = con.prepareStatement(update);
+            pst.executeUpdate();           
+            return true;
+            
+        } catch (SQLException e) {
+          return false;
+        }
+    }
+    public Integer brojPoena(String username) throws SQLException{
+        String select = "select Poeni from klijenti where KIme = '" + username + "'";
+        Statement st;
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(select);
+
+            while(rs.next())
+               return rs.getInt("Poeni");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
+        }
+        return 0;
+    }
+     public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena){
+        String update = "update klijenti "
+                      + "set Poeni = Poeni - " + BrojPoena 
+                      + " where KIme = '" + Username +"'";
+        try {
+            PreparedStatement pst = con.prepareStatement(update);
+            pst.executeUpdate();           
+            return true;
+            
+        } catch (SQLException e) {
+          return false;
+        }
+    }
 }

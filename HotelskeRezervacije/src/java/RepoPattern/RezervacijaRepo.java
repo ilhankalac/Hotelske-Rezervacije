@@ -97,8 +97,6 @@ public class RezervacijaRepo {
           try {
             PreparedStatement pst = con.prepareStatement(update);
             pst.setString(1, Id);
-            
-            
             pst.executeUpdate();
             return true;
           } catch (SQLException e) {
@@ -112,7 +110,7 @@ public class RezervacijaRepo {
         Statement st;
         try {
             String upit = "select Id, datumOdlaska, datumDolaska, VremeOdlaska, StatusRezervacije from  rezervacije "
-                    + "where StatusRezervacije = 1 and datumDolaska > now() and sobaId = "+Id;
+                    + "where StatusRezervacije = 1 and datumDolaska >= date(now()) and sobaId = " + Id;
             
             st = con.createStatement();
             ResultSet rs = st.executeQuery(upit);

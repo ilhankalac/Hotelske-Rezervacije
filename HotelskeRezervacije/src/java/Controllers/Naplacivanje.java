@@ -2,6 +2,7 @@
 package Controllers;
 
 import Models.KreditnaKartica;
+import RepoPattern.KlijentRepo;
 import RepoPattern.RezervacijaRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,7 +54,16 @@ public class Naplacivanje extends HttpServlet {
                       Rezervacija_Id = cookie.getValue();
             }
 
-            if(new RezervacijaRepo().updateStatusRezervacije(Rezervacija_Id)){                
+           
+            if(new RezervacijaRepo().updateStatusRezervacije(Rezervacija_Id)){
+                
+                if(request.getParameter("NaplacivanjeNovcem")!=null)
+                    new  KlijentRepo().updatePoeniNakonPlacanjaNovcem((String)request.getSession().getAttribute("ulogovan"), Integer.parseInt(request.getParameter("BrojPoena")));                            
+                else
+                    new KlijentRepo().updatePoeniNakonPlacanjaPoenima((String)request.getSession().getAttribute("ulogovan"), Integer.parseInt(request.getParameter("CenaUPoenima")));
+                
+                
+                request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
                 request.setAttribute("poruka", "True");
                 request.getRequestDispatcher("Placanje.jsp").forward(request, response);
             }
@@ -61,6 +71,7 @@ public class Naplacivanje extends HttpServlet {
                 request.setAttribute("poruka", "False");
                 request.getRequestDispatcher("Placanje.jsp").forward(request, response);
             }
+           
         } catch (SQLException ex) {
             Logger.getLogger(Naplacivanje.class.getName()).log(Level.SEVERE, null, ex);
         }

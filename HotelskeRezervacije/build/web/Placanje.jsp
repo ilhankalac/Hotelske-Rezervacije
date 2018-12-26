@@ -4,6 +4,7 @@
     Author     : Ilhan Kalac
 --%>
 
+<%@page import="Models.Soba"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,11 +13,12 @@
         <title>Plaćanje</title>
     </head>
     <body>
+     
         <jsp:include page="navbar.jsp" />  
         <form action="Naplacivanje" method="post">
                 <div style="margin-right:50%;" >
                <div style=" margin-left: 40%;" class="form-control"  >
-
+                   <input type="hidden" name="BrojPoena" value="<%=request.getAttribute("BrojPoena")%>">
                    <h2> Plaćanje  </h2>
                    <br>
                    Vrsta kreditne kartice: 
@@ -38,7 +40,7 @@
                                <%}
                            }
                        %>
-
+                    <input type="hidden" value="<%=request.getAttribute("CenaUPoenima")%>" name="CenaUPoenima">   
                    </select> <br> <br>
                     Datum  isteka: (Godina) 
                    <select name="DatumIstekaGodina">
@@ -59,14 +61,27 @@
                         }
                      %>
 
-                   <input type="submit" value="Potvrdi plaćanje" class="button btn-success"> <br> <br>
+                   <input  type="submit" name="NaplacivanjeNovcem" value="Potvrdi plaćanje" class="button btn-success"> <br> <br>
                    
                    <hr>
-                   <h4>Ili platite Starling poenima</h4>
-                    <input type="submit" value="Plati - broj poena" class="button btn-warning"> <br> <br>  
-                     
-                     
-                  
+                   <% 
+                       if(request.getAttribute("CenaUPoenima")!=null)
+                       if((Integer)request.getSession().getAttribute("BrojPoenaKlijenta") >= (Integer)request.getAttribute("CenaUPoenima")){ 
+                        {%>
+                           <h4>Ili platite Starling poenima</h4>
+                           <h3>Vaše trenutan  broj poena: <%=request.getSession().getAttribute("BrojPoenaKlijenta")%></h3>
+                         
+                           <input type="submit" value="Plati sa <%=request.getAttribute("CenaUPoenima")%> poena" class="button btn-warning"> <br> <br>  
+                       <%}
+                      }
+                      else { 
+                        {%> 
+                            <h4>Plaćanje Starling poenima</h4>
+                            <h4>Nemate dovoljno poena, potrebno <%=request.getAttribute("CenaUPoenima")%> poena</h4>
+                            <h3>Vaš trenutan  broj poena: <%=request.getSession().getAttribute("BrojPoenaKlijenta")%></h3>
+                        <%}
+                      }
+                   %>
                </div>
            </div>
             
@@ -74,7 +89,7 @@
            <%  if(request.getAttribute("poruka")!=null){
                 if (request.getAttribute("poruka").equals("True")){ 
                     {%> 
-                             <script type="text/javascript">
+           <script type="text/javascript">
                          swal("Dobar  posao", "Rezervacija uspela", "success")
                          .then(function() {
                              window.location = "index.jsp";
@@ -92,10 +107,6 @@
                     }
               }
             %>
-           
-                   
-            
-
            </script>
         </form>
       
