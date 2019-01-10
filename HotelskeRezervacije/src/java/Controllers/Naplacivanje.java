@@ -55,12 +55,12 @@ public class Naplacivanje extends HttpServlet {
             }
 
            
-            if(new RezervacijaRepo().updateStatusRezervacije(Rezervacija_Id)){
+            if(new RezervacijaRepo().updateStatusRezervacije(Rezervacija_Id,request.getParameter("NaplacivanjeNovcem"))){
                 
                 if(request.getParameter("NaplacivanjeNovcem")!=null)
                     new  KlijentRepo().updatePoeniNakonPlacanjaNovcem((String)request.getSession().getAttribute("ulogovan"), Integer.parseInt(request.getParameter("BrojPoena")));                            
                 else
-                    new KlijentRepo().updatePoeniNakonPlacanjaPoenima((String)request.getSession().getAttribute("ulogovan"), Integer.parseInt(request.getParameter("CenaUPoenima")));
+                    new KlijentRepo().updatePoeniNakonPlacanjaPoenima((String)request.getSession().getAttribute("ulogovan"), Integer.parseInt(request.getParameter("CenaUPoenima")), Integer.parseInt(request.getParameter("BrojPoena")));
                 
                 
                 request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));

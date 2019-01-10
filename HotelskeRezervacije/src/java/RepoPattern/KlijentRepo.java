@@ -293,9 +293,9 @@ public class KlijentRepo {
         }
         return 0;
     }
-     public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena){
+     public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena, Integer BrojPoenaSobe){
         String update = "update klijenti "
-                      + "set Poeni = Poeni - " + BrojPoena 
+                      + "set Poeni = Poeni - " + BrojPoena +" + " + BrojPoenaSobe
                       + " where KIme = '" + Username +"'";
         try {
             PreparedStatement pst = con.prepareStatement(update);

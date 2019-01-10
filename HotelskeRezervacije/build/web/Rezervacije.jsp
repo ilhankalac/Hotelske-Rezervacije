@@ -32,6 +32,7 @@
                       <th scope="col">Prezime klijenta</th>
                       <th scope="col">Vreme odlaska</th>
                       <th scope="col">Status rezervacije</th>
+                      <th scope="col">Cena u poenima</th>
                     </tr>
          </thead>
          <tbody>
@@ -53,6 +54,7 @@
                       <td><%=rezervacija.klijent.getPrezime()%> </td>
                       <td><%=rezervacija.getVremeOdlaska() %> </td>
                       <td><%=rezervacija.getStatusRezervacije() %> </td>
+                      <td><%=rezervacija.getPoeni()%> </td>
                       <td> 
                           
                          <a class="delete_link" style="color:red"

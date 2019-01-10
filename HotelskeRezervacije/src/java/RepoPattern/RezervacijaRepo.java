@@ -58,7 +58,7 @@ public class RezervacijaRepo {
             pst.setInt(7, rezervacija.getKlijentID());
             pst.setString(8, rezervacija.getVremeOdlaska());
             pst.setBoolean(9, rezervacija.getStatusRezervacije());
-            pst.setInt(10, 0);
+            pst.setInt(10, rezervacija.getPoeni());
             pst.executeUpdate();
 
             //sa ovim se uzima ID poslednjeg inserta u tabeli rezervacije
@@ -91,9 +91,16 @@ public class RezervacijaRepo {
             return 0;
         }
     }
-    public boolean  updateStatusRezervacije(String Id) throws SQLException{
+    public boolean  updateStatusRezervacije(String Id, String NaplacivanjeNovcem) throws SQLException{
         
-         String update = "update rezervacije  set StatusRezervacije = 1 where Id = ?";
+        String update = "";
+         if(NaplacivanjeNovcem!=null)
+            update = "update rezervacije  set StatusRezervacije = 1, Poeni = 0 where Id = ?";
+         else
+            update = "update rezervacije  set StatusRezervacije = 1, novac = 0 where Id = ?"; 
+        
+        
+         
           try {
             PreparedStatement pst = con.prepareStatement(update);
             pst.setString(1, Id);
@@ -264,7 +271,8 @@ public class RezervacijaRepo {
         try {
            
              String select = "select r.Id, r.DatumDolaska, r.DatumOdlaska, r.Novac, r.BrojOdraslih, r.BrojDece, r.SobaID, "
-                             + " r.KlijentID, r.VremeOdlaska, r.StatusRezervacije, s.BrojSobe as 'BrojSobe', k.Ime as 'ime', k.Prezime as 'prezime' "
+                             + " r.KlijentID, r.VremeOdlaska, r.StatusRezervacije, s.BrojSobe as 'BrojSobe', "
+                             + "k.Ime as 'ime', k.Prezime as 'prezime', r.Poeni as 'Poeni' "
                              + " from rezervacije r join sobe s on r.sobaId = s.Id join klijenti k on r.KlijentId = k.Id";
                             
         
@@ -286,6 +294,7 @@ public class RezervacijaRepo {
                  rezervacija.soba.setBrojSobe(rs.getString("BrojSobe"));
                  rezervacija.klijent.setIme(rs.getString("ime"));
                  rezervacija.klijent.setPrezime(rs.getString("prezime"));
+                 rezervacija.setPoeni(rs.getInt("Poeni"));
                  rezervacije.add(rezervacija);
              }
  
@@ -300,11 +309,14 @@ public class RezervacijaRepo {
         return rezervacije; 
     }
     
-    public boolean brisanje(String Id) throws SQLException{
+    public boolean brisanje(String KlijentId) throws SQLException{
        
         try {
+            String update = "update klijenti"
+                           +" set Poeni = Poeni - (select poeni from rezervacije where klijentId =  ";
             
-            String delete = "delete from  rezervacije where id = " + Id;
+            
+            String delete = "delete from  rezervacije where id = " + KlijentId;
  
             PreparedStatement ps  = con.prepareStatement(delete);
             
