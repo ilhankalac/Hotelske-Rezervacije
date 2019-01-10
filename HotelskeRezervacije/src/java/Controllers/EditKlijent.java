@@ -58,10 +58,7 @@ public class EditKlijent extends HttpServlet {
             klijent.setRola(request.getParameter("Rola"));
             klijent.setPoeni(Integer.parseInt(request.getParameter("Poeni")));
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
-            
-           
-            
-            
+
             if(new  KlijentRepo().update(klijent)){
                 if(klijent.getRola().equals("3")){
                     MenadzeriHotela menadzerHotela = new MenadzeriHotela();
