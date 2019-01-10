@@ -1,6 +1,7 @@
 package Controllers;
 
 
+import RepoPattern.KlijentRepo;
 import RepoPattern.RezervacijaRepo;
 
 import java.io.IOException;
@@ -29,12 +30,15 @@ public class BrisanjeRezervacije extends HttpServlet {
         try {
             
             
-            if(new RezervacijaRepo().brisanje(request.getParameter("Rezervacije_Id"))){
+            if(new RezervacijaRepo().brisanje(request.getParameter("Rezervacije_Id")
+                    ,Double.parseDouble(request.getParameter("Novac")),Double.parseDouble(request.getParameter("Poeni")))){
+                request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
                 request.setAttribute("rezultat", "true");
                 request.getRequestDispatcher("Rezervacije.jsp").forward(request, response);
             }
             else{
-                 request.setAttribute("rezultat", "false");
+                request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
+                request.setAttribute("rezultat", "false");
                 request.getRequestDispatcher("Rezervacije.jsp").forward(request, response);
             }
         } catch (SQLException ex) {

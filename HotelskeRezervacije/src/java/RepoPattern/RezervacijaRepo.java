@@ -309,18 +309,32 @@ public class RezervacijaRepo {
         return rezervacije; 
     }
     
-    public boolean brisanje(String KlijentId) throws SQLException{
+    public boolean brisanje(String Id, Double Novac, Double Poeni) throws SQLException{
        
         try {
-            String update = "update klijenti"
-                           +" set Poeni = Poeni - (select poeni from rezervacije where klijentId =  ";
+             String update = "";
+            if(Novac > 0){
+                update = "update klijenti"
+                        + " set Poeni = Poeni - "
+                        + "(select poeni from sobe where  id = (select sobaId from rezervacije where id = "+Id+"))"
+                        + " where id = (select klijentId from rezervacije where id = "+Id+")";
+            }
+            else if (Novac ==0){
+                 update = "update klijenti"
+                          +" set Poeni = Poeni - "
+                          + "(select poeni from sobe where  id = (select sobaId from rezervacije where id = "+Id+")) + " +Poeni
+                          + " where id = (select klijentId from rezervacije where id = "+Id+")";
+            }
+                 
             
+            String delete = "delete from  rezervacije where id = " + Id;
             
-            String delete = "delete from  rezervacije where id = " + KlijentId;
- 
-            PreparedStatement ps  = con.prepareStatement(delete);
+            PreparedStatement psUpdate  = con.prepareStatement(update);
             
-            ps.executeUpdate();
+            PreparedStatement psDelete  = con.prepareStatement(delete);
+            
+            psUpdate.executeUpdate();
+            psDelete.executeUpdate();
   
         } catch (SQLException ex) {
            Logger.getLogger(BrisanjeRezervacije.class.getName()).log(Level.SEVERE, null, ex);
