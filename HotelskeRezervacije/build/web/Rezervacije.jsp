@@ -4,6 +4,8 @@
     Author     : andreja
 --%>
 
+<%@page import="RepoPattern.KlijentRepo"%>
+<%@page import="Models.Klijent"%>
 <%@page import="RepoPattern.RezervacijaRepo"%>
 <%@page import="Models.Rezervacija"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -37,14 +39,14 @@
          </thead>
          <tbody>
          <%
+             Klijent klijent = new KlijentRepo().selectByUsername((String)request.getSession().getAttribute("ulogovan"));  
+             
              int  i = 1;
-             for(Rezervacija rezervacija : new RezervacijaRepo().lista()){
-                    {
-         %>
-                    
-                        
+             for(Rezervacija rezervacija : new RezervacijaRepo().lista()){ 
+                if(klijent.getRola().equals("2")){
+                {%>
                     <tr>
-                      <td> <%= i++ %> </td>
+                      <td> <%= klijent.getRola()%>  </td>
                       <td><%=rezervacija.getDatumDolaska() %> </td>
                       <td><%=rezervacija.getDatumOdlaska() %> </td>
                       <td><%=rezervacija.getNovac() %> </td>
@@ -78,6 +80,47 @@
                     </tr>
                  
              <%}
+                }
+                else if (klijent.getRola().equals("1")){
+                     if(klijent.getKlijentId()==rezervacija.getKlijentID()) {
+                     {%>
+                    <tr>
+                      <td> <%= klijent.getRola()%>  </td>
+                      <td><%=rezervacija.getDatumDolaska() %> </td>
+                      <td><%=rezervacija.getDatumOdlaska() %> </td>
+                      <td><%=rezervacija.getNovac() %> </td>
+                      <td><%=rezervacija.getBrojOdraslih() %> </td>
+                      <td><%=rezervacija.getBrojDece() %> </td>
+                      <td><%=rezervacija.soba.getBrojSobe() %> </td>
+                      <td><%=rezervacija.klijent.getIme() %> </td>
+                      <td><%=rezervacija.klijent.getPrezime()%> </td>
+                      <td><%=rezervacija.getVremeOdlaska() %> </td>
+                      <td><%=rezervacija.getStatusRezervacije() %> </td>
+                      <td><%=rezervacija.getPoeni()%> </td>
+                      <td> 
+                         <% 
+                            if(new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())){
+                         %>
+                         <button disabled="true" class="btn btn-success"> Aktivna </button>
+                         <% }
+                            else if(new RezervacijaRepo().isteklaRezervacija(rezervacija.getRezervacijaId())) { 
+                         %>
+                            <button disabled="true" class="btn btn-warning"> Istekla </button>
+                         
+                         <%} 
+                            else{    
+                         %>
+                         <a class="delete_link" style="color:red"
+                                    href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>">
+                                   <i class="fa fa-trash"> Obriši</i>                                  
+                         </a>
+                         <%} %>
+                            </td>
+                          </tr>
+
+                   <%}
+                 }
+               }
              }
              %>
              

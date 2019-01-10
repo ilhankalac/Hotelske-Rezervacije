@@ -223,6 +223,8 @@ public class KlijentRepo {
         return "Greska";
     }
     public boolean update(Klijent klijent) throws SQLException{
+        
+        String deleteFromMenadzeri = "delete from  menadzerihotela where klijentId = " + klijent.getKlijentId();
         String update = "update klijenti "
                       + "set Ime = ?,"
                       + "Prezime = ?,"
@@ -238,8 +240,11 @@ public class KlijentRepo {
                       + " where id = ?";
          
         try {
+            //brisanje iz many to many tabele ako je prethodno bio menadzer
+            PreparedStatement pstDelete = con.prepareStatement(deleteFromMenadzeri);
+            pstDelete.executeUpdate();
+            
             PreparedStatement pst = con.prepareStatement(update);
-
             pst.setString(1, klijent.getIme());
             pst.setString(2, klijent.getPrezime());
             pst.setString(3, klijent.getKIme());

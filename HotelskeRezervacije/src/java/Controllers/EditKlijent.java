@@ -2,7 +2,9 @@
 package Controllers;
 
 import Models.Klijent;
+import Models.MenadzeriHotela;
 import RepoPattern.KlijentRepo;
+import RepoPattern.MenadzerHotelaRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -57,9 +59,21 @@ public class EditKlijent extends HttpServlet {
             klijent.setPoeni(Integer.parseInt(request.getParameter("Poeni")));
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
             
+           
             
-            if(new  KlijentRepo().update(klijent))
+            
+            if(new  KlijentRepo().update(klijent)){
+                if(klijent.getRola().equals("3")){
+                    MenadzeriHotela menadzerHotela = new MenadzeriHotela();
+
+                    menadzerHotela.setHotelId(Integer.parseInt(request.getParameter("HotelId")));
+                    menadzerHotela.setKlijentId(klijent.getKlijentId());
+
+                    new MenadzerHotelaRepo().insert(menadzerHotela);
+                }
                 response.sendRedirect("Klijenti.jsp");
+            }
+                
             else
             {
                 request.setAttribute("Klijent_Id", klijent.getKlijentId());
