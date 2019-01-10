@@ -310,9 +310,9 @@ public class RezervacijaRepo {
     }
     
     public boolean brisanje(String Id, Double Novac, Double Poeni) throws SQLException{
-       
         try {
-             String update = "";
+           
+            String update = "";
             if(Novac > 0){
                 update = "update klijenti"
                         + " set Poeni = Poeni - "
@@ -343,5 +343,49 @@ public class RezervacijaRepo {
             con.close();
         }
       return true;
+    }
+    public boolean aktivnaRezervacija(Integer Id){
+        
+        Statement st;
+        try {
+            
+          String upit = "select Id "
+                      + "from rezervacije "
+                      + "where datumOdlaska > date(now()) and datumDolaska <= date(now()) and id = " + Id;
+          
+          st = con.createStatement();
+          ResultSet rs = st.executeQuery(upit);
+
+          if(rs.next())
+              return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        return false;
+    }
+    public boolean isteklaRezervacija(Integer Id){
+        
+        Statement st;
+        try {
+            
+          String upit = "select Id "
+                      + "from rezervacije "
+                      + "where datumOdlaska < date(now()) and id = " + Id;
+          
+          st = con.createStatement();
+          ResultSet rs = st.executeQuery(upit);
+
+          if(rs.next())
+              return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        return false;
     }
 }

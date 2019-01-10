@@ -39,7 +39,8 @@
          <%
              int  i = 1;
              for(Rezervacija rezervacija : new RezervacijaRepo().lista()){
-                    { %>
+                    {
+         %>
                     
                         
                     <tr>
@@ -56,11 +57,23 @@
                       <td><%=rezervacija.getStatusRezervacije() %> </td>
                       <td><%=rezervacija.getPoeni()%> </td>
                       <td> 
-                          
+                         <% 
+                            if(new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())){
+                         %>
+                         <button disabled="true" class="btn btn-success"> Aktivna </button>
+                         <% }
+                            else if(new RezervacijaRepo().isteklaRezervacija(rezervacija.getRezervacijaId())) { 
+                         %>
+                            <button disabled="true" class="btn btn-warning"> Istekla </button>
+                         
+                         <%} 
+                            else{    
+                         %>
                          <a class="delete_link" style="color:red"
                                     href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>">
                                    <i class="fa fa-trash"> Obriši</i>                                  
                          </a>
+                         <%} %>
                       </td>
                     </tr>
                  
