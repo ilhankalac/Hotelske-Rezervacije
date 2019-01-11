@@ -44,7 +44,6 @@ public class EditKlijent extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-            
             Klijent klijent = new Klijent();
             klijent.setKlijentId(Integer.parseInt(request.getParameter("Klijent_Id")));
             klijent.setIme(request.getParameter("Ime"));
@@ -56,16 +55,20 @@ public class EditKlijent extends HttpServlet {
             klijent.setDrzava(request.getParameter("Drzava"));
             klijent.setGrad(request.getParameter("Grad"));
             klijent.setRola(request.getParameter("Rola"));
-            klijent.setPoeni(Integer.parseInt(request.getParameter("Poeni")));
+            
+            String ulogovanaRola = (String)request.getSession().getAttribute("UlogovanaRola");
+            if(ulogovanaRola.equals("2"))
+                klijent.setPoeni(Integer.parseInt(request.getParameter("Poeni")));
+            
+            
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
 
-            if(new  KlijentRepo().update(klijent)){
-                if(klijent.getRola().equals("3")){
+            if(new  KlijentRepo().update(klijent, ulogovanaRola)){
+                if(ulogovanaRola.equals("3")){
+                    
                     MenadzeriHotela menadzerHotela = new MenadzeriHotela();
-
                     menadzerHotela.setHotelId(Integer.parseInt(request.getParameter("HotelId")));
                     menadzerHotela.setKlijentId(klijent.getKlijentId());
-
                     new MenadzerHotelaRepo().insert(menadzerHotela);
                 }
                 response.sendRedirect("Klijenti.jsp");
@@ -77,6 +80,7 @@ public class EditKlijent extends HttpServlet {
                 request.setAttribute("rezultat", "False");
                 request.getRequestDispatcher("EditKlijent.jsp").forward(request, response);
             }
+            request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
         } catch (SQLException ex) {
             Logger.getLogger(EditKlijent.class.getName()).log(Level.SEVERE, null, ex);
         }

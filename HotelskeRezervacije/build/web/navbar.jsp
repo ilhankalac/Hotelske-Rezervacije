@@ -1,4 +1,5 @@
 
+<%@page import="RepoPattern.KlijentRepo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,6 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     </head>
    <body> 
        
@@ -81,9 +83,18 @@
                      </div>
                    </div>
                  </div> 
-       <li class="nav-item">
-         <a class="nav-link" href="#">Features</a>
-       </li>
+      
+            <% 
+                
+                
+               if(((String)request.getSession().getAttribute("ulogovan"))!= null)
+               {%>
+            
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=new KlijentRepo().selectByUsername((String)request.getSession().getAttribute("ulogovan")).getKlijentId()%>">Profil</a>
+                    </li> 
+               <%}
+            %>
        <%if(pom) 
        {%>
             <li class="nav-item">

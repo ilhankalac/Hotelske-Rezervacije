@@ -222,7 +222,15 @@ public class KlijentRepo {
         }
         return "Greska";
     }
-    public boolean update(Klijent klijent) throws SQLException{
+    public boolean update(Klijent klijent, String ulogovanaRola) throws SQLException{
+        
+        String poeni = "";
+        String rolaID = "";
+        if(ulogovanaRola.equals("2")){
+            poeni = "Poeni = ?,";
+            rolaID = "RolaID = ?,";
+        }
+            
         
         String deleteFromMenadzeri = "delete from  menadzerihotela where klijentId = " + klijent.getKlijentId();
         String update = "update klijenti "
@@ -234,8 +242,8 @@ public class KlijentRepo {
                       + "Adresa = ?,"
                       + "Drzava = ?,"
                       + "Grad = ?,"
-                      + "RolaID = ?,"
-                      + "Poeni = ?,"
+                      + rolaID
+                      + poeni
                       + "PostanskiBroj = ?"
                       + " where id = ?";
          
@@ -253,10 +261,19 @@ public class KlijentRepo {
             pst.setString(6, klijent.getAdresa());
             pst.setString(7, klijent.getDrzava());
             pst.setString(8, klijent.getGrad()); 
-            pst.setInt(9, Integer.parseInt(klijent.getRola()));
-            pst.setDouble(10, klijent.getPoeni());
-            pst.setString(11, klijent.getPostanskiBroj());
-            pst.setInt(12, klijent.getKlijentId());
+            
+
+            if(ulogovanaRola.equals("2")){
+                pst.setInt(9, Integer.parseInt(klijent.getRola()));
+                pst.setDouble(10, klijent.getPoeni()); 
+                pst.setString(11, klijent.getPostanskiBroj());
+                pst.setInt(12, klijent.getKlijentId());
+            }  
+            else{
+                pst.setString(9, klijent.getPostanskiBroj());
+                pst.setInt(10, klijent.getKlijentId());
+            }
+            
 
             pst.executeUpdate();
             
@@ -298,7 +315,7 @@ public class KlijentRepo {
         }
         return 0;
     }
-     public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena, Integer BrojPoenaSobe){
+    public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena, Integer BrojPoenaSobe){
         String update = "update klijenti "
                       + "set Poeni = Poeni - " + BrojPoena +" + " + BrojPoenaSobe
                       + " where KIme = '" + Username +"'";
@@ -309,6 +326,30 @@ public class KlijentRepo {
             
         } catch (SQLException e) {
           return false;
+        }
+    }
+    public boolean promenaLozinke(String username, String staraLozinka, String novaLozinka) throws SQLException{
+        String select = "select Sifra from klijenti where KIme = '" + username + "' and Sifra = '" + staraLozinka + "'";
+        Statement st;
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(select);
+            
+            if(rs.next()){
+                String update = "update klijenti set sifra = '" + novaLozinka +"' where KIme = '" + username + "'";
+                st.executeUpdate(update);
+                return true;
+            }
+            else
+                return false;
+              
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+            con.close();
         }
     }
 }

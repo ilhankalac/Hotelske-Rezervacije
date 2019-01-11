@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class TipSobeRepo {
 
-     Connection con;
+    Connection con;
     public TipSobeRepo() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
