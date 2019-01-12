@@ -116,8 +116,12 @@ public class RezervacijaRepo {
         ArrayList<Rezervacija> rezervacije = new ArrayList<>();
         Statement st;
         try {
-            String upit = "select Id, datumOdlaska, datumDolaska, VremeOdlaska, StatusRezervacije from  rezervacije "
-                    + "where StatusRezervacije = 1 and datumDolaska >= date(now()) and sobaId = " + Id;
+            String upit = "select Id, datumOdlaska, datumDolaska, VremeOdlaska, StatusRezervacije"
+                        + " from  rezervacije "
+                        + "where StatusRezervacije = 1 and "
+                        + "(datumDolaska >= date(now()) or "
+                        + " (datumOdlaska > date(now()) and datumDolaska <= date(now()))) "
+                        + "and sobaId = " + Id;
             
             st = con.createStatement();
             ResultSet rs = st.executeQuery(upit);

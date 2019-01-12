@@ -64,7 +64,7 @@ public class EditKlijent extends HttpServlet {
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
 
             if(new  KlijentRepo().update(klijent, ulogovanaRola)){
-                if(ulogovanaRola.equals("3")){
+                if(klijent.getRola().equals("3")){
                     
                     MenadzeriHotela menadzerHotela = new MenadzeriHotela();
                     menadzerHotela.setHotelId(Integer.parseInt(request.getParameter("HotelId")));

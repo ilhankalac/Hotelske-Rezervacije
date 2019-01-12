@@ -28,18 +28,31 @@ public class BrisanjeRezervacije extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try {
+           
             
-            
+            Integer KlijentId = new KlijentRepo().selectByUsername((String)request.getSession().getAttribute("ulogovan")).getKlijentId();
             if(new RezervacijaRepo().brisanje(request.getParameter("Rezervacije_Id")
                     ,Double.parseDouble(request.getParameter("Novac")),Double.parseDouble(request.getParameter("Poeni")))){
                 request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
                 request.setAttribute("rezultat", "true");
+               
+                if(request.getParameter("Profil").equals("True"))
+                     request.getRequestDispatcher("EditKlijent.jsp?Klijent_Id=" + KlijentId).forward(request, response);
+                else
                 request.getRequestDispatcher("Rezervacije.jsp").forward(request, response);
+               
+                
+                
             }
             else{
                 request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
                 request.setAttribute("rezultat", "false");
+                if(request.getParameter("Profil").equals("True"))
+                     request.getRequestDispatcher("EditKlijent.jsp?Klijent_Id=" + KlijentId).forward(request, response);
+                else
                 request.getRequestDispatcher("Rezervacije.jsp").forward(request, response);
+                
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(BrisanjeRezervacije.class.getName()).log(Level.SEVERE, null, ex);

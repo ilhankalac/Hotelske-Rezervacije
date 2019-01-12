@@ -63,7 +63,7 @@ public class KreiranjeRezervacije extends HttpServlet {
 
             //Integer Poeni = Math.round(brojDana * soba.getCena());
             
-            rezervacija.setPoeni(soba.getCenaUPoenima());
+                 rezervacija.setPoeni(soba.getCenaUPoenima());
             
             
             try {

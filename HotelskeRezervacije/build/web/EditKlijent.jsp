@@ -4,6 +4,8 @@
     Author     : Ilhan Kalac
 --%>
 
+<%@page import="Models.Rezervacija"%>
+<%@page import="RepoPattern.RezervacijaRepo"%>
 <%@page import="RepoPattern.MenadzerHotelaRepo"%>
 <%@page import="Models.MenadzeriHotela"%>
 <%@page import="RepoPattern.HotelRepo"%>
@@ -114,17 +116,17 @@
                                     <input 
                                         <%if (klijent.getRola().equals("1")) {
                                                 {%>checked ="checked" <%}
-                                                  }  %>
+                                                    }  %>
                                         name="Rola" value ="1" onclick="funkcija()"type="radio" class="btn btn-primary"> Klijent </button>
                                     <input
                                         <%if (klijent.getRola().equals("2")) {
                                                 {%>checked ="checked" <%}
-                                                  }  %>
+                                                    }  %>
                                         name="Rola" value ="2" onclick="funkcija()" type="radio" class="btn btn-primary"> Administrator </button>
                                     <input
                                         <%if (klijent.getRola().equals("3")) {
                                                 {%>checked ="checked" <%}
-                                                  }  %>
+                                                    }  %>
                                         name="Rola" value ="3" type="radio" data-toggle="collapse" class ="btn btn-primary" data-target="#Demo" onclick="myFunction()"> Menadžer hotela </button>
 
                                 </td>
@@ -147,7 +149,7 @@
                                                 if (menadzerHotela.getKlijentId() != null)
                                                     if (menadzerHotela.getHotelId() == hotel.getHotelId()) {
                                                         {%> selected <%}
-                                                                       }%>
+                                                                }%>
                                             value="<%=hotel.getHotelId()%>">
                                             <%=hotel.getNaziv()%> - <%=hotel.getDrzava()%> (<%=hotel.getAdresa()%>)</option>
 
@@ -218,6 +220,101 @@
             document.getElementById("showInDropDown").style.visibility = "hidden";
         }
     </script>
+    <form method="post" action="BrisanjeRezervacije">
+
+       
+        <div style="padding-left:10%; padding-right: 10%;">
+            <table class="table table-hover table-dark" style="background-color: #32383e; color:white;  font-family: Roboto;">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Datum dolaska</th>
+                        <th scope="col">Datum odlaska</th>
+                        <th scope="col">Novac</th>
+                        <th scope="col">Broj odraslih</th>
+                        <th scope="col">Broj dece</th>
+                        <th scope="col">Broj sobe</th>
+                        <th scope="col">Ime klijenta</th>
+                        <th scope="col">Prezime klijenta</th>
+                        <th scope="col">Vreme odlaska</th>
+                        <th scope="col">Status rezervacije</th>
+                        <th scope="col">Cena u poenima</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        Klijent klijent1 = new KlijentRepo().selectByUsername((String) request.getSession().getAttribute("ulogovan"));
+
+                        int i = 1;
+                        for (Rezervacija rezervacija : new RezervacijaRepo().lista()) {
+                      
+                        if (klijent1.getKlijentId() == rezervacija.getKlijentID()) {
+                            {%>
+                    <tr>
+                        <td> <%= klijent1.getRola()%>  </td>
+                        <td><%=rezervacija.getDatumDolaska()%> </td>
+                        <td><%=rezervacija.getDatumOdlaska()%> </td>
+                        <td><%=rezervacija.getNovac()%> </td>
+                        <td><%=rezervacija.getBrojOdraslih()%> </td>
+                        <td><%=rezervacija.getBrojDece()%> </td>
+                        <td><%=rezervacija.soba.getBrojSobe()%> </td>
+                        <td><%=rezervacija.klijent.getIme()%> </td>
+                        <td><%=rezervacija.klijent.getPrezime()%> </td>
+                        <td><%=rezervacija.getVremeOdlaska()%> </td>
+                        <td><%=rezervacija.getStatusRezervacije()%> </td>
+                        <td><%=rezervacija.getPoeni()%> </td>
+                        <td> 
+                            <%
+                                if (new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())) {
+                            %>
+                            <button disabled="true" class="btn btn-success"> Aktivna </button>
+                            <% } else if (new RezervacijaRepo().isteklaRezervacija(rezervacija.getRezervacijaId())) {
+                            %>
+                            <button disabled="true" class="btn btn-warning"> Istekla </button>
+
+                            <%} else {
+                            %>
+                            <a class="delete_link" style="color:red"
+                               href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>">
+                                <i class="fa fa-trash"> Obriši</i>                                  
+                            </a>
+                            <%} %>
+                        </td>
+                    </tr>
+
+                    <%}
+                                }
+                            
+                        }
+                    %>
+
+                    <%
+                        String rezultat1 = (String) request.getAttribute("rezultat");
+
+                        if (rezultat1 != null)
+                                if (rezultat1.equals("true")) {%>
+                <script type="text/javascript">
+                    swal("Dobar  posao", "Uspesno brisanje", "success");
+                    
+
+
+                </script>
+
+                <%   } else if (rezultat1.equals("false")) {%>
+
+                <script type="text/javascript">
+                    swal("Greska", "Pokusajte ponovo", "warning");
+                </script>
+
+                <% }%>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+
+
+
 </body>
 </html>
 <%
@@ -231,7 +328,7 @@
 <%   }
 
     if (request.getAttribute("Promena") != null)
-                     if (request.getAttribute("Promena").equals("False")) {%>
+        if (request.getAttribute("Promena").equals("False")) {%>
 <script type="text/javascript">
     swal("Greška!", "Uneli ste pogrešnu lozinku. ", "error")
 
