@@ -255,7 +255,7 @@
                         <td><%=rezervacija.getVremeOdlaska()%> </td>
                         <td><%=rezervacija.getStatusRezervacije()%> </td>
                         <td><%=rezervacija.getPoeni()%> </td>
-                            
+
                         <td> 
                             <%
                                 if (new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())) {
