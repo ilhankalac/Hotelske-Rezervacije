@@ -22,10 +22,16 @@
                 response.sendRedirect("Hoteli.jsp");
         %>
         <jsp:include page="navbar.jsp" />  
-        
-        <a style="margin-top:20px; margin-left:40px" href="${pageContext.request.contextPath}/KreiranjeSoba.jsp?Hotel_Id=<%=Hotel_Id%>" class="btn btn-success">Dodaj novu sobu</a>
-        <br>
-        <% 
+        <%
+            String ulogovanaRola = "";
+            if((String)request.getSession().getAttribute("UlogovanaRola")!=null)
+                ulogovanaRola =(String)request.getSession().getAttribute("UlogovanaRola");
+            if(ulogovanaRola.equals("2")){            
+        %>
+                <a style="margin-top:20px; margin-left:40px" href="${pageContext.request.contextPath}/KreiranjeSoba.jsp?Hotel_Id=<%=Hotel_Id%>" class="btn btn-success">Dodaj novu sobu</a>
+                <br>
+         
+        <% } 
            String IDk = "";
            
            if(request.getSession().getAttribute("UlogovanaRola")!=null)

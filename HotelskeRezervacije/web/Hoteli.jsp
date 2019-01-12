@@ -19,9 +19,9 @@
     <body>
         <jsp:include page="navbar.jsp" />  
         <%
-           String IDk = "";
+           String UlogovanaRola = "";
            if(request.getSession().getAttribute("UlogovanaRola")!=null)
-            IDk = (String)request.getSession().getAttribute("UlogovanaRola");
+                UlogovanaRola = (String)request.getSession().getAttribute("UlogovanaRola");
            for(Hotel hotel : new HotelRepo().lista())
            {
                {%>
@@ -34,9 +34,8 @@
                         <p class="card-text">Adresa: <%=hotel.getAdresa()%> </p>
                         <p class="card-text">Opis: <%=hotel.getOpis()%> </p>
                         <p class="card-text">Broj zvezdica: <%=hotel.getBrojZvezdica()%> </p>
-                        
-                        <% if (IDk.equals("2")) {%> 
-                            <a href="${pageContext.request.contextPath}/Sobe.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-primary">Pogledaj sobe</a>
+                        <a href="${pageContext.request.contextPath}/Sobe.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-primary">Pogledaj sobe</a>
+                        <% if (UlogovanaRola.equals("2")) {%> 
                             <a href="${pageContext.request.contextPath}/EditHotel.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-success">Izmeni</a>
                             <%}
                         %>

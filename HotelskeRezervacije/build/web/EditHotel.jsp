@@ -37,7 +37,7 @@
         %>
         <div class="row">
          <div class="span6" style="margin-left:10%">
-         <h2>Kreiranje hotela </h2>
+         <h2>Izmena hotela </h2>
          <form action="EditHotel" method="post" enctype="multipart/form-data">
            <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
            <div style="padding-left:5%">

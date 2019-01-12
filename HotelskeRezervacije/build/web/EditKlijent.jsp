@@ -32,17 +32,6 @@
             request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
 
             Klijent klijent = (Klijent) request.getAttribute("Klijent");
-
-            String Rola = "";
-            if (klijent.getRola().equals("1")) {
-                Rola = "Klijent";
-            } else if (klijent.getRola().equals("2")) {
-                Rola = "Administrator";
-            } else {
-                Rola = "Menadžer hotela";
-            }
-
-
         %>
         <form action="EditKlijent" method="post">
             <input value="<%= request.getParameter("Klijent_Id")%>" name="Klijent_Id" type="hidden">
