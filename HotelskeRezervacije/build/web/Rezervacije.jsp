@@ -4,6 +4,8 @@
     Author     : andreja
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="RepoPattern.KlijentRepo"%>
 <%@page import="Models.Klijent"%>
 <%@page import="RepoPattern.RezervacijaRepo"%>
@@ -24,6 +26,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Hotel</th>
                             <th scope="col">Datum dolaska</th>
                             <th scope="col">Datum odlaska</th>
                             <th scope="col">Novac</th>
@@ -33,8 +36,10 @@
                             <th scope="col">Ime klijenta</th>
                             <th scope="col">Prezime klijenta</th>
                             <th scope="col">Vreme odlaska</th>
-                            <th scope="col">Status rezervacije</th>
+                            <th scope="col">Plaćena</th>
                             <th scope="col">Cena u poenima</th>
+                            <th scope="col">Status</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -42,22 +47,32 @@
                             Klijent klijent = new KlijentRepo().selectByUsername((String) request.getSession().getAttribute("ulogovan"));
 
                             int i = 1;
-                            for (Rezervacija rezervacija : new RezervacijaRepo().lista()) {
-                                if (klijent.getRola().equals("2")) {
-                     {%>
+                            ArrayList<Rezervacija> rezervacije;
+                            if (klijent.getRola().equals("2")) {
+                                rezervacije = new RezervacijaRepo().lista();
+                            } else {
+                                rezervacije = new RezervacijaRepo().rezervacijeMenadzerovihHotela(klijent.getKlijentId());
+                            }
+
+                            for (Rezervacija rezervacija : rezervacije) {
+                                if (klijent.getRola().equals("2") || klijent.getRola().equals("3")) {
+                                    {%>
                         <tr>
-                            <td> <%= klijent.getRola()%>  </td>
+                            <td> <%=i++%>  </td>
+                            <td><%=rezervacija.soba.Hotel.getNaziv()%> </td>
                             <td><%=rezervacija.getDatumDolaska()%> </td>
                             <td><%=rezervacija.getDatumOdlaska()%> </td>
                             <td><%=rezervacija.getNovac()%> </td>
                             <td><%=rezervacija.getBrojOdraslih()%> </td>
                             <td><%=rezervacija.getBrojDece()%> </td>
                             <td><%=rezervacija.soba.getBrojSobe()%> </td>
+
                             <td><%=rezervacija.klijent.getIme()%> </td>
                             <td><%=rezervacija.klijent.getPrezime()%> </td>
                             <td><%=rezervacija.getVremeOdlaska()%> </td>
                             <td><%=rezervacija.getStatusRezervacije()%> </td>
                             <td><%=rezervacija.getPoeni()%> </td>
+
                             <td> 
                                 <%
                                     if (new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())) {
@@ -123,7 +138,7 @@
                             String rezultat = (String) request.getAttribute("rezultat");
 
                             if (rezultat != null)
-                      if (rezultat.equals("true")) {%>
+                                if (rezultat.equals("true")) {%>
                     <script type="text/javascript">
                         swal("Dobar  posao", "Uspesno brisanje", "success");
 
@@ -139,6 +154,7 @@
 
                     <% }%>
                     </tbody>
+
                 </table>
             </div>
         </form>

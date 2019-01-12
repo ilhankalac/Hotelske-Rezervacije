@@ -222,12 +222,13 @@
     </script>
     <form method="post" action="BrisanjeRezervacije">
 
-       
+
         <div style="padding-left:10%; padding-right: 10%;">
             <table class="table table-hover table-dark" style="background-color: #32383e; color:white;  font-family: Roboto;">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Hotel</th>
                         <th scope="col">Datum dolaska</th>
                         <th scope="col">Datum odlaska</th>
                         <th scope="col">Novac</th>
@@ -237,8 +238,9 @@
                         <th scope="col">Ime klijenta</th>
                         <th scope="col">Prezime klijenta</th>
                         <th scope="col">Vreme odlaska</th>
-                        <th scope="col">Status rezervacije</th>
+                        <th scope="col">Plaćena</th>
                         <th scope="col">Cena u poenima</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -247,11 +249,12 @@
 
                         int i = 1;
                         for (Rezervacija rezervacija : new RezervacijaRepo().lista()) {
-                      
-                        if (klijent1.getKlijentId() == rezervacija.getKlijentID()) {
-                            {%>
+
+                            if (klijent1.getKlijentId() == rezervacija.getKlijentID()) {
+                                {%>
                     <tr>
-                        <td> <%= klijent1.getRola()%>  </td>
+                        <td> <%=i++%>  </td>
+                        <td><%=rezervacija.soba.Hotel.getNaziv()%> </td>
                         <td><%=rezervacija.getDatumDolaska()%> </td>
                         <td><%=rezervacija.getDatumOdlaska()%> </td>
                         <td><%=rezervacija.getNovac()%> </td>
@@ -263,6 +266,7 @@
                         <td><%=rezervacija.getVremeOdlaska()%> </td>
                         <td><%=rezervacija.getStatusRezervacije()%> </td>
                         <td><%=rezervacija.getPoeni()%> </td>
+                            
                         <td> 
                             <%
                                 if (new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())) {
@@ -283,8 +287,8 @@
                     </tr>
 
                     <%}
-                                }
-                            
+                            }
+
                         }
                     %>
 
@@ -292,10 +296,10 @@
                         String rezultat1 = (String) request.getAttribute("rezultat");
 
                         if (rezultat1 != null)
-                                if (rezultat1.equals("true")) {%>
+                            if (rezultat1.equals("true")) {%>
                 <script type="text/javascript">
                     swal("Dobar  posao", "Uspesno brisanje", "success");
-                    
+
 
 
                 </script>

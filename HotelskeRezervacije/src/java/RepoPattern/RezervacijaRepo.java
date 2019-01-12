@@ -275,9 +275,10 @@ public class RezervacijaRepo {
         try {
            
              String select = "select r.Id, r.DatumDolaska, r.DatumOdlaska, r.Novac, r.BrojOdraslih, r.BrojDece, r.SobaID, "
-                             + " r.KlijentID, r.VremeOdlaska, r.StatusRezervacije, s.BrojSobe as 'BrojSobe', "
+                             + " r.KlijentID, r.VremeOdlaska, r.StatusRezervacije, s.BrojSobe as 'BrojSobe', h.Naziv as 'NazivHotela',"
                              + "k.Ime as 'ime', k.Prezime as 'prezime', r.Poeni as 'Poeni' "
-                             + " from rezervacije r join sobe s on r.sobaId = s.Id join klijenti k on r.KlijentId = k.Id";
+                             + " from rezervacije r join sobe s on r.sobaId = s.Id join klijenti k on r.KlijentId = k.Id"
+                             + " join hotel h on h.id = s.hotelID";
                             
         
              Statement st = con.createStatement();
@@ -299,6 +300,7 @@ public class RezervacijaRepo {
                  rezervacija.klijent.setIme(rs.getString("ime"));
                  rezervacija.klijent.setPrezime(rs.getString("prezime"));
                  rezervacija.setPoeni(rs.getInt("Poeni"));
+                 rezervacija.soba.Hotel.setNaziv(rs.getString("NazivHotela"));
                  rezervacije.add(rezervacija);
              }
  
@@ -391,5 +393,56 @@ public class RezervacijaRepo {
         }
         
         return false;
+    }
+    public ArrayList<Rezervacija> rezervacijeMenadzerovihHotela(Integer MenadzerId) throws SQLException{
+        
+        ArrayList<Rezervacija> rezervacije = new ArrayList<Rezervacija>();
+        try {
+           
+             String select = "select r.id, r.DatumDolaska, r.DatumOdlaska,"
+                           + "r.Novac, r.BrojOdraslih, r.BrojDece, s.BrojSobe, r.SobaId, r.KlijentId,"
+                           + "(select ime from klijenti where id = r.KlijentID) as Ime,"
+                           + "(select Prezime from klijenti where id = r.KlijentID) as Prezime,"
+                           + "r.VremeOdlaska, r.StatusRezervacije, r.Poeni, h.Naziv as 'NazivHotela'"     
+                           + "from rezervacije r "
+                           + "join sobe s on s.Id = r.SobaID "
+                           + "join hotel h on h.id = s.HotelID "
+                           + "join menadzerihotela mh on mh.HotelID = h.Id "
+                           + "join klijenti k on k.id = mh.KlijentID "
+                           + "where mh.KlijentId = " + MenadzerId;
+                           
+                            
+        
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(select);
+             
+             while(rs.next()){
+                 Rezervacija rezervacija = new Rezervacija();
+                 rezervacija.setRezervacijaId(rs.getInt("Id"));
+                 rezervacija.setDatumDolaska(rs.getString("DatumDolaska"));
+                 rezervacija.setDatumOdlaska(rs.getString("DatumOdlaska"));
+                 rezervacija.setNovac(rs.getDouble("Novac"));
+                 rezervacija.setBrojOdraslih(rs.getInt("BrojOdraslih"));
+                 rezervacija.setBrojDece(rs.getInt("BrojDece"));
+                 rezervacija.setSobaID(rs.getInt("SobaID"));
+                 rezervacija.setKlijentID(rs.getInt("KlijentID"));
+                 rezervacija.setVremeOdlaska(rs.getString("VremeOdlaska"));
+                 rezervacija.setStatusRezervacije(rs.getBoolean("StatusRezervacije"));
+                 rezervacija.soba.setBrojSobe(rs.getString("BrojSobe"));
+                 rezervacija.klijent.setIme(rs.getString("Ime"));
+                 rezervacija.klijent.setPrezime(rs.getString("Prezime"));
+                 rezervacija.setPoeni(rs.getInt("Poeni"));
+                 rezervacija.soba.Hotel.setNaziv(rs.getString("NazivHotela"));
+                 rezervacije.add(rezervacija);
+             }
+ 
+        } catch (SQLException ex) {
+            Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
+        }
+
+        return rezervacije; 
     }
 }
