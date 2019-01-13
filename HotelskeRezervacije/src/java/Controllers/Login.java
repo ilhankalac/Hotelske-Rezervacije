@@ -2,6 +2,7 @@
 package Controllers;
 
 import RepoPattern.KlijentRepo;
+import RepoPattern.MenadzerHotelaRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -27,10 +28,13 @@ public class Login extends HttpServlet {
             HttpSession  sesija = request.getSession();
             String  username = request.getParameter("username");
             String password = request.getParameter("password");
+            String ulogovanaRola = new KlijentRepo().Rola(username, password);
             
             if(new KlijentRepo().logovanje(username, password)){
+                if(ulogovanaRola.equals("3"))
+                    sesija.setAttribute("HotelId", new MenadzerHotelaRepo().select(new KlijentRepo().selectByUsername(username).getKlijentId()).getHotelId());
                 sesija.setAttribute("ulogovan", username); 
-                sesija.setAttribute("UlogovanaRola", new KlijentRepo().Rola(username, password));
+                sesija.setAttribute("UlogovanaRola", ulogovanaRola);
                 sesija.setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena(username));
                 request.setAttribute("prvoLogovanje", "True");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -39,6 +43,7 @@ public class Login extends HttpServlet {
                 request.setAttribute("prvoLogovanje", "False");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }    

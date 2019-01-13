@@ -147,7 +147,7 @@
                     </div>
                </table>                       
             </div>  
-               
+                   <a href="Sobe.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId") %>" class="btn btn-primary">Sobe hotela</a>
          </div>                               
       </div>                            
     </body>

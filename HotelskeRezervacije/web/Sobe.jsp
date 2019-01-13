@@ -16,8 +16,12 @@
     </head>
     <body>
         <%
+            HttpSession sesija = request.getSession();
+            
+            String hotelIdSesija = "" + sesija.getAttribute("HotelId");
+            
             String Hotel_Id = request.getParameter("Hotel_Id");
-
+           
             if (Hotel_Id == null) {
                 response.sendRedirect("Hoteli.jsp");
             }
@@ -28,7 +32,7 @@
             if ((String) request.getSession().getAttribute("UlogovanaRola") != null) {
                 ulogovanaRola = (String) request.getSession().getAttribute("UlogovanaRola");
             }
-            if (ulogovanaRola.equals("2")) {
+            if (ulogovanaRola.equals("2") || Hotel_Id.equals(hotelIdSesija)) {
         %>
         <a style="margin-top:20px; margin-left:40px" href="${pageContext.request.contextPath}/KreiranjeSoba.jsp?Hotel_Id=<%=Hotel_Id%>" class="btn btn-success">Dodaj novu sobu</a>
         <br>
@@ -57,7 +61,7 @@
                <% if(!IDk.isEmpty()) {%>
                 <a href="${pageContext.request.contextPath}/Rezervisi.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-primary">Rezerviši</a>
                 <%} %>
-                <% if (IDk.equals("2")) {%> 
+                <% if (IDk.equals("2") || Hotel_Id.equals(hotelIdSesija)) {%> 
                 <a href="${pageContext.request.contextPath}/EditSoba.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-success">Izmeni</a>
                 <%}
                 %>

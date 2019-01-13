@@ -119,7 +119,7 @@
                         }
                         if (ulogovanaRola.equals("3")) {
                             {%> 
-                    <a class="dropdown-item" href="Hoteli.jsp">Upravljanje hotelom</a>
+                            <a class="dropdown-item" href="EditHotel.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId") %>">Upravljanje hotelom</a>
                     <%}
                         }
                     %>
