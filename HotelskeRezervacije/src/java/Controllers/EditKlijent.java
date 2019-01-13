@@ -64,14 +64,15 @@ public class EditKlijent extends HttpServlet {
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
 
             if(new  KlijentRepo().update(klijent, ulogovanaRola)){
-                if(klijent.getRola().equals("3")){
-                    
-                    MenadzeriHotela menadzerHotela = new MenadzeriHotela();
-                    menadzerHotela.setHotelId(Integer.parseInt(request.getParameter("HotelId")));
-                    menadzerHotela.setKlijentId(klijent.getKlijentId());
-                    new MenadzerHotelaRepo().insert(menadzerHotela);
-                }
-                response.sendRedirect("Klijenti.jsp");
+                if(klijent.getRola()!=null)
+                    if(klijent.getRola().equals("3")){
+
+                        MenadzeriHotela menadzerHotela = new MenadzeriHotela();
+                        menadzerHotela.setHotelId(Integer.parseInt(request.getParameter("HotelId")));
+                        menadzerHotela.setKlijentId(klijent.getKlijentId());
+                        new MenadzerHotelaRepo().insert(menadzerHotela);
+                    }
+                response.sendRedirect("EditKlijent.jsp?Klijent_Id="+klijent.getKlijentId());
             }
                 
             else

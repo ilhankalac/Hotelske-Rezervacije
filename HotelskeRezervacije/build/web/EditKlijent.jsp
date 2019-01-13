@@ -30,11 +30,16 @@
         <jsp:include page="navbar.jsp" />  
         <%
             request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
-
+            MenadzeriHotela mh = new MenadzerHotelaRepo().select(Integer.parseInt(request.getParameter("Klijent_Id")));
+            String ulogovanaRola ="";
+            if( request.getSession().getAttribute("UlogovanaRola")!=null)
+                ulogovanaRola =(String) request.getSession().getAttribute("UlogovanaRola");
             Klijent klijent = (Klijent) request.getAttribute("Klijent");
         %>
         <form action="EditKlijent" method="post">
             <input value="<%= request.getParameter("Klijent_Id")%>" name="Klijent_Id" type="hidden">
+            <%if (ulogovanaRola.equals("3")){  {%> 
+            <input type="hidden" name="HotelId" value="<%= mh.getHotelId()%>"> <%} }%>
             <div style="padding-left:5%">
 
                 <div class="row" >

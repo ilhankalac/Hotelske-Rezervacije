@@ -53,7 +53,10 @@
                 <p class="card-text">Cena sa poenima: <%=soba.getCenaUPoenima()%> </p>
                 <p class="card-text">Poeni: <%=soba.getPoeni()%> </p>
                 <p class="card-text">Kapacitet: <%=soba.getKapacitet()%> </p>
+                
+               <% if(!IDk.isEmpty()) {%>
                 <a href="${pageContext.request.contextPath}/Rezervisi.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-primary">Rezerviši</a>
+                <%} %>
                 <% if (IDk.equals("2")) {%> 
                 <a href="${pageContext.request.contextPath}/EditSoba.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-success">Izmeni</a>
                 <%}

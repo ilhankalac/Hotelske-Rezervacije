@@ -118,27 +118,30 @@ public class SobeRepo {
             con.close();
         }
     }
-    public void fotografije(HttpServletRequest request, HttpServletResponse response, String SobaId)throws ServletException, IOException {
+    public void fotografije(HttpServletRequest request, HttpServletResponse response, String SobaId)throws ServletException, IOException, SQLException {
         
-            Statement stmt;
-            try {
+        Statement stmt;
+        try {
 
-                stmt = con.createStatement();
-                byte[] imgData = null;
-                ResultSet rs = stmt.executeQuery("select fotografija from sobe where id = " + SobaId);
-                while (rs.next()) 
-                {
-                    Blob image = rs.getBlob(1);
-                    imgData = image.getBytes(1,(int)image.length());
-                }
-                response.setContentType("image/jpg");
-                try (OutputStream o = response.getOutputStream()) {
-                    o.write(imgData);
-                    o.flush();
-                }
-            } catch (SQLException ex) {
-
+            stmt = con.createStatement();
+            byte[] imgData = null;
+            ResultSet rs = stmt.executeQuery("select fotografija from sobe where id = " + SobaId);
+            while (rs.next()) 
+            {
+                Blob image = rs.getBlob(1);
+                imgData = image.getBytes(1,(int)image.length());
             }
+            response.setContentType("image/jpg");
+            try (OutputStream o = response.getOutputStream()) {
+                o.write(imgData);
+                o.flush();
+            }
+        } catch (SQLException ex) {
+
+        }
+        finally{
+            con.close();
+        }
     }
     public Soba select(String Id) throws SQLException{
         Soba soba = new Soba();
@@ -267,21 +270,24 @@ public class SobeRepo {
             con.close();
         }
     }
-    public int maxKapacitetSobe(String Id){
+    public int maxKapacitetSobe(String Id) throws SQLException{
+        
         Statement stmt;
         int maxKapacitet = 0;
-            try {
+        try {
 
-                stmt = con.createStatement();
-             
-                ResultSet rs = stmt.executeQuery("select max(Kapacitet) as 'Kapacitet' from sobe where Id = " +Id);
-                while (rs.next()) 
-                    maxKapacitet = rs.getInt("Kapacitet");                
-            } catch (SQLException ex) {
+            stmt = con.createStatement();
 
-            }
-        
-        
+            ResultSet rs = stmt.executeQuery("select max(Kapacitet) as 'Kapacitet' from sobe where Id = " +Id);
+            while (rs.next()) 
+                maxKapacitet = rs.getInt("Kapacitet");                
+        } catch (SQLException ex) {
+
+        }
+        finally{
+            con.close();
+        }
+
         return maxKapacitet;
         
     }

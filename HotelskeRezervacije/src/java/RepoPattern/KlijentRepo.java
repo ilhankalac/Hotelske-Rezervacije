@@ -172,6 +172,9 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
       
         return klijent;
     }
@@ -200,6 +203,9 @@ public class KlijentRepo {
         
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
         }
       
         return klijent;
@@ -282,8 +288,11 @@ public class KlijentRepo {
         } catch (SQLException e) {
           return false;
         }
+        finally{
+            con.close();
+        }
     }
-    public boolean updatePoeniNakonPlacanjaNovcem(String Username, Integer BrojPoena){
+    public boolean updatePoeniNakonPlacanjaNovcem(String Username, Integer BrojPoena) throws SQLException{
         String update = "update klijenti "
                       + "set Poeni = Poeni + " + BrojPoena 
                       + " where KIme = '" + Username +"'";
@@ -295,6 +304,9 @@ public class KlijentRepo {
             
         } catch (SQLException e) {
           return false;
+        }
+        finally{
+            con.close();
         }
     }
     public Integer brojPoena(String username) throws SQLException{
@@ -315,7 +327,7 @@ public class KlijentRepo {
         }
         return 0;
     }
-    public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena, Integer BrojPoenaSobe){
+    public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena, Integer BrojPoenaSobe) throws SQLException{
         String update = "update klijenti "
                       + "set Poeni = Poeni - " + BrojPoena +" + " + BrojPoenaSobe
                       + " where KIme = '" + Username +"'";
@@ -326,6 +338,9 @@ public class KlijentRepo {
             
         } catch (SQLException e) {
           return false;
+        }
+        finally{
+            con.close();
         }
     }
     public boolean promenaLozinke(String username, String staraLozinka, String novaLozinka) throws SQLException{

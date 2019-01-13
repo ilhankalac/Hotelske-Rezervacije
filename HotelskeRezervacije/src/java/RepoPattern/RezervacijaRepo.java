@@ -90,6 +90,7 @@ public class RezervacijaRepo {
             e.printStackTrace();
             return 0;
         }
+        
     }
     public boolean  updateStatusRezervacije(String Id, String NaplacivanjeNovcem) throws SQLException{
         
@@ -98,19 +99,21 @@ public class RezervacijaRepo {
             update = "update rezervacije  set StatusRezervacije = 1, Poeni = 0 where Id = ?";
          else
             update = "update rezervacije  set StatusRezervacije = 1, novac = 0 where Id = ?"; 
-        
-        
-         
-          try {
-            PreparedStatement pst = con.prepareStatement(update);
-            pst.setString(1, Id);
-            pst.executeUpdate();
-            return true;
-          } catch (SQLException e) {
-          return false;
+
+        try {
+          PreparedStatement pst = con.prepareStatement(update);
+          pst.setString(1, Id);
+          pst.executeUpdate();
+          return true;
+        }
+        catch (SQLException e) {
+        return false;
+        }
+        finally{
+            con.close();
         }
     }
-    public ArrayList<Rezervacija>  aktivneRezervacije(String Id){
+    public ArrayList<Rezervacija>  aktivneRezervacije(String Id) throws SQLException{
         
         
         ArrayList<Rezervacija> rezervacije = new ArrayList<>();
@@ -139,9 +142,12 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
         return rezervacije;
     }
-    public boolean  dostupna(Rezervacija rezervacija){
+    public boolean  dostupna(Rezervacija rezervacija) throws SQLException{
         
         
         Statement st;
@@ -176,7 +182,10 @@ public class RezervacijaRepo {
              
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
              return false;
-         }           
+         }
+        finally{
+            con.close();
+        }
     }
     public boolean logickiUnosDatuma(Rezervacija rezervacija){
         
@@ -209,7 +218,7 @@ public class RezervacijaRepo {
         return true;
     }
     
-    public ArrayList<Datumi> listaRezervisanihDatuma(Rezervacija rezervacija){
+    public ArrayList<Datumi> listaRezervisanihDatuma(Rezervacija rezervacija) throws SQLException{
         
         Statement st;
          try {
@@ -235,7 +244,10 @@ public class RezervacijaRepo {
              
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
              return null;
-         }           
+         }
+         finally{
+            con.close();
+         }
 
     }
     public boolean proveraDostupnihTermina(Rezervacija rezervacija, ArrayList<Datumi> listaRezervisanihDatuma){
@@ -310,8 +322,7 @@ public class RezervacijaRepo {
         finally{
             con.close();
         }
-        
-        
+
         return rezervacije; 
     }
     
@@ -350,7 +361,7 @@ public class RezervacijaRepo {
         }
       return true;
     }
-    public boolean aktivnaRezervacija(Integer Id){
+    public boolean aktivnaRezervacija(Integer Id) throws SQLException{
         
         Statement st;
         try {
@@ -369,10 +380,13 @@ public class RezervacijaRepo {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+        finally{
+            con.close();
+        }
         
         return false;
     }
-    public boolean isteklaRezervacija(Integer Id){
+    public boolean isteklaRezervacija(Integer Id) throws SQLException{
         
         Statement st;
         try {
@@ -390,6 +404,9 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+        finally{
+            con.close();
         }
         
         return false;

@@ -106,7 +106,7 @@ public class HotelRepo {
         
         return hoteli; 
     }
-    public void fotografije(HttpServletRequest request, HttpServletResponse response, String HotelID)throws ServletException, IOException {
+    public void fotografije(HttpServletRequest request, HttpServletResponse response, String HotelID)throws ServletException, IOException, SQLException {
         
             Statement stmt;
             try {
@@ -126,6 +126,9 @@ public class HotelRepo {
                 }
             } catch (SQLException ex) {
 
+            }
+            finally{
+                con.close();
             }
     }
     public Hotel select(String Id) throws SQLException{
