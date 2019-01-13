@@ -69,9 +69,7 @@ public class HotelRepo {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        finally{
-            con.close();
-        }
+        
     }
     public ArrayList<Hotel> lista() throws SQLException{
         
@@ -99,9 +97,7 @@ public class HotelRepo {
         } catch (SQLException ex) {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
         
         
         return hoteli; 
@@ -127,9 +123,7 @@ public class HotelRepo {
             } catch (SQLException ex) {
 
             }
-            finally{
-                con.close();
-            }
+            
     }
     public Hotel select(String Id) throws SQLException{
         Hotel hotel = new Hotel();
@@ -151,9 +145,7 @@ public class HotelRepo {
         } catch (SQLException ex) {
            Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
         return hotel;
     }
     public boolean update(Hotel hotel, Part part) throws SQLException, IOException{
@@ -204,9 +196,7 @@ public class HotelRepo {
         } catch (SQLException e) {
           return false;
         }
-        finally{
-            con.close();
-        }
+       
     }
     public void brisanje (String Id) throws SQLException{
         try {
@@ -219,9 +209,7 @@ public class HotelRepo {
         } catch (SQLException ex) {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
        
     }
     

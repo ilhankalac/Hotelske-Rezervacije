@@ -273,7 +273,7 @@
                             <%} else {
                             %>
                             <a class="delete_link" style="color:red"
-                               href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>">
+                               href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>&Profil=True">
                                 <i class="fa fa-trash"> Obriši</i>                                  
                             </a>
                             <%} %>

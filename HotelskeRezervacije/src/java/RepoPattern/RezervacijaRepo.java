@@ -72,9 +72,7 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             return 0;
         }
-        finally{
-            con.close();
-        }
+       
     }
     public long brojDana(Rezervacija rezervacija){
 
@@ -109,9 +107,7 @@ public class RezervacijaRepo {
         catch (SQLException e) {
         return false;
         }
-        finally{
-            con.close();
-        }
+        
     }
     public ArrayList<Rezervacija>  aktivneRezervacije(String Id) throws SQLException{
         
@@ -142,9 +138,7 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
         return rezervacije;
     }
     public boolean  dostupna(Rezervacija rezervacija) throws SQLException{
@@ -183,9 +177,7 @@ public class RezervacijaRepo {
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
              return false;
          }
-        finally{
-            con.close();
-        }
+        
     }
     public boolean logickiUnosDatuma(Rezervacija rezervacija){
         
@@ -245,9 +237,7 @@ public class RezervacijaRepo {
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
              return null;
          }
-         finally{
-            con.close();
-         }
+         
 
     }
     public boolean proveraDostupnihTermina(Rezervacija rezervacija, ArrayList<Datumi> listaRezervisanihDatuma){
@@ -319,9 +309,7 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
 
         return rezervacije; 
     }
@@ -356,9 +344,7 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
            Logger.getLogger(BrisanjeRezervacije.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
       return true;
     }
     public boolean aktivnaRezervacija(Integer Id) throws SQLException{
@@ -380,9 +366,7 @@ public class RezervacijaRepo {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        finally{
-            con.close();
-        }
+        
         
         return false;
     }
@@ -405,9 +389,7 @@ public class RezervacijaRepo {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        finally{
-            con.close();
-        }
+        
         
         return false;
     }
@@ -456,9 +438,7 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
 
         return rezervacije; 
     }

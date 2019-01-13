@@ -79,9 +79,7 @@ public class SobeRepo {
         } catch (SQLException ex) {
             Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
         return sobe; 
     }
     public boolean insert(Soba soba, Part part) throws SQLException, IOException{
@@ -114,9 +112,7 @@ public class SobeRepo {
             Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        finally{
-            con.close();
-        }
+        
     }
     public void fotografije(HttpServletRequest request, HttpServletResponse response, String SobaId)throws ServletException, IOException, SQLException {
         
@@ -139,9 +135,7 @@ public class SobeRepo {
         } catch (SQLException ex) {
 
         }
-        finally{
-            con.close();
-        }
+        
     }
     public Soba select(String Id) throws SQLException{
         Soba soba = new Soba();
@@ -176,9 +170,7 @@ public class SobeRepo {
         } catch (SQLException ex) {
            Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+       
         return  soba;
     }
     public String brisanje(String Id) throws SQLException{
@@ -202,9 +194,7 @@ public class SobeRepo {
         } catch (SQLException ex) {
             Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
         return HotelID;
     }
     
@@ -266,9 +256,7 @@ public class SobeRepo {
         } catch (SQLException e) {
           return "";
         }
-        finally{
-            con.close();
-        }
+        
     }
     public int maxKapacitetSobe(String Id) throws SQLException{
         
@@ -284,9 +272,7 @@ public class SobeRepo {
         } catch (SQLException ex) {
 
         }
-        finally{
-            con.close();
-        }
+        
 
         return maxKapacitet;
         

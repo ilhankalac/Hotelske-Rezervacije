@@ -36,6 +36,8 @@ public class BrisanjeRezervacije extends HttpServlet {
                 request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
                 request.setAttribute("rezultat", "true");
                
+                String pom = request.getParameter("Profil");
+                
                 if(request.getParameter("Profil").equals("True"))
                      request.getRequestDispatcher("EditKlijent.jsp?Klijent_Id=" + KlijentId).forward(request, response);
                 else

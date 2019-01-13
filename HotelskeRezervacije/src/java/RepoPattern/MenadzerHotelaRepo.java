@@ -54,9 +54,7 @@ public class MenadzerHotelaRepo {
         } catch (SQLException ex) {
             return false;
         } 
-        finally{
-            con.close();
-        }
+        
     }
     public MenadzeriHotela select(Integer KlijentId) throws SQLException{
         MenadzeriHotela menadzerHotela = new MenadzeriHotela();
@@ -77,9 +75,7 @@ public class MenadzerHotelaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
         
         return menadzerHotela; 
     }

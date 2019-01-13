@@ -55,9 +55,7 @@ public class TipSobeRepo {
         } catch (SQLException ex) {
             Logger.getLogger(TipSobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
         return tipoviSoba; 
     }
     public boolean insert(TipSobe tipSobe) throws SQLException, IOException{
@@ -77,9 +75,7 @@ public class TipSobeRepo {
         } catch (SQLException ex) {
             return false;
         }
-        finally{
-            con.close();
-        }
+        
     }
     public boolean brisanje (String Niz_ID) throws SQLException{
         try {
@@ -93,9 +89,7 @@ public class TipSobeRepo {
         } catch (SQLException ex) {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            con.close();
-        }
+        
        return false;
     }
     
