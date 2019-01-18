@@ -126,7 +126,6 @@ public class KlijentRepo {
  
         
         try {
-          
             String delete = "delete from  klijenti where id = " + Id;
             PreparedStatement ps  = con.prepareStatement(delete);
 

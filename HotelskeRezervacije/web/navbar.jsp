@@ -122,7 +122,9 @@
                     <%
                         if (ulogovanaRola.equals("2")) {
                             {%> 
+                    <a class="dropdown-item" href="KreiranjeHotela.jsp">Kreiraj hotel</a>
                     <a class="dropdown-item" href="Klijenti.jsp">Svi korisnici</a>
+                    
                     <%}
                         }
                         if (ulogovanaRola.equals("3")) {
