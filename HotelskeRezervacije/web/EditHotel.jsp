@@ -23,17 +23,13 @@
             String HotelID = request.getParameter("Hotel_Id");
             Hotel hotel = new HotelRepo().select(HotelID);
             
-            
-            //izmeni ovo da bude preko sesije ne ovako
-            //Klijent klijent = (Klijent)request.getAttribute("Klijent");
-            
-           // String Rola = "";
-           // if (klijent.getRola().equals("1"))
-            //    Rola = "Klijent";
-           // else if(klijent.getRola().equals("2"))
-            //    Rola = "Administrator";
-            //else
-              //  Rola = "Menadžer hotela";
+            if(request.getSession().getAttribute("UlogovanaRola")!=null){
+               if(!(request.getSession().getAttribute("UlogovanaRola").equals("2")))
+                      response.sendRedirect("index.jsp");
+            }
+            else
+                response.sendRedirect("index.jsp");
+
         %>
         <div class="row">
          <div class="span6" style="margin-left:10%">

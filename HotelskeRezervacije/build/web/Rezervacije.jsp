@@ -14,15 +14,23 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:include page="navbar.jsp" />  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Rezervacije</title>
+        <script src="jQuery.min.js"> </script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"> </script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+        <script type="text/javascript">
+                $(document).ready( function () {
+                 $('#Tabela').DataTable();
+             } );
+        </script>
     </head>
     <body>
         <form method="post" action="BrisanjeRezervacije">
-
-            <jsp:include page="navbar.jsp" />  
-            <div style="padding-left:10%; padding-right: 10%;">
-                <table class="table table-hover table-dark" style="background-color: #32383e; color:white;  font-family: Roboto;">
+            <div style="width:90%; margin-left:5%">
+                <table id="Tabela" class="table table-hover table-dark" style="background-color: #32383e; color:black;  font-family: Roboto;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

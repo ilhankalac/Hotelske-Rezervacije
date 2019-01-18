@@ -83,7 +83,7 @@
                     Broj odraslih:
                        <select name="BrojOdraslih" class="custom-select" style="width:50px">
 
-                          <% for(int i = 0; i <= sobaMaxKapacitet; i++){
+                          <% for(int i = 1; i <= sobaMaxKapacitet; i++){
                               {%>
                                  <option value="<%=i%>"> <%=i%> </option>
                               <%}  

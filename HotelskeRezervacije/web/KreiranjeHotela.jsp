@@ -5,6 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if(request.getSession().getAttribute("UlogovanaRola")!=null){
+       if(!(request.getSession().getAttribute("UlogovanaRola").equals("2")))
+              response.sendRedirect("index.jsp");
+    }
+    else
+        response.sendRedirect("index.jsp");
+%>
 <!DOCTYPE html>
 <html>
     <head>
