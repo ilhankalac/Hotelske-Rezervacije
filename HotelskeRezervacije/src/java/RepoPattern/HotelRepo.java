@@ -1,5 +1,6 @@
 package RepoPattern;
 
+import DAO.HotelDAO;
 import Models.Hotel;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +24,7 @@ import javax.servlet.http.Part;
  *
  * @author Ilhan Kalac
  */
-public class HotelRepo {
+public class HotelRepo implements HotelDAO {
     
     Connection con;
     public HotelRepo() {
@@ -42,6 +43,7 @@ public class HotelRepo {
         
     }
     
+    @Override
     public boolean insert(Hotel hotel, Part part) throws SQLException{
         String insert = "INSERT INTO `hotel`( `Naziv`, `Drzava`, `Grad`, `Adresa`, `BrojZvezdica`, Fotografija, Opis) "
                         + "VALUES (?,?,?,?,?,?,?) ";
@@ -71,6 +73,7 @@ public class HotelRepo {
         }
         
     }
+    @Override
     public ArrayList<Hotel> lista() throws SQLException{
         
         ArrayList<Hotel> hoteli = new ArrayList<Hotel>();
@@ -102,6 +105,7 @@ public class HotelRepo {
         
         return hoteli; 
     }
+    @Override
     public void fotografije(HttpServletRequest request, HttpServletResponse response, String HotelID)throws ServletException, IOException, SQLException {
         
             Statement stmt;
@@ -128,6 +132,7 @@ public class HotelRepo {
             }
             
     }
+    @Override
     public Hotel select(String Id) throws SQLException{
         Hotel hotel = new Hotel();
         try {
@@ -153,6 +158,7 @@ public class HotelRepo {
         }
         return hotel;
     }
+    @Override
     public boolean update(Hotel hotel, Part part) throws SQLException, IOException{
         
         
@@ -203,6 +209,7 @@ public class HotelRepo {
         }
        
     }
+    @Override
     public void brisanje (String Id) throws SQLException{
         try {
           

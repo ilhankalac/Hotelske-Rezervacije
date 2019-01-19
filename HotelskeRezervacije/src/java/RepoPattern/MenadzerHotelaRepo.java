@@ -1,5 +1,6 @@
 package RepoPattern;
 
+import DAO.MenadzerHotelaDAO;
 import Models.MenadzeriHotela;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Ilhan Kalac
  */
-public class MenadzerHotelaRepo {
+public class MenadzerHotelaRepo implements MenadzerHotelaDAO {
     
     Connection con;
     public MenadzerHotelaRepo() {
@@ -32,6 +33,7 @@ public class MenadzerHotelaRepo {
         }
         
     }
+    @Override
     public boolean insert(MenadzeriHotela menadzerHotela) throws SQLException{
         String delete = "delete from  menadzerihotela where klijentId = " + menadzerHotela.getKlijentId();
         String insert = "INSERT INTO menadzerihotela"
@@ -56,6 +58,7 @@ public class MenadzerHotelaRepo {
         } 
         
     }
+    @Override
     public MenadzeriHotela select(Integer KlijentId) throws SQLException{
         MenadzeriHotela menadzerHotela = new MenadzeriHotela();
         

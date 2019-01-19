@@ -2,6 +2,7 @@
 package RepoPattern;
 
 import Controllers.BrisanjeRezervacije;
+import DAO.RezervacijaDAO;
 import Models.Datumi;
 import Models.Rezervacija;
 import java.sql.Connection;
@@ -23,7 +24,7 @@ import java.util.logging.Logger;
  *
  * @author Ilhan Kalac
  */
-public class RezervacijaRepo {
+public class RezervacijaRepo implements RezervacijaDAO{
     Connection con;
     public RezervacijaRepo() {
         try {
@@ -40,6 +41,7 @@ public class RezervacijaRepo {
         }
         
     }
+    @Override
     public Integer insert(Rezervacija rezervacija) throws SQLException{
         Integer LastID = 0;
         String insert = "INSERT INTO `Rezervacije`( `DatumDolaska`, `DatumOdlaska`, `Novac`, "
@@ -74,6 +76,7 @@ public class RezervacijaRepo {
         }
        
     }
+    @Override
     public long brojDana(Rezervacija rezervacija){
 
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,6 +93,7 @@ public class RezervacijaRepo {
         }
         
     }
+    @Override
     public boolean  updateStatusRezervacije(String Id, String NaplacivanjeNovcem) throws SQLException{
         
         String update = "";
@@ -109,6 +113,7 @@ public class RezervacijaRepo {
         }
         
     }
+    @Override
     public ArrayList<Rezervacija>  aktivneRezervacije(String Id) throws SQLException{
         
         
@@ -144,6 +149,7 @@ public class RezervacijaRepo {
         
         return rezervacije;
     }
+    @Override
     public boolean  dostupna(Rezervacija rezervacija) throws SQLException{
         
         
@@ -185,6 +191,7 @@ public class RezervacijaRepo {
          }
         
     }
+    @Override
     public boolean logickiUnosDatuma(Rezervacija rezervacija){
         
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
@@ -216,6 +223,7 @@ public class RezervacijaRepo {
         return true;
     }
     
+    @Override
     public ArrayList<Datumi> listaRezervisanihDatuma(Rezervacija rezervacija) throws SQLException{
         
         Statement st;
@@ -243,12 +251,11 @@ public class RezervacijaRepo {
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
              return null;
          }
-         finally{
-            con.close();
-         }
+
          
 
     }
+    @Override
     public boolean proveraDostupnihTermina(Rezervacija rezervacija, ArrayList<Datumi> listaRezervisanihDatuma){
         
         if(listaRezervisanihDatuma.size()== 0)
@@ -280,6 +287,7 @@ public class RezervacijaRepo {
     }
     
     
+    @Override
     public ArrayList<Rezervacija> lista() throws SQLException{
         
         ArrayList<Rezervacija> rezervacije = new ArrayList<Rezervacija>();
@@ -326,6 +334,7 @@ public class RezervacijaRepo {
         return rezervacije; 
     }
     
+    @Override
     public boolean brisanje(String Id, Double Novac, Double Poeni) throws SQLException{
         try {
            
@@ -359,6 +368,7 @@ public class RezervacijaRepo {
         
       return true;
     }
+    @Override
     public boolean aktivnaRezervacija(Integer Id) throws SQLException{
         
         Statement st;
@@ -385,6 +395,7 @@ public class RezervacijaRepo {
         
         return false;
     }
+    @Override
     public boolean isteklaRezervacija(Integer Id) throws SQLException{
         
         Statement st;
@@ -411,6 +422,7 @@ public class RezervacijaRepo {
         
         return false;
     }
+    @Override
     public ArrayList<Rezervacija> rezervacijeMenadzerovihHotela(Integer MenadzerId) throws SQLException{
         
         ArrayList<Rezervacija> rezervacije = new ArrayList<Rezervacija>();

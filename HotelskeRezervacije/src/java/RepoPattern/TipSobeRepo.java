@@ -1,5 +1,6 @@
 package RepoPattern;
 
+import DAO.TipSobeDAO;
 import Models.TipSobe;
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Ilhan Kalac
  */
-public class TipSobeRepo {
+public class TipSobeRepo implements TipSobeDAO {
 
     Connection con;
     public TipSobeRepo() {
@@ -34,6 +35,7 @@ public class TipSobeRepo {
         }
     }
    
+    @Override
     public ArrayList<TipSobe> lista(String HotelID) throws SQLException{
         
         ArrayList<TipSobe> tipoviSoba = new ArrayList<TipSobe>();
@@ -60,6 +62,7 @@ public class TipSobeRepo {
         }
         return tipoviSoba; 
     }
+    @Override
     public boolean insert(TipSobe tipSobe) throws SQLException, IOException{
         String insert = "INSERT INTO `TipSobe`(`Naziv`, `HotelID`) "
                       + "VALUES (?,?)";
@@ -79,6 +82,7 @@ public class TipSobeRepo {
         }
         
     }
+    @Override
     public boolean brisanje (String Niz_ID) throws SQLException{
         try {
             
@@ -94,7 +98,4 @@ public class TipSobeRepo {
         
        return false;
     }
-    
-    
-    
 }

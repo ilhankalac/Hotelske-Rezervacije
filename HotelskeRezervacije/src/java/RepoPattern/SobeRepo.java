@@ -1,5 +1,6 @@
 package RepoPattern;
 
+import DAO.SobeDAO;
 import Models.Hotel;
 import Models.Soba;
 import java.io.IOException;
@@ -24,7 +25,7 @@ import javax.servlet.http.Part;
  *
  * @author Ilhan Kalac
  */
-public class SobeRepo {
+public class SobeRepo implements SobeDAO {
 
     Connection con;
     public SobeRepo() {
@@ -41,6 +42,7 @@ public class SobeRepo {
             Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @Override
     public ArrayList<Soba> listaSobaSelektovanogHotela(String Hotel_Id) throws SQLException{
         
         ArrayList<Soba> sobe = new ArrayList<Soba>();
@@ -85,6 +87,7 @@ public class SobeRepo {
         
         return sobe; 
     }
+    @Override
     public boolean insert(Soba soba, Part part) throws SQLException, IOException{
         String insert = "INSERT INTO `sobe`(`BrojSobe`, `TipSobeID`, `HotelID`, `Fotografija`,"
                       + " Opis, KratkiOpis,  Cena,  Kapacitet, Poeni, CenaUPoenima) "
@@ -118,6 +121,7 @@ public class SobeRepo {
         
         
     }
+    @Override
     public void fotografije(HttpServletRequest request, HttpServletResponse response, String SobaId)throws ServletException, IOException, SQLException {
         
         Statement stmt;
@@ -144,6 +148,7 @@ public class SobeRepo {
         }
         
     }
+    @Override
     public Soba select(String Id) throws SQLException{
         Soba soba = new Soba();
         try {
@@ -183,6 +188,7 @@ public class SobeRepo {
        
         return  soba;
     }
+    @Override
     public String brisanje(String Id) throws SQLException{
         String HotelID = "";
         try {
@@ -210,6 +216,7 @@ public class SobeRepo {
         return HotelID;
     }
     
+    @Override
     public String update(Soba soba, Part part) throws SQLException, IOException{
         
         String getHotelID ="select HotelID from sobe where ID = " + soba.getSobaId();
@@ -273,6 +280,7 @@ public class SobeRepo {
         }
         
     }
+    @Override
     public int maxKapacitetSobe(String Id) throws SQLException{
         
         Statement stmt;

@@ -1,5 +1,6 @@
 package RepoPattern;
 
+import DAO.KlijentDAO;
 import Models.Klijent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Ilhan Kalac
  */
-public class KlijentRepo {
+public class KlijentRepo implements KlijentDAO{
     
     Connection con;
     public KlijentRepo() {
@@ -37,6 +38,7 @@ public class KlijentRepo {
     
     
     
+    @Override
     public boolean insert(Klijent klijent) throws SQLException{
         try {
             String insertToKlijent = "INSERT INTO `klijenti`(Ime, Prezime, KIme, Sifra, Email, Telefon,"
@@ -68,6 +70,7 @@ public class KlijentRepo {
        
         return false;
     }
+    @Override
     public boolean logovanje(String username, String password) throws SQLException{
         
         
@@ -91,6 +94,7 @@ public class KlijentRepo {
       
         return false;
     }
+    @Override
     public ArrayList<Klijent> lista() throws SQLException{ 
         ArrayList<Klijent> klijenti = new ArrayList<Klijent>();
         try {
@@ -128,6 +132,7 @@ public class KlijentRepo {
         
         return klijenti; 
     }
+    @Override
     public void brisanje(String Id) throws SQLException{
  
         
@@ -142,6 +147,7 @@ public class KlijentRepo {
         }
        
     }
+    @Override
     public Klijent select(String Id) throws SQLException{
 
         Klijent klijent = new Klijent();
@@ -174,6 +180,7 @@ public class KlijentRepo {
       
         return klijent;
     }
+    @Override
     public Klijent selectByUsername(String Username) throws SQLException{
 
         Klijent klijent = new Klijent();
@@ -207,6 +214,7 @@ public class KlijentRepo {
       
         return klijent;
     }
+    @Override
     public String Rola(String username, String password) throws SQLException{
         String select = "select RolaID from klijenti where sifra = '"+ password + "' and KIme = '" + username + "'";
         Statement st;
@@ -226,6 +234,7 @@ public class KlijentRepo {
         
         return "Greska";
     }
+    @Override
     public boolean update(Klijent klijent, String ulogovanaRola) throws SQLException{
         
         String poeni = "";
@@ -288,6 +297,7 @@ public class KlijentRepo {
         }
        
     }
+    @Override
     public boolean updatePoeniNakonPlacanjaNovcem(String Username, Integer BrojPoena) throws SQLException{
         String update = "update klijenti "
                       + "set Poeni = Poeni + " + BrojPoena 
@@ -303,6 +313,7 @@ public class KlijentRepo {
         }
         
     }
+    @Override
     public Integer brojPoena(String username) throws SQLException{
         String select = "select Poeni from klijenti where KIme = '" + username + "'";
         Statement st;
@@ -321,6 +332,7 @@ public class KlijentRepo {
         }
         return 0;
     }
+    @Override
     public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena, Integer BrojPoenaSobe) throws SQLException{
         String update = "update klijenti "
                       + "set Poeni = Poeni - " + BrojPoena +" + " + BrojPoenaSobe
@@ -337,6 +349,7 @@ public class KlijentRepo {
             con.close();
         }
     }
+    @Override
     public boolean promenaLozinke(String username, String staraLozinka, String novaLozinka) throws SQLException{
         String select = "select Sifra from klijenti where KIme = '" + username + "' and Sifra = '" + staraLozinka + "'";
         Statement st;
