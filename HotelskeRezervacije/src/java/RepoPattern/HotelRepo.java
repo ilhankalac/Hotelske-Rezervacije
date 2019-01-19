@@ -123,6 +123,9 @@ public class HotelRepo {
             } catch (SQLException ex) {
 
             }
+            finally{
+                con.close();
+            }
             
     }
     public Hotel select(String Id) throws SQLException{
@@ -145,7 +148,9 @@ public class HotelRepo {
         } catch (SQLException ex) {
            Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        finally{
+            con.close();
+        }
         return hotel;
     }
     public boolean update(Hotel hotel, Part part) throws SQLException, IOException{

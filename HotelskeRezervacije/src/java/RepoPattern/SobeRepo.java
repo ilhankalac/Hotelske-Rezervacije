@@ -79,6 +79,9 @@ public class SobeRepo {
         } catch (SQLException ex) {
             Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
         
         return sobe; 
     }
@@ -113,6 +116,7 @@ public class SobeRepo {
             return false;
         }
         
+        
     }
     public void fotografije(HttpServletRequest request, HttpServletResponse response, String SobaId)throws ServletException, IOException, SQLException {
         
@@ -134,6 +138,9 @@ public class SobeRepo {
             }
         } catch (SQLException ex) {
 
+        }
+        finally{
+            con.close();
         }
         
     }
@@ -170,6 +177,9 @@ public class SobeRepo {
         } catch (SQLException ex) {
            Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
        
         return  soba;
     }
@@ -194,7 +204,9 @@ public class SobeRepo {
         } catch (SQLException ex) {
             Logger.getLogger(SobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        finally{
+            con.close();
+        }
         return HotelID;
     }
     
@@ -256,6 +268,9 @@ public class SobeRepo {
         } catch (SQLException e) {
           return "";
         }
+        finally{
+            con.close();
+        }
         
     }
     public int maxKapacitetSobe(String Id) throws SQLException{
@@ -271,6 +286,9 @@ public class SobeRepo {
                 maxKapacitet = rs.getInt("Kapacitet");                
         } catch (SQLException ex) {
 
+        }
+        finally{
+            con.close();
         }
         
 

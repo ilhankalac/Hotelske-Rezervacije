@@ -83,6 +83,9 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
         
        
       
@@ -117,6 +120,9 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+           con.close();
+        }
        
         
         
@@ -133,9 +139,6 @@ public class KlijentRepo {
   
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            con.close();
         }
        
     }
@@ -165,7 +168,9 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        finally{
+            con.close();
+        }
       
         return klijent;
     }
@@ -195,6 +200,9 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
        
       
         return klijent;
@@ -211,6 +219,9 @@ public class KlijentRepo {
             
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
         }
         
         return "Greska";
@@ -290,9 +301,7 @@ public class KlijentRepo {
         } catch (SQLException e) {
           return false;
         }
-        finally{
-            con.close();
-        }
+        
     }
     public Integer brojPoena(String username) throws SQLException{
         String select = "select Poeni from klijenti where KIme = '" + username + "'";
@@ -307,7 +316,9 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        finally{
+            con.close();
+        }
         return 0;
     }
     public boolean updatePoeniNakonPlacanjaPoenima(String Username, Integer BrojPoena, Integer BrojPoenaSobe) throws SQLException{
@@ -345,6 +356,9 @@ public class KlijentRepo {
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+        finally{
+            con.close();
         }
         
     }

@@ -25,7 +25,7 @@
         <%
             String UlogovanaRola = "";
             if (request.getSession().getAttribute("UlogovanaRola") != null) {
-                UlogovanaRola = (String) request.getSession().getAttribute("UlogovanaRola");
+                UlogovanaRola = ""+(request.getSession().getAttribute("UlogovanaRola"));
             }
             for (Hotel hotel : new HotelRepo().lista()) {
                 {%>

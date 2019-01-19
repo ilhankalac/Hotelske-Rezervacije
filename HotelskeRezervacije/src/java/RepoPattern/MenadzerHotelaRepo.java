@@ -75,6 +75,9 @@ public class MenadzerHotelaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
         
         
         return menadzerHotela; 

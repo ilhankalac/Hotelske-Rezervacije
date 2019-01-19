@@ -55,7 +55,9 @@ public class TipSobeRepo {
         } catch (SQLException ex) {
             Logger.getLogger(TipSobeRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        finally{
+            con.close();
+        }
         return tipoviSoba; 
     }
     public boolean insert(TipSobe tipSobe) throws SQLException, IOException{

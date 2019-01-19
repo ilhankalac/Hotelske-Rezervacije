@@ -70,7 +70,7 @@
                                             </div>
                                             <input required name="password" type="password" class="form-control" placeholder="Lozinka" aria-label="Password" aria-describedby="basic-addon1">
                                             <%
-                                                String loginGreska = (String) request.getAttribute("prvoLogovanje");
+                                                String loginGreska = ""+request.getAttribute("prvoLogovanje");
                                                 if (loginGreska != null)
                                                     if (loginGreska.equals("False")) {%>
                                             <div class="invalid-feedback">
@@ -90,7 +90,7 @@
             </div> 
 
             <%
-                if (((String) request.getSession().getAttribute("ulogovan")) != null) {%>
+                if (( request.getSession().getAttribute("ulogovan")) != null) {%>
 
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan")).getKlijentId()%>">Profil</a>
@@ -107,8 +107,8 @@
 
             <%
                 String ulogovanaRola = "";
-                if ((String) request.getSession().getAttribute("UlogovanaRola") != null) {
-                    ulogovanaRola = (String) request.getSession().getAttribute("UlogovanaRola");
+                if (request.getSession().getAttribute("UlogovanaRola") != null) {
+                    ulogovanaRola = "" + request.getSession().getAttribute("UlogovanaRola");
                 }
 
                 if (ulogovanaRola.equals("2") || ulogovanaRola.equals("3")) {

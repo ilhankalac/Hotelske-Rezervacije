@@ -52,7 +52,7 @@
                     </thead>
                     <tbody>
                         <%
-                            Klijent klijent = new KlijentRepo().selectByUsername((String) request.getSession().getAttribute("ulogovan"));
+                            Klijent klijent = new KlijentRepo().selectByUsername(""+ request.getSession().getAttribute("ulogovan"));
 
                             int i = 1;
                             ArrayList<Rezervacija> rezervacije;

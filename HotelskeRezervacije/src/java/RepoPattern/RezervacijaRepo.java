@@ -138,6 +138,9 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
         
         return rezervacije;
     }
@@ -176,6 +179,9 @@ public class RezervacijaRepo {
              
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
              return false;
+         }
+         finally{
+            con.close();
          }
         
     }
@@ -236,6 +242,9 @@ public class RezervacijaRepo {
              
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
              return null;
+         }
+         finally{
+            con.close();
          }
          
 
@@ -309,6 +318,9 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            con.close();
+        }
         
 
         return rezervacije; 
@@ -366,6 +378,9 @@ public class RezervacijaRepo {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+        finally{
+            con.close();
+        }
         
         
         return false;
@@ -388,6 +403,9 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+        finally{
+            con.close();
         }
         
         
@@ -438,8 +456,9 @@ public class RezervacijaRepo {
         } catch (SQLException ex) {
             Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
+        finally{
+            con.close();
+        }
         return rezervacije; 
     }
 }
