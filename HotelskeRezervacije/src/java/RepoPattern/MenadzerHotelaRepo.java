@@ -85,4 +85,33 @@ public class MenadzerHotelaRepo implements MenadzerHotelaDAO {
         
         return menadzerHotela; 
     }
+     public MenadzeriHotela selectByHotelId(String HotelId) throws SQLException{
+        MenadzeriHotela menadzerHotela = new MenadzeriHotela();
+        
+        try {
+           
+             String select = "select *from menadzerihotela where HotelId = " + HotelId;
+        
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(select);
+             
+             while(rs.next()){               
+                 menadzerHotela.setHotelId(rs.getInt("HotelId"));
+                 menadzerHotela.setKlijentId(rs.getInt("KlijentId"));
+                 menadzerHotela.setId(rs.getInt("Id"));               
+             }
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            con.close();
+        }
+        
+        
+        return menadzerHotela; 
+    }
+     public void kurac(String kurcis, String evome){
+         
+     }
 }

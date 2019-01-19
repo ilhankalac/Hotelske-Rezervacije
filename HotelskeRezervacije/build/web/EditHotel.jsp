@@ -24,7 +24,7 @@
             Hotel hotel = new HotelRepo().select(HotelID);
             
             if(request.getSession().getAttribute("UlogovanaRola")!=null){
-               if(!(request.getSession().getAttribute("UlogovanaRola").equals("2")))
+               if((request.getSession().getAttribute("UlogovanaRola").equals("1")))
                       response.sendRedirect("index.jsp");
             }
             else
@@ -34,14 +34,15 @@
         <div class="row">
          <div class="span6" style="margin-left:10%">
          <h2>Izmena hotela </h2>
-         <form action="EditHotel" method="post" enctype="multipart/form-data">
+         <form  action="EditHotel" method="post" enctype="multipart/form-data">
            <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
            <div style="padding-left:5%">
               <table style="margin-top: -14%; text-align: right; display:inline-block">
                <tr>
                  <div class="form-inline">
                   <td style="padding-top:2%"><label>Naziv: </label></td>
-                  <td style="padding-left:2%"><input type="text" class="form-control" placeholder="Naziv" value="<%= hotel.getNaziv()%>" name="Naziv"></td>
+                  <td style="padding-left:2%"><input required type="text" class="form-control" placeholder="Naziv" value="<%= hotel.getNaziv()%>" name="Naziv"></td>
+                  <div class="invalid-feedback">Morate uneti  naziv</div>
                  </div>
                </tr>
                <br>
