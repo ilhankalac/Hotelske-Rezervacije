@@ -85,7 +85,7 @@ public class MenadzerHotelaRepo implements MenadzerHotelaDAO {
         
         return menadzerHotela; 
     }
-     public MenadzeriHotela selectByHotelId(String HotelId) throws SQLException{
+     public boolean allow(String HotelId, String HotelIDSession) throws SQLException{
         MenadzeriHotela menadzerHotela = new MenadzeriHotela();
         
         try {
@@ -95,23 +95,28 @@ public class MenadzerHotelaRepo implements MenadzerHotelaDAO {
              Statement st = con.createStatement();
              ResultSet rs = st.executeQuery(select);
              
-             while(rs.next()){               
-                 menadzerHotela.setHotelId(rs.getInt("HotelId"));
-                 menadzerHotela.setKlijentId(rs.getInt("KlijentId"));
-                 menadzerHotela.setId(rs.getInt("Id"));               
+             if(rs.next()){             
+                    menadzerHotela.setHotelId(rs.getInt("HotelId"));
+                    menadzerHotela.setKlijentId(rs.getInt("KlijentId"));
+                    menadzerHotela.setId(rs.getInt("Id"));                                
              }
+             else 
+                 return false;
+             
+             if(menadzerHotela.getHotelId().equals(Integer.parseInt(HotelIDSession))) 
+                 return true;
+             
+             else
+                 return false;
+             
              
         } catch (SQLException ex) {
             Logger.getLogger(HotelRepo.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         finally{
             con.close();
         }
-        
-        
-        return menadzerHotela; 
+       
     }
-     public void kurac(String kurcis, String evome){
-         
-     }
 }

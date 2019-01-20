@@ -4,6 +4,8 @@
     Author     : Ilhan Kalac
 --%>
 
+<%@page import="RepoPattern.MenadzerHotelaRepo"%>
+<%@page import="Models.MenadzeriHotela"%>
 <%@page import="RepoPattern.TipSobeRepo"%>
 <%@page import="Models.TipSobe"%>
 <%@page import="Models.Hotel"%>
@@ -23,8 +25,16 @@
             String HotelID = request.getParameter("Hotel_Id");
             Hotel hotel = new HotelRepo().select(HotelID);
             
+            boolean pristupSvomHotelu = true;
+            
+            if(request.getSession().getAttribute("UlogovanaRola")!=null)
+               if(request.getSession().getAttribute("UlogovanaRola").equals("3")) 
+                      pristupSvomHotelu = new MenadzerHotelaRepo().allow(HotelID, ""+request.getSession().getAttribute("HotelId"));
+            
+            
             if(request.getSession().getAttribute("UlogovanaRola")!=null){
-               if((request.getSession().getAttribute("UlogovanaRola").equals("1")))
+               if((request.getSession().getAttribute("UlogovanaRola").equals("1")) 
+                       || !(pristupSvomHotelu))
                       response.sendRedirect("index.jsp");
             }
             else

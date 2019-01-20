@@ -76,7 +76,7 @@ public class RezervacijaRepo implements RezervacijaDAO{
         }
        
     }
-    @Override
+
     public long brojDana(Rezervacija rezervacija){
 
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -191,7 +191,7 @@ public class RezervacijaRepo implements RezervacijaDAO{
          }
         
     }
-    @Override
+
     public boolean logickiUnosDatuma(Rezervacija rezervacija){
         
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
@@ -255,7 +255,7 @@ public class RezervacijaRepo implements RezervacijaDAO{
          
 
     }
-    @Override
+
     public boolean proveraDostupnihTermina(Rezervacija rezervacija, ArrayList<Datumi> listaRezervisanihDatuma){
         
         if(listaRezervisanihDatuma.size()== 0)
