@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:include page="navbar.jsp" />  
+         <%@ include file="navbar.jsp" %> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Rezervacije</title>
         <script src="jQuery.min.js"> </script>
@@ -33,19 +33,21 @@
                 <table id="Tabela" class="table table-hover table-dark" style="background-color: #32383e; color:black;  font-family: Roboto;">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Hotel</th>
-                            <th scope="col">Datum dolaska</th>
-                            <th scope="col">Datum odlaska</th>
-                            <th scope="col">Novac</th>
-                            <th scope="col">Broj odraslih</th>
-                            <th scope="col">Broj dece</th>
-                            <th scope="col">Broj sobe</th>
+                             <th scope="col">#</th>
                             <th scope="col">Ime klijenta</th>
                             <th scope="col">Prezime klijenta</th>
+
+                            <th scope="col">Datum dolaska</th>
+                            <th scope="col">Datum odlaska</th>
                             <th scope="col">Vreme odlaska</th>
+                            <th scope="col">Hotel</th>
+                            <th scope="col">Broj sobe</th>
+                            <th scope="col">Broj odraslih</th>
+                            <th scope="col">Broj dece</th>
+
                             <th scope="col">Plaćena</th>
                             <th scope="col">Cena u poenima</th>
+                            <th scope="col">Novac (RSD)</th>
                             <th scope="col">Status</th>
 
                         </tr>
@@ -67,20 +69,23 @@
                                     {%>
                         <tr>
                             <td> <%=i++%>  </td>
-                            <td><%=rezervacija.soba.Hotel.getNaziv()%> </td>
-                            <td><%=rezervacija.getDatumDolaska()%> </td>
-                            <td><%=rezervacija.getDatumOdlaska()%> </td>
-                            <td><%=rezervacija.getNovac()%> </td>
-                            <td><%=rezervacija.getBrojOdraslih()%> </td>
-                            <td><%=rezervacija.getBrojDece()%> </td>
-                            <td><%=rezervacija.soba.getBrojSobe()%> </td>
-
                             <td><%=rezervacija.klijent.getIme()%> </td>
                             <td><%=rezervacija.klijent.getPrezime()%> </td>
+                           
+                            <td><%=rezervacija.getDatumDolaska()%> </td>
+                            <td><%=rezervacija.getDatumOdlaska()%> </td>
                             <td><%=rezervacija.getVremeOdlaska()%> </td>
+                            <td><%=rezervacija.soba.Hotel.getNaziv()%> </td>
+                            <td><%=rezervacija.soba.getBrojSobe()%> </td>
+                            <td><%=rezervacija.getBrojOdraslih()%> </td>
+                            <td><%=rezervacija.getBrojDece()%> </td>
+                           
+
+                            
+                           
                             <td><%=rezervacija.getStatusRezervacije()%> </td>
                             <td><%=rezervacija.getPoeni()%> </td>
-
+                             <td style="color:red"><%=rezervacija.getNovac()%>  </td>
                             <td> 
                                 <%
                                     if (new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())) {

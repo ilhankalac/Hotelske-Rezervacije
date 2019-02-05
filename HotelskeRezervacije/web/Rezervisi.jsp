@@ -26,7 +26,7 @@
             ArrayList<Rezervacija> aktivneRezervacije = new RezervacijaRepo().aktivneRezervacije(request.getParameter("Soba_Id"));
         %>
         
-         <jsp:include page="navbar.jsp" />  
+         <%@ include file="navbar.jsp" %> 
         <% int sobaMaxKapacitet = new SobeRepo().maxKapacitetSobe(request.getParameter("Soba_Id"));%>
        
          <form action = "KreiranjeRezervacije" method="post" >

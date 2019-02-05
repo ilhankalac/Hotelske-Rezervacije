@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:include page="navbar.jsp" /> 
+        <%@ include file="navbar.jsp" %> 
         <title>Klijenti</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="jQuery.min.js"></script>

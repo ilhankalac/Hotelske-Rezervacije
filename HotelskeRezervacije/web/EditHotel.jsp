@@ -20,7 +20,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="navbar.jsp" />  
+        <%@ include file="navbar.jsp" %>  
         <% 
             String HotelID = request.getParameter("Hotel_Id");
             Hotel hotel = new HotelRepo().select(HotelID);
@@ -49,11 +49,10 @@
            <div style="padding-left:5%">
               <table style="margin-top: -14%; text-align: right; display:inline-block">
                <tr>
-                 <div class="form-inline">
-                  <td style="padding-top:2%"><label>Naziv: </label></td>
-                  <td style="padding-left:2%"><input required type="text" class="form-control" placeholder="Naziv" value="<%= hotel.getNaziv()%>" name="Naziv"></td>
-                  <div class="invalid-feedback">Morate uneti  naziv</div>
-                 </div>
+                <div class="form-inline">
+                    <td style="padding-top:9%"><label> Naziv: </label></td>
+                    <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Naziv" value="<%= hotel.getNaziv()%>"  name="Naziv"></td>
+                </div>
                </tr>
                <br>
                <tr>
@@ -154,7 +153,7 @@
                     </div>
                </table>                       
             </div>  
-                   <a href="Sobe.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId") %>" class="btn btn-primary">Sobe hotela</a>
+                   <a href="Sobe.jsp?Hotel_Id=<%= hotel.getHotelId() %>" class="btn btn-primary">Sobe hotela</a>
          </div>                               
       </div>                            
     </body>

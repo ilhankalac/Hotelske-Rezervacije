@@ -17,7 +17,7 @@
     </head>
 
     <body>
-        <jsp:include page="navbar.jsp" />  
+       <%@ include file="navbar.jsp" %> 
     <center>
         <input type="text" id="myInput" onkeyup="myFunction()" style="width:250px;" placeholder="Pretraga hotela.." class="form-control">
     </center>

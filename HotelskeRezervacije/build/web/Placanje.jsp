@@ -14,7 +14,7 @@
     </head>
     <body>
      
-        <jsp:include page="navbar.jsp" />  
+         <%@ include file="navbar.jsp" %> 
         <form action="Naplacivanje" method="post">
                 <div style="margin-right:50%;" >
                <div style=" margin-left: 40%;" class="form-control"  >

@@ -19,7 +19,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="navbar.jsp" /> 
+        <%@ include file="navbar.jsp" %> 
          <% 
             String HotelID = request.getParameter("Hotel_Id");
             ArrayList<TipSobe> tipoviSoba = new TipSobeRepo().lista(HotelID);             

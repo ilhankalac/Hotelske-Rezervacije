@@ -20,7 +20,7 @@
         <title>Hoteli</title>
     </head>
     <body>
-         <jsp:include page="navbar.jsp" /> 
+         <%@ include file="navbar.jsp" %> 
          <form action = "KreiranjeHotela" method="post" enctype="multipart/form-data">
 
              Naziv: <input type="text" name="Naziv"> <br> <br> 

@@ -15,11 +15,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="navbar.jsp" /> 
+       
         <%
-            HttpSession sesija = request.getSession();
 
-            String hotelIdSesija = "" + sesija.getAttribute("HotelId");
+            String hotelIdSesija = "" + request.getSession().getAttribute("HotelId");
 
             String Hotel_Id = request.getParameter("Hotel_Id");
 
@@ -27,6 +26,7 @@
                 response.sendRedirect("Hoteli.jsp");
             }
         %>
+        <%@ include file="navbar.jsp" %> 
         <center>
             <input type="text" id="myInput" onkeyup="myFunction()" style="width:250px;" placeholder="Pretraga soba.." class="form-control">
         </center>
