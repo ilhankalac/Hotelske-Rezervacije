@@ -15,9 +15,7 @@
 
     <body>
         <% 
-            HttpSession sesija = request.getSession();
-            
-            if(sesija.getAttribute("ulogovan")!=null)
+            if(request.getSession().getAttribute("ulogovan")!=null)
                 response.sendRedirect("index.jsp");
         %>
         

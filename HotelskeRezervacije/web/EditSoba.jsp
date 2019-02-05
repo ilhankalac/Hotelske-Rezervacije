@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="navbar.jsp" />  
+        <%@ include file="navbar.jsp" %> 
         <% 
             Soba soba = new SobeRepo().select(request.getParameter("Soba_Id"));
             

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2019 at 08:19 PM
+-- Generation Time: Feb 05, 2019 at 08:31 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -68,6 +68,90 @@ CREATE TABLE `klijenti` (
 INSERT INTO `klijenti` (`Id`, `Ime`, `Prezime`, `KIme`, `Sifra`, `Email`, `Telefon`, `Adresa`, `Grad`, `Drzava`, `Poeni`, `PostanskiBroj`, `RolaID`) VALUES
 (143, 'Neko', 'Nesto', 'admin', 'admin', 'admin', 'admin@gmail.com', '06666666', 'Neka', 'Tanzanija', 9100, '1111', 2);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menadzerihotela`
+--
+
+CREATE TABLE `menadzerihotela` (
+  `KlijentID` int(11) NOT NULL,
+  `HotelID` int(11) NOT NULL,
+  `Id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rezervacije`
+--
+
+CREATE TABLE `rezervacije` (
+  `Id` int(11) NOT NULL,
+  `DatumDolaska` date NOT NULL,
+  `DatumOdlaska` date NOT NULL,
+  `Novac` decimal(10,0) NOT NULL,
+  `BrojOdraslih` smallint(6) NOT NULL,
+  `BrojDece` smallint(6) NOT NULL,
+  `SobaID` int(11) NOT NULL,
+  `KlijentID` int(11) NOT NULL,
+  `VremeOdlaska` time NOT NULL,
+  `StatusRezervacije` tinyint(1) NOT NULL,
+  `Poeni` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `Id` int(11) NOT NULL,
+  `Naziv` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`Id`, `Naziv`) VALUES
+(1, 'Klijent'),
+(2, 'Administrator'),
+(3, 'Menadžer hotela');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sobe`
+--
+
+CREATE TABLE `sobe` (
+  `Id` int(11) NOT NULL,
+  `BrojSobe` varchar(20) NOT NULL,
+  `TipSobeID` int(11) NOT NULL,
+  `HotelID` int(11) NOT NULL,
+  `Fotografija` longblob NOT NULL,
+  `Opis` varchar(100) NOT NULL,
+  `KratkiOpis` varchar(50) NOT NULL,
+  `Cena` decimal(10,0) NOT NULL,
+  `Kapacitet` smallint(6) NOT NULL,
+  `Poeni` int(11) NOT NULL,
+  `CenaUPoenima` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tipsobe`
+--
+
+CREATE TABLE `tipsobe` (
+  `Id` int(11) NOT NULL,
+  `Naziv` varchar(50) NOT NULL,
+  `HotelID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -88,6 +172,43 @@ ALTER TABLE `klijenti`
   ADD KEY `RolaID` (`RolaID`);
 
 --
+-- Indexes for table `menadzerihotela`
+--
+ALTER TABLE `menadzerihotela`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `HotelID` (`HotelID`),
+  ADD KEY `KlijentID` (`KlijentID`);
+
+--
+-- Indexes for table `rezervacije`
+--
+ALTER TABLE `rezervacije`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `SobaID` (`SobaID`),
+  ADD KEY `KlijentID` (`KlijentID`);
+
+--
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `sobe`
+--
+ALTER TABLE `sobe`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `sobe_ibfk_1` (`HotelID`),
+  ADD KEY `sobe_ibfk_2` (`TipSobeID`);
+
+--
+-- Indexes for table `tipsobe`
+--
+ALTER TABLE `tipsobe`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `tipsobe_ibfk_1` (`HotelID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -104,6 +225,36 @@ ALTER TABLE `klijenti`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
+-- AUTO_INCREMENT for table `menadzerihotela`
+--
+ALTER TABLE `menadzerihotela`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `rezervacije`
+--
+ALTER TABLE `rezervacije`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=324;
+
+--
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `sobe`
+--
+ALTER TABLE `sobe`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tipsobe`
+--
+ALTER TABLE `tipsobe`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -112,6 +263,33 @@ ALTER TABLE `klijenti`
 --
 ALTER TABLE `klijenti`
   ADD CONSTRAINT `klijenti_ibfk_2` FOREIGN KEY (`RolaID`) REFERENCES `role` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `menadzerihotela`
+--
+ALTER TABLE `menadzerihotela`
+  ADD CONSTRAINT `menadzerihotela_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `hotel` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `menadzerihotela_ibfk_2` FOREIGN KEY (`KlijentID`) REFERENCES `klijenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rezervacije`
+--
+ALTER TABLE `rezervacije`
+  ADD CONSTRAINT `rezervacije_ibfk_1` FOREIGN KEY (`SobaID`) REFERENCES `sobe` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rezervacije_ibfk_2` FOREIGN KEY (`KlijentID`) REFERENCES `klijenti` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sobe`
+--
+ALTER TABLE `sobe`
+  ADD CONSTRAINT `sobe_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `hotel` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sobe_ibfk_2` FOREIGN KEY (`TipSobeID`) REFERENCES `tipsobe` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tipsobe`
+--
+ALTER TABLE `tipsobe`
+  ADD CONSTRAINT `tipsobe_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `hotel` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 DELIMITER $$
 --
