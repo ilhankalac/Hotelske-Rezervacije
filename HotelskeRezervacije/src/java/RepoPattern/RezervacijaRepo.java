@@ -178,18 +178,20 @@ public class RezervacijaRepo implements RezervacijaDAO{
                 else
                     return  false;
              }
-             else
-                 return true;
-                
+             else if(logickiUnosDatuma(rezervacija)){
+                   return true;
+             }
+               
+         
          } catch (SQLException ex) {
              
              Logger.getLogger(RezervacijaRepo.class.getName()).log(Level.SEVERE, null, ex);
-             return false;
+            
          }
          finally{
             con.close();
          }
-        
+         return false;
     }
 
     public boolean logickiUnosDatuma(Rezervacija rezervacija){
