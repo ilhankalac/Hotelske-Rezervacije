@@ -43,6 +43,8 @@ public class Registracija extends HttpServlet {
                 HttpSession sesija = request.getSession();
                 sesija.setAttribute("ulogovan", klijent.getKIme());
                 sesija.setAttribute("UlogovanaRola", "1");
+                sesija.setAttribute("BrojPoenaKlijenta",
+                new KlijentRepo().brojPoena(klijent.getKIme()));
             }
             else{
                 request.setAttribute("rezultat", "False");

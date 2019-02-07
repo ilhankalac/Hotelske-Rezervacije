@@ -31,7 +31,7 @@
                 {%>
                     <li>
                         <div  class="card" style="width: 18rem; float:left; margin:7.5px" >              
-                            <img height="180px" width="286px" src="FotografijeHotela.jsp?hotelID=<%=hotel.getHotelId()%>" /> 
+                            <img height="180px" width="286px"  <img height="180px" width="286px" src="FotografijeHotela.jsp?hotelID=<%=hotel.getHotelId()%>" /> 
                             <div id="myUL" class="card-body" style="display:inline-table">
 
                                 <a>

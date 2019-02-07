@@ -37,11 +37,11 @@ public class Login extends HttpServlet {
                 sesija.setAttribute("UlogovanaRola", ulogovanaRola);
                 sesija.setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena(username));
                 request.setAttribute("prvoLogovanje", "True");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("Hoteli.jsp").forward(request, response);
             }
             else{
                 request.setAttribute("prvoLogovanje", "False");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("Hoteli.jsp").forward(request, response);
             }
             
         } catch (SQLException ex) {

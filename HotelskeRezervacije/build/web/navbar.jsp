@@ -9,14 +9,28 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-         <script src="jQuery.min.js"> </script>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css">
+        <script src="jQuery.min.js"> </script>
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"> </script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+        
     </head>
+    <style>
+        .background-image {
+            position: fixed;
+            background-image: url( 'https://curzonblob.blob.core.windows.net/media/5032/nostalgia-03.jpg' );
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+        } 
+    </style>
+    
     <body> 
-       
+       <div class="background-image"></div>
         <%
             Boolean pom = false;
             HttpSession sesija = request.getSession();
@@ -32,7 +46,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="Hoteli.jsp">Hoteli <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="Hoteli.jsp">Početna <span class="sr-only">(current)</span></a>
                     </li>
                     <%
                         if (!pom) {%>
