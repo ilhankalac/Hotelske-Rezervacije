@@ -29,7 +29,7 @@
             <script type="text/javascript">
                     swal("Dobar  posao", "Registracija uspela", "success")
                     .then(function() {
-                        window.location = "index.jsp";
+                        window.location = "Hoteli.jsp";
                     });
 
             </script>

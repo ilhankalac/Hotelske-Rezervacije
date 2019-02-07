@@ -10,11 +10,11 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css">
-        <script src="jQuery.min.js"> </script>
+        <script src="jQuery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"> </script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
-        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
     </head>
     <style>
         .background-image {
@@ -24,13 +24,14 @@
             background-size: cover;
             width: 100%;
             height: 100%;
+            filter:blur(px);
             z-index: -1;
 
         } 
     </style>
-    
+
     <body> 
-       <div class="background-image"></div>
+        <div class="background-image"></div>
         <%
             Boolean pom = false;
             HttpSession sesija = request.getSession();
@@ -39,7 +40,7 @@
             }
         %>             
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.jsp">Hotelske rezervacije</a>
+            <a class="navbar-brand" href="Hoteli.jsp">Hotelske rezervacije</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -84,7 +85,7 @@
                                             </div>
                                             <input required name="password" type="password" class="form-control" placeholder="Lozinka" aria-label="Password" aria-describedby="basic-addon1">
                                             <%
-                                                String loginGreska = ""+request.getAttribute("prvoLogovanje");
+                                                String loginGreska = "" + request.getAttribute("prvoLogovanje");
                                                 if (loginGreska != null)
                                                     if (loginGreska.equals("False")) {%>
                                             <div class="invalid-feedback">
@@ -104,7 +105,7 @@
             </div> 
 
             <%
-                if (( request.getSession().getAttribute("ulogovan")) != null) {%>
+                if ((request.getSession().getAttribute("ulogovan")) != null) {%>
 
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan")).getKlijentId()%>">Profil</a>
@@ -114,9 +115,10 @@
             <%if (pom) {%>
             <li class="nav-item">
                 <%  String brojPoenaKlijenta = "0";
-                    if(request.getSession().getAttribute("BrojPoenaKlijenta")!=null)
-                       brojPoenaKlijenta = "" + request.getSession().getAttribute("BrojPoenaKlijenta"); %>
-                <a class="nav-link" href="#"> Broj poena: <%=brojPoenaKlijenta%></a>
+                    if (request.getSession().getAttribute("BrojPoenaKlijenta") != null) {
+                        brojPoenaKlijenta = "" + request.getSession().getAttribute("BrojPoenaKlijenta");
+                    }%>
+                <a class="nav-link" href="#">  <i class="fas fa-coins "></i> <%=brojPoenaKlijenta%></a>
             </li>
 
             <%
@@ -138,12 +140,12 @@
                             {%> 
                     <a class="dropdown-item" href="KreiranjeHotela.jsp">Kreiraj hotel</a>
                     <a class="dropdown-item" href="Klijenti.jsp">Svi korisnici</a>
-                    
+
                     <%}
                         }
                         if (ulogovanaRola.equals("3")) {
                             {%> 
-                            <a class="dropdown-item" href="EditHotel.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId") %>">Upravljanje hotelom</a>
+                    <a class="dropdown-item" href="EditHotel.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId")%>">Upravljanje hotelom</a>
                     <%}
                         }
                     %>

@@ -25,7 +25,8 @@ public class Logout extends HttpServlet {
             sesija.removeAttribute("ulogovan");
             sesija.removeAttribute("UlogovanaRola");
             sesija.removeAttribute("BrojPoenaKlijenta");
-            response.sendRedirect("index.jsp");
+            sesija.removeAttribute("HotelId");
+            response.sendRedirect("Hoteli.jsp");
             
         }
     }

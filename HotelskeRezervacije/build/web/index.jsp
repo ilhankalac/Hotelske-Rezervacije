@@ -13,9 +13,7 @@
     </head>
     
     <body>
-         <jsp:include page="navbar.jsp" />  
-        <h1>Hello World!</h1>
-        <form action="Klijenti">
+ 
         <%
             String Ime =(String) request.getSession().getAttribute("ulogovan");
             if(request.getAttribute("prvoLogovanje")!=null)
@@ -23,7 +21,9 @@
             <script type="text/javascript">
                 swal("Dobrodošli  <%=Ime %>!", "Uspešno ste se ulogovali! ", "success")
                     .then(function() {
-                        window.location = "index.jsp";
+                        <% request.removeAttribute("prvoLogovanje"); %>
+                        window.location = "Hoteli.jsp";
+                
                     });
 
             </script>
@@ -39,8 +39,6 @@
             <%}
 
             %>
-            
-        <input type="submit" value="posalji">
-        </form>
+
     </body>
 </html>

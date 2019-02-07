@@ -128,16 +128,16 @@
         <%@ include file="navbar.jsp" %> 
 
         <%            String ulogovanaRola = "";
-            if ((String) request.getSession().getAttribute("UlogovanaRola") != null) {
+            if (request.getSession().getAttribute("UlogovanaRola") != null) {
                 ulogovanaRola = (String) request.getSession().getAttribute("UlogovanaRola");
             }
             if (ulogovanaRola.equals("2") || Hotel_Id.equals(hotelIdSesija)) {
         %>
     <center>
         <a style="margin-top:20px; margin-left:40px" href="${pageContext.request.contextPath}/KreiranjeSoba.jsp?Hotel_Id=<%=Hotel_Id%>"> <i style="color:#00fb00" class="fas fa-plus-square fa-3x">Dodaj</i></a>
-</center>
+    </center>
 
- <br>
+    <br>
 
 
     <% }
@@ -147,12 +147,10 @@
             IDk = (String) request.getSession().getAttribute("UlogovanaRola");
         }
 
-    %>  <div class="slideshow-container" > <%          
-        ArrayList<Soba> sobe = new SobeRepo().listaSobaSelektovanogHotela(Hotel_Id);
-        if(sobe.isEmpty()) 
+    %>  <div class="slideshow-container" > <%        ArrayList<Soba> sobe = new SobeRepo().listaSobaSelektovanogHotela(Hotel_Id);
+        if (sobe.isEmpty())
         %> <center> <h2 style="color:white"> Trenutno nema ni jedna soba.</h2> </center><%
-            
-        for (Soba soba : sobe) {%>
+            for (Soba soba : sobe) {%>
 
         <div class="mySlides" >
 
