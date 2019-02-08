@@ -19,7 +19,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body style="overflow:scroll;">
         <%@ include file="navbar.jsp" %>  
         <% 
             String HotelID = request.getParameter("Hotel_Id");
@@ -43,7 +43,7 @@
         %>
         <div class="row">
          <div class="span6" style="margin-left:10%">
-         <h2>Izmena hotela </h2>
+             <center> <h2>Izmena hotela </h2> </center>
          <form  action="EditHotel" method="post" enctype="multipart/form-data">
            <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
            <div style="padding-left:5%">

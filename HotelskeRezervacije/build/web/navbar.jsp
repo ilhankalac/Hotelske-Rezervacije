@@ -1,10 +1,13 @@
+<%-- 
+    Document   : navbar2
+    Created on : 08-Feb-2019, 18:33:23
+    Author     : Ilhan Kalac
+--%>
 
-<%@page import="Models.Klijent"%>
 <%@page import="RepoPattern.KlijentRepo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-<html lang="sr">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -17,6 +20,75 @@
 
     </head>
     <style>
+        * {
+            margin:0px;
+            padding:0px;
+            box-sizing:border-box;
+            font-family:"Bree Serif",sans-serif;
+        }
+        body {
+            overflow:hidden;
+        }
+        #sidebar {
+            position:fixed;
+            top:0px;
+            left:0px;
+            width:190px;
+            height:100vh;
+            background:#1a1a1a;
+            text-align:center;
+            transform-origin:left;
+            transform:perspective(1200px) rotateY(90deg);
+            transition:all 400ms ease;
+            background: rgba(0,0,0,0.9);
+            
+        }
+        #sidebar ul li {
+            color:#ccc;
+            font-size:20px;
+            width:100%;
+            height:50px;
+            border-bottom:1px solid #222222;
+            line-height:50px;
+        }
+        #sidebar.active {
+            transform:perspective(1200px) rotateY(0deg);
+        }
+
+
+
+        #toggle-btn {
+            position:fixed;
+            left:30px;
+            top:20px;
+            transition:left 200ms linear 0ms,transform 300ms ease 100ms;
+        }
+        #toggle-btn.active {
+            left:230px;
+            transform:rotate(360deg);
+        }
+        #toggle-btn span {
+            position:relative;
+            top:0px;
+            display:block;
+            background:#1a1a1a;
+            width:30px;
+            height:5px;
+            margin:5px 0px;
+            cursor:pointer;
+            transition:transform 300ms ease 200ms;
+        }
+        #toggle-btn.active span:nth-child(1) {
+            top:10px;
+            transform:rotate(45deg);
+        }
+        #toggle-btn.active span:nth-child(2) {
+            opacity:0;
+        }
+        #toggle-btn.active span:nth-child(3) {
+            top:-10px;
+            transform:rotate(-45deg);
+        }
         .background-image {
             position: fixed;
             background-image: url( 'https://curzonblob.blob.core.windows.net/media/5032/nostalgia-03.jpg' );
@@ -29,8 +101,7 @@
 
         } 
     </style>
-
-    <body> 
+    <body>
         <div class="background-image"></div>
         <%
             Boolean pom = false;
@@ -38,87 +109,43 @@
             if (sesija.getAttribute("ulogovan") != null) {
                 pom = true;
             }
-        %>             
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="Hoteli.jsp">Hotelske rezervacije</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="Hoteli.jsp">Početna <span class="sr-only">(current)</span></a>
-                    </li>
+        %>     
+
+
+
+
+
+        <div id="sidebar">
+            <ul>
+                <li> <a class="btn" href="Hoteli.jsp">Početna</a></li>
                     <%
                         if (!pom) {%>
 
-                    <li class="nav-item"><a class="nav-link" href="Registracija.jsp">Registruj se</a></li>
-                    <li class="nav-item"><a class="nav-link" href="" data-toggle="modal" data-target="#exampleModal" >Prijavi se</a></li>
+                <li><a class="btn" href="Registracija.jsp">Registruj se</a></li>
+                <li><a class="btn" href="" data-toggle="modal" data-target="#exampleModal" >Prijavi se</a></li>
 
 
-                    <%   } else {%>
-                    <li class="nav-item"><a class="nav-link" href="Logout">Odjavi se</a></li>
-                        <%   }
-                        %>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Prijava</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="Login" method="post">
-                                    <div class="modal-body">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1" for="validationServer03">Korisničko ime: </span>
-                                            </div>
-                                            <input required name="username" type="text" class="form-control" placeholder="Korisničko ime" aria-label="Username" aria-describedby="basic-addon1">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">Lozinka: </span>
-                                            </div>
-                                            <input required name="password" type="password" class="form-control" placeholder="Lozinka" aria-label="Password" aria-describedby="basic-addon1">
-                                            <%
-                                                String loginGreska = "" + request.getAttribute("prvoLogovanje");
-                                                if (loginGreska != null)
-                                                    if (loginGreska.equals("False")) {%>
-                                            <div class="invalid-feedback">
-                                                Pogresan unos podataka !
-                                            </div>
-                                            <%}
-                                            %> 
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-                                        <button type="submit" class="btn btn-primary">Prijavi  se</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-            </div> 
-
+                <%   } else {%>
+                <li><a class="btn" href="Logout">Odjavi se</a></li>
+                    <%   }
+                    %>
+                
+                
             <%
                 if ((request.getSession().getAttribute("ulogovan")) != null) {%>
 
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan")).getKlijentId()%>">Profil</a>
+            <li>
+                <a class="btn" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan")).getKlijentId()%>">Profil</a>
             </li> 
             <%}
             %>
             <%if (pom) {%>
-            <li class="nav-item">
+            <li>
                 <%  String brojPoenaKlijenta = "0";
                     if (request.getSession().getAttribute("BrojPoenaKlijenta") != null) {
                         brojPoenaKlijenta = "" + request.getSession().getAttribute("BrojPoenaKlijenta");
                     }%>
-                <a class="nav-link" href="#">  <i class="fas fa-coins "></i> <%=brojPoenaKlijenta%></a>
+                <a class="btn" href="#">  <i class="fas fa-coins "></i> <%=brojPoenaKlijenta%></a>
             </li>
 
             <%
@@ -129,8 +156,8 @@
 
                 if (ulogovanaRola.equals("2") || ulogovanaRola.equals("3")) {
             %>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li>
+                <a class="btn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Opcije moj brate
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -156,16 +183,71 @@
 
             <%}
             %>
+                
+                
+            
+            </ul>
+        </div>
+        <div id="toggle-btn" onclick="toggleSidebar(this)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Prijava</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="Login" method="post">
+                        <div class="modal-body">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1" for="validationServer03">Korisničko ime: </span>
+                                </div>
+                                <input required name="username" type="text" class="form-control" placeholder="Korisničko ime" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Lozinka: </span>
+                                </div>
+                                <input required name="password" type="password" class="form-control" placeholder="Lozinka" aria-label="Password" aria-describedby="basic-addon1">
+                                <%
+                                    String loginGreska = "" + request.getAttribute("prvoLogovanje");
+                                    if (loginGreska != null)
+                                        if (loginGreska.equals("False")) {%>
+                                <div class="invalid-feedback">
+                                    Pogresan unos podataka !
+                                </div>
+                                <%}
+                                %> 
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                            <button type="submit" class="btn btn-primary">Prijavi  se</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> 
 
-        </ul>
-    </div>
-</nav>
 
 
+</body>
+</html>
 
+<script>
+    function toggleSidebar(ref) {
+        ref.classList.toggle('active');
+        document.getElementById('sidebar').classList.toggle('active');
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</body>
-</html>

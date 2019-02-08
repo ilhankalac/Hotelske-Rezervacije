@@ -36,7 +36,7 @@
         select {
             visibility: hidden;
         }</style>
-    <body>
+    <body style="overflow:scroll;">
        
         <%
             request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));

@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
 
-    <body>
+    <body style="overflow:scroll;">
         <%@ include file="navbar.jsp" %> 
     <center>
         <br>
