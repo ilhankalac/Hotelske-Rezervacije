@@ -4,6 +4,7 @@
     Author     : Ilhan Kalac
 --%>
 
+<%@page import="Models.Klijent"%>
 <%@page import="RepoPattern.KlijentRepo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,7 +42,7 @@
             transform:perspective(1200px) rotateY(90deg);
             transition:all 400ms ease;
             background: rgba(0,0,0,0.9);
-            
+
         }
         #sidebar ul li {
             color:#ccc;
@@ -101,7 +102,7 @@
 
         } 
     </style>
-    <body>
+    <body style = "font-family:roboto;font-size:16px;">
         <div class="background-image"></div>
         <%
             Boolean pom = false;
@@ -117,75 +118,78 @@
 
         <div id="sidebar">
             <ul>
-                <li> <a class="btn" href="Hoteli.jsp">Početna</a></li>
-                    <%
-                        if (!pom) {%>
 
-                <li><a class="btn" href="Registracija.jsp">Registruj se</a></li>
-                <li><a class="btn" href="" data-toggle="modal" data-target="#exampleModal" >Prijavi se</a></li>
+
+
+
+                <%
+                    if ((request.getSession().getAttribute("ulogovan")) != null) {%>
+
+                <li>
+                    <% Klijent UlogovanKlijent = new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan"));%>
+                    <a style="color:white;" class="btn" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=UlogovanKlijent.getKlijentId()%>"> Korisnik: <%= UlogovanKlijent.getKIme()%></a>
+                </li> 
+                <%}
+                %>
+                <%if (pom) {%>
+                <li>
+                    <%  String brojPoenaKlijenta = "0";
+                        if (request.getSession().getAttribute("BrojPoenaKlijenta") != null) {
+                            brojPoenaKlijenta = "" + request.getSession().getAttribute("BrojPoenaKlijenta");
+                        }%>
+                    <a class="btn" href="#">  <i class="fas fa-coins "></i> <%=brojPoenaKlijenta%> poena</a>
+                </li>
+                <li> <a style=" color:white;" class="btn" href="Hoteli.jsp">Početna</a></li>
+                    <%
+                        String ulogovanaRola = "";
+                        if (request.getSession().getAttribute("UlogovanaRola") != null) {
+                            ulogovanaRola = "" + request.getSession().getAttribute("UlogovanaRola");
+                        }
+
+                        if (ulogovanaRola.equals("2") || ulogovanaRola.equals("3")) {
+                    %>
+                <li>
+                    <a style="color:white" class="btn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dodatne opcije
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                        <%
+                            if (ulogovanaRola.equals("2")) {
+                                {%> 
+                        <a class="dropdown-item" href="KreiranjeHotela.jsp">Kreiraj hotel</a>
+                        <a class="dropdown-item" href="Klijenti.jsp">Svi korisnici</a>
+
+                        <%}
+                            }
+                            if (ulogovanaRola.equals("3")) {
+                                {%> 
+                        <a class="dropdown-item" href="EditHotel.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId")%>">Upravljanje hotelom</a>
+                        <%}
+                            }
+                        %>
+                        <a class="dropdown-item" href="Rezervacije.jsp">Sve rezervacije</a>
+                        <% } %>
+                    </div>
+                </li>
+
+                <%}
+                %>
+
+
+
+                <%
+                    if (!pom) {%>
+
+                <li><a class="btn" style=" color:white;" href="Registracija.jsp">Registruj se</a></li>
+                <li><a class="btn" style=" color:white;" href="" data-toggle="modal" data-target="#exampleModal" >Prijavi se <i class="fas fa-sign-in-alt"></i></a></li>
 
 
                 <%   } else {%>
-                <li><a class="btn" href="Logout">Odjavi se</a></li>
+                <li>   <a class="btn" style=" color:red;" href="Logout">Odjavi se <i class="fas fa-sign-out-alt"></i> </a></li>
                     <%   }
                     %>
-                
-                
-            <%
-                if ((request.getSession().getAttribute("ulogovan")) != null) {%>
 
-            <li>
-                <a class="btn" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan")).getKlijentId()%>">Profil</a>
-            </li> 
-            <%}
-            %>
-            <%if (pom) {%>
-            <li>
-                <%  String brojPoenaKlijenta = "0";
-                    if (request.getSession().getAttribute("BrojPoenaKlijenta") != null) {
-                        brojPoenaKlijenta = "" + request.getSession().getAttribute("BrojPoenaKlijenta");
-                    }%>
-                <a class="btn" href="#">  <i class="fas fa-coins "></i> <%=brojPoenaKlijenta%></a>
-            </li>
-
-            <%
-                String ulogovanaRola = "";
-                if (request.getSession().getAttribute("UlogovanaRola") != null) {
-                    ulogovanaRola = "" + request.getSession().getAttribute("UlogovanaRola");
-                }
-
-                if (ulogovanaRola.equals("2") || ulogovanaRola.equals("3")) {
-            %>
-            <li>
-                <a class="btn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Opcije moj brate
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-                    <%
-                        if (ulogovanaRola.equals("2")) {
-                            {%> 
-                    <a class="dropdown-item" href="KreiranjeHotela.jsp">Kreiraj hotel</a>
-                    <a class="dropdown-item" href="Klijenti.jsp">Svi korisnici</a>
-
-                    <%}
-                        }
-                        if (ulogovanaRola.equals("3")) {
-                            {%> 
-                    <a class="dropdown-item" href="EditHotel.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId")%>">Upravljanje hotelom</a>
-                    <%}
-                        }
-                    %>
-                    <a class="dropdown-item" href="Rezervacije.jsp">Sve rezervacije</a>
-                    <% } %>
-                </div>
-            </li>
-
-            <%}
-            %>
-                
-                
-            
             </ul>
         </div>
         <div id="toggle-btn" onclick="toggleSidebar(this)">
@@ -229,7 +233,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-                            <button type="submit" class="btn btn-primary">Prijavi  se</button>
+                            <button type="submit" class="btn btn-primary">Prijavi  se </button>
                     </form>
                 </div>
             </div>
