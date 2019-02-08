@@ -49,7 +49,7 @@
                             <div class="col">
                                 <a>
                                     <span style="visibility: hidden; font-size: 0px"><%= hotel.getNaziv()%></span>
-                                    <div class="card" style="width: 18rem;background: rgba(0,0,0,0.3);">
+                                    <div class="card"  align="left" style="width: 18rem;background: rgba(0,0,0,0.3);">
                                         <p class="card-text">Država: <%=hotel.getDrzava()%> </p>
                                         <p class="card-text">Grad:  <%=hotel.getGrad()%> </p>
                                         <p class="card-text">Adresa: <%=hotel.getAdresa()%> </p>

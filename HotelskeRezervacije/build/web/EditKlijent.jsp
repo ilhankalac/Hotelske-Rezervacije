@@ -22,34 +22,32 @@
         <%@ include file="navbar.jsp" %> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <script src="jQuery.min.js"> </script>
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"> </script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
-        <script type="text/javascript">
-                $(document).ready( function () {
-                 $('#Tabela').DataTable();
-             } );
-        </script>
     </head>
     <style>
         select {
             visibility: hidden;
-        }</style>
-    <body style="overflow:scroll;">
-       
-        <%
-            request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
+        }
+        body {
+            overflow:scroll;
+        }
+    </style>
+    <body >
+
+        <%            request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
             MenadzeriHotela mh = new MenadzerHotelaRepo().select(Integer.parseInt(request.getParameter("Klijent_Id")));
-            String ulogovanaRola ="";
-            if( request.getSession().getAttribute("UlogovanaRola")!=null)
-                ulogovanaRola =(String) request.getSession().getAttribute("UlogovanaRola");
+            String ulogovanaRola = "";
+            if (request.getSession().getAttribute("UlogovanaRola") != null) {
+                ulogovanaRola = (String) request.getSession().getAttribute("UlogovanaRola");
+            }
             Klijent klijent = (Klijent) request.getAttribute("Klijent");
         %>
-        <form action="EditKlijent" method="post">
+        <form style="margin-left:250px;" action="EditKlijent" method="post">
             <input value="<%= request.getParameter("Klijent_Id")%>" name="Klijent_Id" type="hidden">
-            <%if (ulogovanaRola.equals("3")){  {%> 
-            <input type="hidden" name="HotelId" value="<%= mh.getHotelId()%>"> <%} }%>
+            <%if (ulogovanaRola.equals("3")) {
+                    {%> 
+            <input type="hidden" name="HotelId" value="<%= mh.getHotelId()%>"> <%}
+                }%>
             <div style="padding-left:5%">
 
                 <div class="row" >
@@ -344,3 +342,11 @@
 <%}
 
 %>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Tabela').DataTable();
+    });
+</script>
+<script src="jQuery.min.js"></script>
