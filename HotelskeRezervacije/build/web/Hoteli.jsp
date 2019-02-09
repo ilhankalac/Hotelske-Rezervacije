@@ -14,7 +14,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-
+    <style>
+        .zoom:hover {
+            transform: scale(1.5);
+            z-index:10;
+        }
+    </style>
     <body style="overflow:scroll;">
         <%@ include file="navbar.jsp" %> 
     <center>
@@ -43,13 +48,13 @@
                     <div class="card-body">
                         <div class="row">
 
-                            <div class="col">
-                                <img  src="FotografijeHotela.jsp?hotelID=<%=hotel.getHotelId()%>"  class="card-img" alt="...">
+                            <div  class="col zoom">
+                                <img style="border:1px solid black;" src="FotografijeHotela.jsp?hotelID=<%=hotel.getHotelId()%>"  class="card-img" alt="...">
                             </div>
                             <div class="col">
                                 <a>
                                     <span style="visibility: hidden; font-size: 0px"><%= hotel.getNaziv()%></span>
-                                    <div class="card"  align="left" style="width: 18rem;background: rgba(0,0,0,0.3);">
+                                    <div class="card" style="width: 18rem;background: rgba(0,0,0,0.3);">
                                         <p class="card-text">Država: <%=hotel.getDrzava()%> </p>
                                         <p class="card-text">Grad:  <%=hotel.getGrad()%> </p>
                                         <p class="card-text">Adresa: <%=hotel.getAdresa()%> </p>

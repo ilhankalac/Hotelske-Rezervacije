@@ -21,6 +21,10 @@
         body {
             overflow: scroll;
         }
+        .zoom:hover {
+            transform: scale(2);
+            z-index:10;
+        }
     </style>
     <body>
         <%    ArrayList<Rezervacija> aktivneRezervacije = new RezervacijaRepo().aktivneRezervacije(request.getParameter("Soba_Id"));
@@ -46,7 +50,10 @@
                         <div class="card-header">
                             <h5 class="card-title"> <%=soba.getHotel().getNaziv()%> - <%=soba.getBrojSobe()%> - <%=soba.getTipSobe().getNaziv()%></h5>
                         </div>
-                        <img height="180px" width="286px" src="FotografijeSoba.jsp?SobaId=<%=soba.getSobaId()%>" />  
+                        <div class="zoom">
+                            <img height="180px" width="286px" src="FotografijeSoba.jsp?SobaId=<%=soba.getSobaId()%>" />  
+                        </div>
+
                         <div class="card-body">
                             <p class="card-text">Opis: <%=soba.getOpis()%> - <%=soba.getKratkiOpis()%>  </p>
                             <p class="card-text">Vredi poena: <%= soba.getPoeni()%>, Kapacitet <%= soba.getKapacitet()%> </p>
@@ -61,7 +68,7 @@
 
                     <% int sobaMaxKapacitet = new SobeRepo().maxKapacitetSobe(request.getParameter("Soba_Id"));%>
 
-                    <form style="color:white; margin:0 auto;" action = "KreiranjeRezervacije" method="post"  >
+                    <form style="color:white; margin:0 auto; position:fixed;" action = "KreiranjeRezervacije" method="post"  >
                         <input type="hidden" value="<%=soba.getCena()%>" name="CenaSobe"> 
                         Datum dolaska:  
                         <input type="date" name="DatumDolaska" class="form-control" style="width:250px" onkeydown="return false">                      

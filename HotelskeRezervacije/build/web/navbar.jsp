@@ -92,7 +92,7 @@
         }
         .background-image {
             position: fixed;
-            background-image: url( 'https://curzonblob.blob.core.windows.net/media/5032/nostalgia-03.jpg' );
+            background-image: url( 'https://i.pinimg.com/originals/5a/56/e2/5a56e2b738b455a3197caac74fd6f727.jpg' );
             background-repeat: no-repeat;
             background-size: cover;
             width: 100%;
@@ -102,7 +102,7 @@
 
         } 
     </style>
-    <body style = "font-family:roboto;font-size:16px;">
+    <body style = "font-family:roboto;font-size:16px;" >
         <div class="background-image"></div>
         <%
             Boolean pom = false;
@@ -240,6 +240,7 @@
 </html>
 
 <script>
+
     function toggleSidebar(ref) {
         ref.classList.toggle('active');
         document.getElementById('sidebar').classList.toggle('active');
