@@ -32,7 +32,7 @@
         }      
     </style>
     <body>
-
+        <br> <br> <br>
         <%
             if (request.getSession().getAttribute("UlogovanaRola") != null) {
                 if (!request.getSession().getAttribute("UlogovanaRola").equals("2")) {
