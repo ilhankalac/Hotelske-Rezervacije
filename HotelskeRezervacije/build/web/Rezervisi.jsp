@@ -51,7 +51,7 @@
                             <h5 class="card-title"> <%=soba.getHotel().getNaziv()%> - <%=soba.getBrojSobe()%> - <%=soba.getTipSobe().getNaziv()%></h5>
                         </div>
                         <div class="zoom">
-                            <img height="180px" width="286px" src="FotografijeSoba.jsp?SobaId=<%=soba.getSobaId()%>" />  
+                            <img  height="180px" width="286px" src="FotografijeSoba.jsp?SobaId=<%=soba.getSobaId()%>" />  
                         </div>
 
                         <div class="card-body">

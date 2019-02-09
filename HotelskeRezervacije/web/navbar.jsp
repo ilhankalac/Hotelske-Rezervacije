@@ -125,13 +125,13 @@
                     if ((request.getSession().getAttribute("ulogovan")) != null) {%>
                 <li>
                     <% Klijent UlogovanKlijent = new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan"));%>
-                    <a style="color:white;" class="btn" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=UlogovanKlijent.getKlijentId()%>"> Profil</a>
+                    <a style="color:white;" class="btn" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=UlogovanKlijent.getKlijentId()%>"><i class="fas fa-user"></i> Profil</a>
                 </li> 
                 <%}
                 %>
                 <%if (pom) {%>
 
-                <li> <a style=" color:white;" class="btn" href="Hoteli.jsp">Početna</a></li>
+                <li> <a style=" color:white;" class="btn" href="Hoteli.jsp"><i class="fas fa-hotel"></i> Početna </a></li>
                     <%
                         String ulogovanaRola = "";
                         if (request.getSession().getAttribute("UlogovanaRola") != null) {
@@ -142,15 +142,15 @@
 
                 <li>
                     <a style="color:white" class="btn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dodatne opcije
+                       <i class="fas fa-cogs"></i> Opcije
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
                         <%
                             if (ulogovanaRola.equals("2")) {
                                 {%> 
-                        <a class="dropdown-item" href="KreiranjeHotela.jsp">Kreiraj hotel</a>
-                        <a class="dropdown-item" href="Klijenti.jsp">Svi korisnici</a>
+                        <a class="dropdown-item" href="KreiranjeHotela.jsp"><i class="fas fa-plus"></i> Kreiraj hotel</a>
+                        <a class="dropdown-item" href="Klijenti.jsp"><i class="fas fa-users"></i> Svi korisnici</a>
 
                         <%}
                             }
@@ -160,7 +160,7 @@
                         <%}
                             }
                         %>
-                        <a class="dropdown-item" href="Rezervacije.jsp">Sve rezervacije</a>
+                        <a class="dropdown-item" href="Rezervacije.jsp"><i class="fas fa-list-ol"></i> Sve rezervacije</a>
 
                     </div>
                 </li>
