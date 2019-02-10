@@ -20,7 +20,7 @@
             z-index:10;
         }
     </style>
-    <body style="overflow:scroll;">
+    <body style="overflow:scroll;overflow-x: hidden;">
         <%@ include file="navbar.jsp" %> 
     <center>
         <br>

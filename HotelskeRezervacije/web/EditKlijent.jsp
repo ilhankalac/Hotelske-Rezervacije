@@ -105,7 +105,7 @@
 
         }
     </style>
-    <body style="width:100%;overflow:scroll" onload="funkcija();">
+    <body style="width:100%;overflow:scroll;overflow-x: hidden;" onload="funkcija();">
         <%@ include file="navbar.jsp" %> 
         <%            request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
             MenadzeriHotela mh = new MenadzerHotelaRepo().select(Integer.parseInt(request.getParameter("Klijent_Id")));

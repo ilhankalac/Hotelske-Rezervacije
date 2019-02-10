@@ -91,7 +91,7 @@
             }
         </style>
     </head>
-    <body style="width:100%;overflow:scroll" >
+    <body style="width:100%;overflow:scroll; overflow-x: hidden;" >
         <%
             if (request.getSession().getAttribute("ulogovan") != null) {
                 response.sendRedirect("index.jsp");
