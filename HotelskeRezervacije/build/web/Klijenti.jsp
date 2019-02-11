@@ -33,8 +33,7 @@
     </style>
     <body>
         <br> <br> <br>
-        <%
-            if (request.getSession().getAttribute("UlogovanaRola") != null) {
+        <%            if (request.getSession().getAttribute("UlogovanaRola") != null) {
                 if (!request.getSession().getAttribute("UlogovanaRola").equals("2")) {
                     response.sendRedirect("index.jsp");
                 }
@@ -49,24 +48,24 @@
 
         <div>
             <table id="Tabela" class="display" style="width:90%; background-color: #32383e; color:black;  font-family: Roboto;">
-                <thead>
+                <thead  style="font-size:90%;">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Ime</th>
-                        <th scope="col">Prezime</th>
-                        <th scope="col">Korisničko ime</th>
-                        <th scope="col">E-mail</th>
-                        <th scope="col">Telefon</th>
-                        <th scope="col">Adresa</th>
-                        <th scope="col">Država</th>
-                        <th scope="col">Grad</th>
-                        <th scope="col">Rola</th> 
-                        <th scope="col">Poeni</th>                      
-                        <th scope="col">Postanski Broj</th>
-                        <th scope="col">Opcije</th>
+                        <th class="align-middle text-center" scope="col">#</th>
+                        <th class="align-middle text-center" scope="col">Ime</th>
+                        <th class="align-middle text-center" scope="col">Prezime</th>
+                        <th class="align-middle text-center" scope="col">Korisničko ime</th>
+                        <th class="align-middle text-center" scope="col">E-mail</th>
+                        <th class="align-middle text-center" scope="col">Telefon</th>
+                        <th class="align-middle text-center" scope="col">Adresa</th>
+                        <th class="align-middle text-center" scope="col">Država</th>
+                        <th class="align-middle text-center" scope="col">Grad</th>
+                        <th class="align-middle text-center" scope="col">Rola</th> 
+                        <th class="align-middle text-center" scope="col">Poeni</th>                      
+                        <th class="align-middle text-center" scope="col">Postanski Broj</th>
+                        <th class="align-middle text-center" scope="col">Opcije</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="font-size:78%;">
                     <%             int i = 1;
                         for (Klijent klijent : new KlijentRepo().lista()) {
                             String Rola = "";
@@ -76,32 +75,32 @@
                                 Rola = "Administrator";
                             } else {
                                 Rola = "Menadžer hotela";
-                                }
-                                {%>
+                            }
+                            {%>
 
 
                     <tr>
-                        <td> <%= i++%> </td>
-                        <td><%=klijent.getIme()%> </td>
-                        <td><%=klijent.getPrezime()%> </td>
-                        <td><%=klijent.getKIme()%> </td>
-                        <td><%=klijent.getEmail()%> </td>
-                        <td><%=klijent.getTelefon()%> </td>
-                        <td><%=klijent.getAdresa()%> </td>
-                        <td><%=klijent.getDrzava()%> </td>
-                        <td><%=klijent.getGrad()%> </td>
-                        <td><%=Rola%> </td>
-                        <td><%=klijent.getPoeni()%> </td>
-                        <td><%=klijent.getPostanskiBroj()%> </td>
-                        <td> 
+                        <td class="align-middle text-center"> <%= i++%> </td>
+                        <td class="align-middle text-center"><%=klijent.getIme()%> </td>
+                        <td class="align-middle text-center"><%=klijent.getPrezime()%> </td>
+                        <td class="align-middle text-center"><%=klijent.getKIme()%> </td>
+                        <td class="align-middle text-center"><%=klijent.getEmail()%> </td>
+                        <td class="align-middle text-center"><%=klijent.getTelefon()%> </td>
+                        <td class="align-middle text-center"><%=klijent.getAdresa()%> </td>
+                        <td class="align-middle text-center"><%=klijent.getDrzava()%> </td>
+                        <td class="align-middle text-center"><%=klijent.getGrad()%> </td>
+                        <td class="align-middle text-center"><%=Rola%> </td>
+                        <td class="align-middle text-center"><%=klijent.getPoeni()%> </td>
+                        <td class="align-middle text-center"><%=klijent.getPostanskiBroj()%> </td>
+                        <td class="align-middle text-center"> 
 
                             <a class="delete_link"
                                href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%= klijent.getKlijentId()%>" >
-                                <i class="fa fa-trash"> Izmeni</i>                                  
+                                <i class="fas fa-edit"> </i>                                  
                             </a>
                             <a class="delete_link" style="color:red"
                                href="${pageContext.request.contextPath}/Klijenti?Klijent_Id=<%= klijent.getKlijentId()%>" >
-                                <i class="fa fa-trash"> Obriši</i>                                  
+                                <i class="fa fa-trash"> </i>                                  
                             </a>
                         </td>
                     </tr>

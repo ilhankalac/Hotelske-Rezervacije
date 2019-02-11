@@ -31,7 +31,7 @@
         <%@ include file="navbar.jsp" %> 
         <br>
         <form style="margin:0 auto;width:50%;color:white; " action = "KreiranjeHotela" method="post" enctype="multipart/form-data">
-            <div class="form-group" style="background: rgba(0,0,0,0.5); border-radius: 5px">
+            <div  style="background: rgba(0,0,0,0.5); border-radius: 5px">
                 <br>  
                 <h1 align="center">Kreiranje hotela</h1>
                 <center>

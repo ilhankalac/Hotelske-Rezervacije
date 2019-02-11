@@ -171,10 +171,10 @@
 
 
                 <% if (!IDk.isEmpty()) {%>
-                <a href="${pageContext.request.contextPath}/Rezervisi.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-primary">Rezerviši</a>
+                <a href="${pageContext.request.contextPath}/Rezervisi.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-primary">Rezerviši <i class="far fa-marker"></i></a>
                 <%} %>
                 <% if (IDk.equals("2") || Hotel_Id.equals(hotelIdSesija)) {%> 
-                <a href="${pageContext.request.contextPath}/EditSoba.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-warning">Izmeni</a>
+                <a href="${pageContext.request.contextPath}/EditSoba.jsp?Soba_Id=<%=soba.getSobaId()%>" class="btn btn-warning">Izmeni <i class="fas fa-edit"></i></a>
                 <%}
                 %>
 

@@ -26,9 +26,11 @@
             padding:0px;
             box-sizing:border-box;
             font-family:"Bree Serif",sans-serif;
+
         }
         body {
             overflow:hidden;
+
         }
         #sidebar {
             position:fixed;
@@ -42,6 +44,7 @@
             transform:perspective(1200px) rotateY(90deg);
             transition:all 400ms ease;
             background: rgba(0,0,0,0.9);
+            z-index:10; 
 
         }
         #sidebar ul li {
@@ -142,7 +145,7 @@
 
                 <li>
                     <a style="color:white" class="btn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       <i class="fas fa-cogs"></i> Opcije
+                        <i class="fas fa-cogs"></i> Opcije
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 

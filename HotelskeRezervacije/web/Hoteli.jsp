@@ -83,9 +83,9 @@
                                     </div>
                                 </a>
                                 <div  class="card-footer" style="border-radius:5px;width:289px;background:rgba(0,0,0,0.3);">
-                                    <a href="${pageContext.request.contextPath}/Sobe.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-primary">Pogledaj sobe</a>
+                                    <a href="${pageContext.request.contextPath}/Sobe.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-primary">Sobe <i class="fal fa-bed"></i></a>
                                     <% if (UlogovanaRola.equals("2")) {%> 
-                                    <a  style="margin-left:20px;"href="${pageContext.request.contextPath}/EditHotel.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-warning">Izmeni</a>
+                                    <a  style="margin-left:20px;"href="${pageContext.request.contextPath}/EditHotel.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-warning">Izmeni <i class="fas fa-edit"></i></a>
                                 </div>    
                                 <%}
                                 %>
