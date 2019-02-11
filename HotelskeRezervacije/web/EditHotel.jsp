@@ -107,7 +107,6 @@
                         <tr>
                             <td></td>
                             <td><img src="" id="profile-img-tag" width="286px" /></td> 
-
                         </tr>
                     </table> <br> <br>
                     <center>
