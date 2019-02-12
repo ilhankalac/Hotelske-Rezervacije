@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ilhan Kalac
  */
-public class Klijenti extends HttpServlet {
+public class BrisanjeKlijenta extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,10 +24,11 @@ public class Klijenti extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             new KlijentRepo().brisanje(request.getParameter("Klijent_Id"));
-            response.sendRedirect("Klijenti.jsp");
+            response.sendRedirect("Klijenti.jsp");   
+           
             
         } catch (SQLException ex) {
-            Logger.getLogger(Klijenti.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BrisanjeKlijenta.class.getName()).log(Level.SEVERE, null, ex);
         } 
 
     }

@@ -13,7 +13,7 @@ public interface KlijentDAO {
     boolean insert(Klijent klijent) throws SQLException;
     boolean logovanje(String username, String password) throws SQLException;
     ArrayList<Klijent> lista() throws SQLException;
-    void brisanje(String Id) throws SQLException;
+    boolean brisanje(String Id) throws SQLException;
     Klijent select(String Id) throws SQLException;
     Klijent selectByUsername(String Username) throws SQLException;
     String Rola(String username, String password) throws SQLException;

@@ -107,11 +107,12 @@
     </style>
     <body style="width:100%;overflow:scroll;overflow-x: hidden;" onload="funkcija();">
         <%@ include file="navbar.jsp" %> 
-        <%            request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
+        <%  
+            request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
             MenadzeriHotela mh = new MenadzerHotelaRepo().select(Integer.parseInt(request.getParameter("Klijent_Id")));
             String ulogovanaRola = "";
             if (request.getSession().getAttribute("UlogovanaRola") != null) {
-                ulogovanaRola = (String) request.getSession().getAttribute("UlogovanaRola");
+                ulogovanaRola = "" + request.getSession().getAttribute("UlogovanaRola");
             }
             Klijent klijent = (Klijent) request.getAttribute("Klijent");
         %>
@@ -182,7 +183,7 @@
                 <div class="mySlides" cellspacing="10" >
                     <h1>Bezbednost</h1> <br> <br><br> <br>
                     <table style="margin-top: -15%; text-align: right"> 
-                        <% if (new KlijentRepo().selectByUsername((String) request.getSession().getAttribute("ulogovan")).getRola().equals("2")) {%>
+                        <% if (new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan")).getRola().equals("2")) {%>
                         <tr>              
                             <td style=""> <label style="padding-bottom: 10px;"> Rola:</label> </td>
                             <td>
@@ -296,12 +297,15 @@
                         </thead>
                         <tbody>
                             <%
-                                Klijent klijent1 = new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan"));
-
+                              
+                                String EditKlijentID = request.getParameter("Klijent_Id");
+                                
+                                
                                 int i = 1;
                                 for (Rezervacija rezervacija : new RezervacijaRepo().lista()) {
 
-                                    if (klijent1.getKlijentId() == rezervacija.getKlijentID()) {
+                                    if ((Integer.parseInt(EditKlijentID) == rezervacija.getKlijentID()))
+                                     {
                                         {%>
                             <tr>
                                 <td> <%=i++%>  </td>

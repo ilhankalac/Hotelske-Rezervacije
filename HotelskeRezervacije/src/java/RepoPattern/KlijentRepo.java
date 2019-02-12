@@ -132,20 +132,32 @@ public class KlijentRepo implements KlijentDAO{
         
         return klijenti; 
     }
+   
     @Override
-    public void brisanje(String Id) throws SQLException{
- 
-        
+    public boolean brisanje(String Id) throws SQLException{
+
         try {
+            
+            String select = "select rolaID from klijenti where id = " + Id;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(select);
+
+            //ako je rola admin onda se ne moze izbrisati iz baze
+            if(rs.next())
+                if(rs.getInt("RolaID") == 2)            
+                    return false;
+            
+
             String delete = "delete from  klijenti where id = " + Id;
             PreparedStatement ps  = con.prepareStatement(delete);
-
+            
             ps.executeUpdate();
   
         } catch (SQLException ex) {
             Logger.getLogger(KlijentRepo.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-       
+       return true;
     }
     @Override
     public Klijent select(String Id) throws SQLException{
@@ -375,4 +387,5 @@ public class KlijentRepo implements KlijentDAO{
         }
         
     }
+
 }
