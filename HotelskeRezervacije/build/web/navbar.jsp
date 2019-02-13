@@ -95,7 +95,7 @@
         }
         .background-image {
             position: fixed;
-            background-image: url( 'https://i.pinimg.com/originals/5a/56/e2/5a56e2b738b455a3197caac74fd6f727.jpg' );
+            background-image: url( 'http://j-s-media.com/wp-content/uploads/2017/02/hipster-wallpaper-18.jpg' );
             background-repeat: no-repeat;
             background-size: cover;
             width: 100%;

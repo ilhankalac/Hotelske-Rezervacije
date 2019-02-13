@@ -14,26 +14,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%@ include file="navbar.jsp" %> 
+        <%@ include file="navbar.jsp" %> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Rezervacije</title>
-        <script src="jQuery.min.js"> </script>
+        <script src="jQuery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"> </script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
-                $(document).ready( function () {
-                 $('#Tabela').DataTable();
-             } );
+            $(document).ready(function () {
+                $('#Tabela').DataTable();
+            });
         </script>
     </head>
     <body>
-        <form method="post" action="BrisanjeRezervacije">
+        
+        <form method="post" action="BrisanjeRezervacije" style="padding-top:5%; ">
             <div style="width:90%; margin-left:5%">
-                <table id="Tabela" class="table table-hover table-dark" style="background-color: #32383e; color:black;  font-family: Roboto;">
+                <table id="Tabela" class="table table-hover table-dark" style="font-size:80%;background-color: #32383e; color:black;  font-family: Roboto;">
                     <thead>
                         <tr>
-                             <th scope="col">#</th>
+                            <th scope="col">#</th>
                             <th scope="col">Ime klijenta</th>
                             <th scope="col">Prezime klijenta</th>
 
@@ -53,8 +54,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%
-                            Klijent klijent = new KlijentRepo().selectByUsername(""+ request.getSession().getAttribute("ulogovan"));
+                        <%                            Klijent klijent = new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan"));
 
                             int i = 1;
                             ArrayList<Rezervacija> rezervacije;
@@ -71,7 +71,7 @@
                             <td> <%=i++%>  </td>
                             <td><%=rezervacija.klijent.getIme()%> </td>
                             <td><%=rezervacija.klijent.getPrezime()%> </td>
-                           
+
                             <td><%=rezervacija.getDatumDolaska()%> </td>
                             <td><%=rezervacija.getDatumOdlaska()%> </td>
                             <td><%=rezervacija.getVremeOdlaska()%> </td>
@@ -79,27 +79,26 @@
                             <td><%=rezervacija.soba.getBrojSobe()%> </td>
                             <td><%=rezervacija.getBrojOdraslih()%> </td>
                             <td><%=rezervacija.getBrojDece()%> </td>
-                           
 
-                            
-                           
+
+
+
                             <td><%=rezervacija.getStatusRezervacije()%> </td>
                             <td><%=rezervacija.getPoeni()%> </td>
-                             <td style="color:red"><%=rezervacija.getNovac()%>  </td>
+                            <td style="color:red"><%=rezervacija.getNovac()%>  </td>
                             <td> 
                                 <%
                                     if (new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())) {
                                 %>
-                                <button disabled="true" class="btn btn-success"> Aktivna </button>
+                                <button disabled="true" class="btn btn-success" style="font-weight: bold;  height: 35px; width: 100px"> AKTIVNA </button>
                                 <% } else if (new RezervacijaRepo().isteklaRezervacija(rezervacija.getRezervacijaId())) {
                                 %>
-                                <button disabled="true" class="btn btn-warning"> Istekla </button>
+                                <button disabled="true" class="btn btn-warning" style="font-weight: bold;  height: 35px; width: 100px;color:white;"> ISTEKLA </button>
 
                                 <%} else {
                                 %>
-                                <a class="delete_link" style="color:red"
-                                   href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>&Profil=False">
-                                    <i class="fa fa-trash"> Obriši</i>                                  
+                                <a class="delete_link btn btn-danger" style="font-weight: bold;  height: 35px; width: 100px" href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>&Profil=False">
+                                    OTKAŽI                         
                                 </a>
                                 <%} %>
                             </td>
@@ -126,16 +125,15 @@
                                 <%
                                     if (new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())) {
                                 %>
-                                <button disabled="true" class="btn btn-success"> Aktivna </button>
+                                <button disabled="true" class="btn btn-success" style="font-weight: bold;  height: 35px; width: 100px"> AKTIVNA </button>
                                 <% } else if (new RezervacijaRepo().isteklaRezervacija(rezervacija.getRezervacijaId())) {
                                 %>
-                                <button disabled="true" class="btn btn-warning"> Istekla </button>
+                                <button disabled="true" class="btn btn-warning" style="font-weight: bold;  height: 35px; width: 100px; color:white;" > ISTEKLA </button>
 
                                 <%} else {
                                 %>
-                                <a class="delete_link" style="color:red"
-                                   href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>&Profil=False">
-                                    <i class="fa fa-trash"> Obriši</i>                                  
+                                <a class="delete_link btn btn-danger" style="font-weight: bold;  height: 35px; width: 100px" href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>&Profil=False">
+                                    OTKAŽI                              
                                 </a>
                                 <%} %>
                             </td>

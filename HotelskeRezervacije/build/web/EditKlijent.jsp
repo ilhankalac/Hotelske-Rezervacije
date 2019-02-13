@@ -107,8 +107,7 @@
     </style>
     <body style="width:100%;overflow:scroll;overflow-x: hidden;" onload="funkcija();">
         <%@ include file="navbar.jsp" %> 
-        <%  
-            request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
+        <%            request.setAttribute("Klijent", new KlijentRepo().select(request.getParameter("Klijent_Id")));
             MenadzeriHotela mh = new MenadzerHotelaRepo().select(Integer.parseInt(request.getParameter("Klijent_Id")));
             String ulogovanaRola = "";
             if (request.getSession().getAttribute("UlogovanaRola") != null) {
@@ -275,9 +274,9 @@
             <form method="post" action="BrisanjeRezervacije">
 
 
-                <div style="width:160%; margin-left:-35%">
-                    <table  id="Tabela" class="table table-hover table-dark" style="background-color: #32383e; color:black;  font-family: Roboto;">
-                        <thead>
+                <div style="width:180%; margin-left:-40%">
+                    <table  id="Tabela" class="table table-hover table-dark" style="font-size:80%;background-color: #32383e; color:black;  font-family: Roboto;">
+                        <thead >
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Hotel</th>
@@ -297,15 +296,12 @@
                         </thead>
                         <tbody>
                             <%
-                              
                                 String EditKlijentID = request.getParameter("Klijent_Id");
-                                
-                                
+
                                 int i = 1;
                                 for (Rezervacija rezervacija : new RezervacijaRepo().lista()) {
 
-                                    if ((Integer.parseInt(EditKlijentID) == rezervacija.getKlijentID()))
-                                     {
+                                    if ((Integer.parseInt(EditKlijentID) == rezervacija.getKlijentID())) {
                                         {%>
                             <tr>
                                 <td> <%=i++%>  </td>
@@ -326,16 +322,15 @@
                                     <%
                                         if (new RezervacijaRepo().aktivnaRezervacija(rezervacija.getRezervacijaId())) {
                                     %>
-                                    <button disabled="true" class="btn btn-success"> Aktivna </button>
+                                    <button disabled="true" class="btn btn-success" style="font-weight: bold;  height: 35px; width: 100px;color:white;"> AKTIVNA </button>
                                     <% } else if (new RezervacijaRepo().isteklaRezervacija(rezervacija.getRezervacijaId())) {
                                     %>
-                                    <button disabled="true" class="btn btn-warning"> Istekla </button>
+                                    <button disabled="true" class="btn btn-warning" style="font-weight: bold;  height: 35px; width: 100px;color:white;"> ISTEKLA </button>
 
                                     <%} else {
                                     %>
-                                    <a class="delete_link" style="color:red"
-                                       href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>&Profil=True">
-                                        <i class="fa fa-trash"> Obriši</i>                                  
+                                    <a class="delete_link btn btn-danger" style="font-weight: bold;  height: 35px; width: 100px" href="${pageContext.request.contextPath}/BrisanjeRezervacije?Rezervacije_Id=<%= rezervacija.getRezervacijaId()%>&Novac=<%=rezervacija.getNovac()%>&Poeni=<%=rezervacija.getPoeni()%>&Profil=True">
+                                        OTKAŽI                         
                                     </a>
                                     <%} %>
                                 </td>

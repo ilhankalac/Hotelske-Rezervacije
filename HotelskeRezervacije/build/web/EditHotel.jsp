@@ -167,14 +167,15 @@
                                         <td style="padding-top:2%">  <input type="submit" style="float:left; margin-left:10%" value ="Obriši"  class="btn btn-danger" ><br> <br> </td>                                
 
                                 </form>
-                            </div>
-                            </table>                       
+                            </div> 
+                            </table>                             
                     </div>  
-
+                                    
                 </div>                               
             </div>
         </div>
-    </div>
+                                           
+    </div><br>  
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {

@@ -124,10 +124,10 @@
         <form action="KlijentController" style="width:50%;margin:0 auto;padding-top:2%;">
 
 
-            <div class="slideshow-container" style="background:rgba(0,0,0,0.5); color:white">
+            <div class="slideshow-container" style="border-radius:5px;background:rgba(0,0,0,0.5); color:white;">
 
 
-                <div class="mySlides" cellspacing="10" >
+                <div class="mySlides" cellspacing="10">
                     <h3> Osnovni podaci</h3> <br>
 
                     <table style="width:88%;">

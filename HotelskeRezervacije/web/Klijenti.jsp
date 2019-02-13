@@ -46,8 +46,8 @@
 
 
 
-        <div>
-            <table id="Tabela" class="display" style="width:90%; background-color: #32383e; color:black;  font-family: Roboto;">
+        <div style="width:90%; margin-left:5%;  color:black;  font-family: Roboto;">
+            <table id="Tabela" class="display" style="background-color: #32383e;" >
                 <thead  style="font-size:90%;">
                     <tr>
                         <th class="align-middle text-center" scope="col">#</th>

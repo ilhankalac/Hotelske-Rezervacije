@@ -22,6 +22,12 @@
     </style>
     <body style="overflow:scroll;overflow-x: hidden;">
         <%@ include file="navbar.jsp" %> 
+
+        <div class="user-input-wrp">
+            <br/>
+            <input type="text" class="inputText" required/>
+            <span class="floating-label">Your email address</span>
+        </div>
     <center>
         <br>
 
@@ -84,7 +90,7 @@
                                 </a>
                                 <div  class="card-footer" style="border-radius:5px;width:289px;background:rgba(0,0,0,0.3);">
                                     <a href="${pageContext.request.contextPath}/Sobe.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-primary">Sobe <i class="fal fa-bed"></i></a>
-                                    <% if (UlogovanaRola.equals("2")) {%> 
+                                        <% if (UlogovanaRola.equals("2")) {%> 
                                     <a  style="margin-left:20px;"href="${pageContext.request.contextPath}/EditHotel.jsp?Hotel_Id=<%=hotel.getHotelId()%>" class="btn btn-warning">Izmeni <i class="fas fa-edit"></i></a>
                                 </div>    
                                 <%}
