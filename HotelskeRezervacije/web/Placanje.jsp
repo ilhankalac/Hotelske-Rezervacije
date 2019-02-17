@@ -37,7 +37,7 @@
                     </tr>
                     <tr>
                         <td>Broj Kreditne kartice:</td>
-                        <td> <input id="creditCard" class="form-control" style=" margin-right: 30%" class="form-control" type="number" name="BrojKartice" placeholder="XXXX-XXXX-XXXX-XXXX">  </td>
+                        <td> <input class="form-control" style=" margin-right: 30%" class="form-control" type="number" name="BrojKartice" placeholder="XXXX-XXXX-XXXX-XXXX">  </td>
                     </tr>
                     <tr>
                         <td>Datum  isteka: (Mesec) </td>

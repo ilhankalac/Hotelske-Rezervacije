@@ -17,7 +17,6 @@
             body {font-family: Verdana, sans-serif; margin:0}
             .mySlides {display: none}
             img {vertical-align: middle;}
-
             /* Slideshow container */
             .slideshow-container {
                 max-width: 1000px;
@@ -25,7 +24,6 @@
                 margin: auto;
                 border-radius: 5px;
             }
-
             /* Next & previous buttons */
             .prev, .next {
                 cursor: pointer;
@@ -41,18 +39,15 @@
                 border-radius: 0 3px 3px 0;
                 user-select: none;
             }
-
             /* Position the "next button" to the right */
             .next {
                 right: 0;
                 border-radius: 3px 0 0 3px;
             }
-
             /* On hover, add a black background color with a little bit see-through */
             .prev:hover, .next:hover {
                 background-color: rgba(0,0,0,0.8);
             }
-
             /* Caption text */
             .text {
                 color: #f2f2f2;
@@ -63,7 +58,6 @@
                 width: 100%;
                 text-align: center;
             }
-
             /* Number text (1/3 etc) */
             .numbertext {
                 color: #f2f2f2;
@@ -72,7 +66,6 @@
                 position: absolute;
                 top: 0;
             }
-
             /* The dots/bullets/indicators */
             .dot {
                 cursor: pointer;
@@ -84,11 +77,9 @@
                 display: inline-block;
                 transition: background-color 0.6s ease;
             }
-
             .active, .dot:hover {
                 background-color: #717171;
             }
-
             /* Fading animation */
             .fade {
                 -webkit-animation-name: fade;
@@ -96,17 +87,14 @@
                 animation-name: fade;
                 animation-duration: 1.5s;
             }
-
             @-webkit-keyframes fade {
                 from {opacity: .4} 
                 to {opacity: 1}
             }
-
             @keyframes fade {
                 from {opacity: .4} 
                 to {opacity: 1}
             }
-
             /* On smaller screens, decrease text size */
             @media only screen and (max-width: 300px) {
                 .prev, .next,.text {font-size: 11px}
@@ -116,11 +104,8 @@
     <body>
 
         <%
-
             String hotelIdSesija = "" + request.getSession().getAttribute("HotelId");
-
             String Hotel_Id = request.getParameter("Hotel_Id");
-
             if (Hotel_Id == null) {
                 response.sendRedirect("Hoteli.jsp");
             }
@@ -142,11 +127,9 @@
 
     <% }
         String IDk = "";
-
         if (request.getSession().getAttribute("UlogovanaRola") != null) {
             IDk = (String) request.getSession().getAttribute("UlogovanaRola");
         }
-
     %>  <div class="slideshow-container" > <%        ArrayList<Soba> sobe = new SobeRepo().listaSobaSelektovanogHotela(Hotel_Id);
         if (sobe.isEmpty())
         %> <center> <h2 style="color:white"> Trenutno nema ni jedna soba.</h2> </center><%
@@ -198,15 +181,12 @@
 <script>
     var slideIndex = 1;
     showSlides(slideIndex);
-
     function plusSlides(n) {
         showSlides(slideIndex += n);
     }
-
     function currentSlide(n) {
         showSlides(slideIndex = n);
     }
-
     function showSlides(n) {
         var i;
         var slides = document.getElementsByClassName("mySlides");
@@ -226,9 +206,7 @@
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
     }
-
 </script>
 
 </body>
 </html> 
-
