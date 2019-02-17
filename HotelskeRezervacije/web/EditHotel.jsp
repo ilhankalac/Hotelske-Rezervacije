@@ -56,45 +56,58 @@
                     <h3>Izmena hotela </h3>
                 </center>
                 <br>
-                <form  action="EditHotel" method="post" enctype="multipart/form-data">
+                <form  action="EditHotel" method="post" enctype="multipart/form-data" class="main-form needs-validation"  novalidate>
                     <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
 
                     <table style=" text-align: right;margin:0 auto; display:inline-block">
                         <tr>
 
                             <td> Naziv:</td>
-                            <td><input type="text" class="form-control" placeholder="Naziv" value="<%= hotel.getNaziv()%>"  name="Naziv"></td>
+                            <td><input required type="text" class="form-control" placeholder="Naziv" value="<%= hotel.getNaziv()%>"  name="Naziv">
+                                <div class="invalid-feedback">Unesite naziv</div> 
+                            </td>
                         </tr>
                         <tr>
                             <td> Država: </td>
-                            <td><input type="text" class="form-control" placeholder="Drzava" value="<%= hotel.getDrzava()%>"  name="Drzava"></td>
+                            <td><input required type="text" class="form-control" placeholder="Drzava" value="<%= hotel.getDrzava()%>"  name="Drzava">
+                                <div class="invalid-feedback">Unesite državu</div>
+                            </td>
+                            
                         </tr>
 
                         <tr>
 
                             <td>Grad: </td>
-                            <td> <input type="text" class="form-control" placeholder="Grad" value="<%= hotel.getGrad()%>"  name="Grad"></td>
+                            <td> <input required type="text" class="form-control" placeholder="Grad" value="<%= hotel.getGrad()%>"  name="Grad">
+                                <div class="invalid-feedback">Unesite grad</div>
+                            </td>
 
                         </tr>
                         <tr>
 
                             <td> Adresa:</td>
-                            <td><input type="text" class="form-control" placeholder="Adresa" value="<%= hotel.getAdresa()%>" name="Adresa"></td>
+                            <td><input required type="text" class="form-control" placeholder="Adresa" value="<%= hotel.getAdresa()%>" name="Adresa">
+                                <div class="invalid-feedback">Unesite adresu</div>
+                            </td>
 
                         </tr>
 
                         <tr>
 
                             <td> Opis: </td>
-                            <td><input type="text" class="form-control" placeholder="Opis" value="<%= hotel.getOpis()%>" name="Opis"></td>
+                            <td><input required type="text" class="form-control" placeholder="Opis" value="<%= hotel.getOpis()%>" name="Opis">
+                                <div class="invalid-feedback">Unesite opis</div>
+                            </td>
 
                         </tr>
                         <br>
                         <tr>
 
                             <td> Broj zvezdica:  </td>
-                            <td><input type="text" class="form-control" placeholder="Broj zvezdica" value="<%= hotel.getBrojZvezdica()%>"  name="Zvezdice"></td>
-
+                            <td><input required type="text" class="form-control" placeholder="Broj zvezdica" value="<%= hotel.getBrojZvezdica()%>"  name="Zvezdice">
+                                <div class="invalid-feedback">Unesite broj zvezdica</div>
+                            </td>
+                            
                         </tr>
                         <tr>
 
@@ -170,11 +183,11 @@
                             </div> 
                             </table>                             
                     </div>  
-                                    
+
                 </div>                               
             </div>
         </div>
-                                           
+
     </div><br>  
     <script>
         function readURL(input) {
@@ -190,6 +203,17 @@
         $("#profile-img").change(function () {
             readURL(this);
         });
+    </script>
+    <script>
+        var form = document.querySelector('.needs-validation');
+        form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        });
+
     </script>
 </body>
 </html>

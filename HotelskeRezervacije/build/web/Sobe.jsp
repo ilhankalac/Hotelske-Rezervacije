@@ -134,7 +134,7 @@
             if (ulogovanaRola.equals("2") || Hotel_Id.equals(hotelIdSesija)) {
         %>
     <center>
-        <a style="margin-top:20px; margin-left:40px" href="${pageContext.request.contextPath}/KreiranjeSoba.jsp?Hotel_Id=<%=Hotel_Id%>"> <i style="color:#00fb00" class="fas fa-plus-square fa-3x">Dodaj</i></a>
+        <a style="margin-top:20px; margin-left:40px" href="${pageContext.request.contextPath}/KreiranjeSoba.jsp?Hotel_Id=<%=Hotel_Id%>"> <i style="color:#000" class="fas fa-plus-square fa-3x">Dodaj</i></a>
     </center>
 
     <br>

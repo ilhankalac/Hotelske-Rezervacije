@@ -23,11 +23,6 @@
     <body style="overflow:scroll;overflow-x: hidden;">
         <%@ include file="navbar.jsp" %> 
 
-        <div class="user-input-wrp">
-            <br/>
-            <input type="text" class="inputText" required/>
-            <span class="floating-label">Your email address</span>
-        </div>
     <center>
         <br>
 

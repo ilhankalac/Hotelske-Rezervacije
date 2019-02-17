@@ -33,7 +33,7 @@
         %>
         <br> 
 
-        <form style="border-radius:5px;width:50%;color:white; margin:0 auto; background: rgba(0,0,0,0.5)" action = "KreiranjeSoba" method="post" enctype="multipart/form-data">
+        <form style="border-radius:5px;width:50%;color:white; margin:0 auto; background: rgba(0,0,0,0.5)" action = "KreiranjeSoba" method="post" enctype="multipart/form-data" class="main-form needs-validation"  novalidate>
             <input value="<%=hotel.getHotelId()%>" name="Hotel_Id" type="hidden">
             <center>
                 <br>
@@ -42,7 +42,10 @@
                 <table style="text-align: right;">
                     <tr>
                         <td>    Broj Sobe:</td>
-                        <td> <input class="form-control" type="text" name="BrojSobe"></td>
+                        <td> 
+                            <input required class="form-control" type="text" name="BrojSobe">
+                             <div class="invalid-feedback">Unesite broj sobe</div>
+                        </td>
                     </tr>
                     <tr>
                         <td>  Tip Sobe: </td>
@@ -59,31 +62,52 @@
                     </tr>
                     <tr>
                         <td>Opis:</td>
-                        <td><input class="form-control" type="text" name="Opis"></td>
+                        <td>
+                            <input required class="form-control" type="text" name="Opis">
+                             <div class="invalid-feedback">Unesite opis</div>
+                        </td>
                     </tr>
                     <tr>
                         <td> Kratki opis:</td>
-                        <td> <input class="form-control" type="text" name="KratkiOpis"></td>
+                        <td>
+                            <input required class="form-control" type="text" name="KratkiOpis">
+                             <div class="invalid-feedback">Unesite kratki opis</div>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Cena:</td>
-                        <td><input class="form-control" type="number" name="Cena"> </td>
+                        <td>Cena: (EUR)</td>
+                        <td>
+                            <input required class="form-control" type="number" name="Cena"> 
+                             <div class="invalid-feedback">Unesite cenu</div>
+                        </td>
                     </tr>
                     <tr>
                         <td> Cena u poenima:</td>
-                        <td> <input class="form-control"  type="number" name="CenaUPoenima"> </td>
+                        <td>
+                            <input required class="form-control"  type="number" name="CenaUPoenima">
+                             <div class="invalid-feedback">Unesite cenu u poenima</div>
+                        </td>
                     </tr>
                     <tr>
-                        <td> Kapacitet:</td>
-                        <td>  <input class="form-control" type="number" name="Kapacitet">  </td>
+                        <td> Kapacitet: </td>
+                        <td> 
+                            <input required class="form-control" type="number" name="Kapacitet"> 
+                             <div class="invalid-feedback">Unesite kapacitet</div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Poeni:</td>
-                        <td>  <input class="form-control" type="number" name="Poeni">  </td>
+                        <td> 
+                            <input required class="form-control" type="number" name="Poeni">  
+                             <div class="invalid-feedback">Unesite poene</div>
+                        </td>
                     </tr>
                     <tr>
                         <td>  Fotografija: </td>
-                        <td> <input id="profile-img" class="form-control-file" type="file" name="file">  </td>
+                        <td>
+                            <input required id="profile-img" class="form-control-file" type="file" name="file"> 
+                             <div class="invalid-feedback">Dodajte fotografiju</div>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
@@ -112,6 +136,17 @@
             $("#profile-img").change(function () {
                 readURL(this);
             });
+        </script>
+        <script>
+            var form = document.querySelector('.needs-validation');
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            });
+
         </script>
     </body>
 </html>

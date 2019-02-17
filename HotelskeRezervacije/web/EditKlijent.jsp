@@ -116,7 +116,7 @@
             Klijent klijent = (Klijent) request.getAttribute("Klijent");
         %>
 
-        <form style="width:50%;margin:0 auto;padding-top:2%;" action="EditKlijent" method="post">
+        <form style="width:50%;margin:0 auto;padding-top:2%;" action="EditKlijent" method="post" class="main-form needs-validation"  novalidate>
             <input value="<%= request.getParameter("Klijent_Id")%>" name="Klijent_Id" type="hidden">
             <%if (ulogovanaRola.equals("3")) {
                     {%> 
@@ -128,23 +128,40 @@
                         <h1>Osnovni podaci</h1> <br>
                         <tr>
                             <td style="padding-top:2%"><label>Ime: </label></td>
-                            <td style="padding-left:2%"><input type="text" class="form-control" placeholder="Ime" value="<%= klijent.getIme()%>" name="Ime"></td>
+                            <td style="padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Ime" value="<%= klijent.getIme()%>" name="Ime">
+                                <div class="invalid-feedback">Unesite ime</div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding-top:9%"><label> Prezime: </label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Prezime" value="<%= klijent.getPrezime()%>"  name="Prezime"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Prezime" value="<%= klijent.getPrezime()%>"  name="Prezime">
+                                <div class="invalid-feedback">Unesite prezime
+                                    <div class="invalid-feedback">Unesite prezime</div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding-top:9%"><label> Korisničko ime: </label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Korisnicko ime" value="<%= klijent.getKIme()%>"  name="KIme"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Korisnicko ime" value="<%= klijent.getKIme()%>"  name="KIme">
+                                <div class="invalid-feedback">Unesite korisničko ime</div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding-top:9%"><label> E-mail:</label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="E-mail:" value="<%= klijent.getEmail()%>" name="Email"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="E-mail:" value="<%= klijent.getEmail()%>" name="Email">
+                                <div class="invalid-feedback">Unesite email</div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding-top:9%"><label> Telefon:</label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Telefon" value="<%= klijent.getTelefon()%>" name="Telefon"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Telefon" value="<%= klijent.getTelefon()%>" name="Telefon">
+                                <div class="invalid-feedback">Unesite telefon</div>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -155,24 +172,39 @@
 
                         <tr>
                             <td style="padding-top:9%"><label> Adresa: </label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Adresa" value="<%= klijent.getAdresa()%>"  name="Adresa"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Adresa" value="<%= klijent.getAdresa()%>"  name="Adresa">
+                                <div class="invalid-feedback">Unesite adresu</div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding-top:9%"><label> Država: </label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Država" value="<%= klijent.getDrzava()%>"  name="Drzava"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Država" value="<%= klijent.getDrzava()%>"  name="Drzava">
+                                <div class="invalid-feedback">Unesite državu</div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding-top:9%"><label> Grad: </label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Grad" value="<%= klijent.getGrad()%>"  name="Grad"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Grad" value="<%= klijent.getGrad()%>"  name="Grad">
+                                <div class="invalid-feedback">Unesite grad</div>
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding-top:9%"><label> Poštanski Broj: </label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Poštanski Broj" value="<%= klijent.getPostanskiBroj()%>" name="PostanskiBroj"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Poštanski Broj" value="<%= klijent.getPostanskiBroj()%>" name="PostanskiBroj">
+                                <div class="invalid-feedback">Unesite poštanski broj </div>
+                            </td>
                         </tr>
                         <%if (new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan")).getRola().equals("2")) {%>
                         <tr>
                             <td style="padding-top:9%"><label> Poeni: </label></td>
-                            <td style="padding-top:6%; padding-left:2%"><input type="text" class="form-control" placeholder="Poeni" value="<%= klijent.getPoeni()%>"  name="Poeni"></td>
+                            <td style="padding-top:6%; padding-left:2%">
+                                <input required type="text" class="form-control" placeholder="Poeni" value="<%= klijent.getPoeni()%>"  name="Poeni">
+                                <div class="invalid-feedback">Unesite poene</div>
+                            </td>
                         </tr> 
                         <%}
                         %>
@@ -447,7 +479,17 @@
                     dots[slideIndex - 1].className += " active";
                 }
             </script>
+            <script>
+                var form = document.querySelector('.needs-validation');
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                });
 
+            </script>
 
 
     </body>
