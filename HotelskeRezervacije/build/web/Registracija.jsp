@@ -133,31 +133,31 @@
                     <table style="width:88%;">
                         <tr>
                             <td align="right">Ime:</td>
-                            <td><input required class="form-control" type="text" name="Ime">
+                            <td><input placeholder="Ime" required class="form-control" type="text" name="Ime">
                                 <div class="invalid-feedback">Unesite ime</div>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">Prezime:</td>
-                            <td> <input required class="form-control" type="text" name="Prezime"> 
+                            <td> <input placeholder="Prezime" required class="form-control" type="text" name="Prezime"> 
                                 <div class="invalid-feedback">Unesite prezime</div>
                             </td>
                         </tr>
                         <tr>
                             <td align="right"> Korisničko ime:</td>
-                            <td> <input required class="form-control" type="text" name="KIme"> 
+                            <td> <input placeholder="Korisničko ime" required class="form-control" type="text" name="KIme"> 
                                 <div class="invalid-feedback">Unesite korisničko ime</div>
                             </td>
                         </tr>
                         <tr>
                             <td align="right"> Lozinka:</td>
-                            <td> <input required class="form-control" type="password" name="Lozinka">   
+                            <td> <input placeholder="Lozinka" required class="form-control" type="password" name="Lozinka">   
                                 <div class="invalid-feedback">Unesite lozinku</div>
                             </td>
                         </tr>
                         <tr>
                             <td align="right"> Email:</td>
-                            <td> <input required class="form-control" type="text" name="Email"> 
+                            <td> <input placeholder="Email" required class="form-control" type="text" name="Email"> 
                                 <div class="invalid-feedback">Unesite email</div>
                             </td>
                         </tr>
@@ -171,32 +171,32 @@
                     <table style="width:88%;">
                         <tr>
                             <td align="right">Telefon:</td>
-                            <td> <input required class="form-control" type="text" name="Telefon">
+                            <td> <input placeholder="Telefon" id = "phone" required class="form-control" type="text" name="Telefon">
                                 <div class="invalid-feedback">Unesite telefon</div>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">Adresa:</td>
-                            <td> <input required class="form-control" type="text" name="Adresa">  
+                            <td> <input placeholder="Adresa" required class="form-control" type="text" name="Adresa">  
                                 <div class="invalid-feedback">Unesite adresu</div>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">Država:</td>
-                            <td> <input required class="form-control" type="text" name="Drzava"> 
+                            <td> <input placeholder="Država" required class="form-control" type="text" name="Drzava"> 
                                 <div class="invalid-feedback">Unesite državu</div>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">Grad:</td>
-                            <td> <input required class="form-control" type="text" name="Grad">   
+                            <td> <input <input placeholder="Grad" required class="form-control" type="text" name="Grad">   
                                 <div class="invalid-feedback">Unesite grad</div>
                             </td>
                         </tr>
 
                         <tr>
                             <td align="right">Poštanski broj:</td>
-                            <td> <input required class="form-control" type="text" name="PostanskiBroj"> 
+                            <td> <input <input placeholder="Poštanski broj" required class="form-control" type="text" name="PostanskiBroj"> 
                                 <div class="invalid-feedback">Unesite poštanski broj</div>
                             </td>
                         </tr>
@@ -263,6 +263,11 @@
             });
 
         </script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script>
+            $(document).ready(function(){
+            $('#phone').mask('999-9999-999');
+            });
+        </script>
     </body>
 </html> 

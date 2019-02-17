@@ -4,10 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/Klijenti.jsp</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/KreiranjeSoba.java</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/RepoPattern/SobeRepo.java</file>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/DAO/KlijentDAO.java</file>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/EditKlijent.jsp</file>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/Controllers/BrisanjeKlijenta.java</file>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/src/java/RepoPattern/KlijentRepo.java</file>
+            <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/KreiranjeSoba.jsp</file>
             <file>file:/C:/Users/Ilhan%20Kalac/Desktop/HotelskeRezervacije/HotelskeRezervacije/HotelskeRezervacije/web/navbar.jsp</file>
         </group>
     </open-files>

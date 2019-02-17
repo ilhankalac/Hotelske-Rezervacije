@@ -37,13 +37,13 @@
                     </tr>
                     <tr>
                         <td>Broj Kreditne kartice:</td>
-                        <td> <input  class="form-control" style=" margin-right: 30%" class="form-control" type="number" name="BrojKartice" placeholder="XXXX-XXXX-XXXX-XXXX">  </td>
+                        <td> <input id="creditCard" class="form-control" style=" margin-right: 30%" class="form-control" type="number" name="BrojKartice" placeholder="XXXX-XXXX-XXXX-XXXX">  </td>
                     </tr>
                     <tr>
                         <td>Datum  isteka: (Mesec) </td>
                         <td><select  class="form-control" name="DatumIstekaMesec">
                                 <%                    for (int i = 1; i <= 12; i++) {
-                                    {%>
+                                        {%>
                                 <option value="<%=i%>"> <%=i%> </option>
                                 <%}
                                     }
@@ -77,7 +77,7 @@
 
                 <br><br>
                 <% if (request.getAttribute("Racun") != null) {
-                    {%>
+                        {%>
                 <h2>Račun: <%=request.getAttribute("Racun")%> EUR.</h2> 
                 <%}
                     }
@@ -86,7 +86,7 @@
 
                 <input style="width:50%" type="submit" name="NaplacivanjeNovcem" value="Potvrdi plaćanje" class="btn btn-success"> <br> <br>
                 <hr style="height:1px; border:none; background-color: #000">
-                
+
                 <%
                     if (request.getAttribute("CenaUPoenima") != null)
                         if ((Integer) request.getSession().getAttribute("BrojPoenaKlijenta") >= (Integer) request.getAttribute("CenaUPoenima")) {
@@ -95,11 +95,11 @@
                 <h3>Vaše trenutan  broj poena: <%=request.getSession().getAttribute("BrojPoenaKlijenta")%></h3>
 
                 <input style="width:50%" type="submit" value="Plati sa <%=request.getAttribute("CenaUPoenima")%> poena" class="btn btn-warning"> <br> <br>  
-                 
+
                 <%}
                 } else {
                     {%> 
-                   
+
                 <h4>Plaćanje Starling poenima</h4>
                 <h4>Nemate dovoljno poena, potrebno <%=request.getAttribute("CenaUPoenima")%> poena</h4>
                 <h3>Vaš trenutan  broj poena: <%=request.getSession().getAttribute("BrojPoenaKlijenta")%></h3>
@@ -130,9 +130,15 @@
                         }
                     %>
                 </script>
-            </center>
-        </form>
-        <br>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+                <script>
+                        $(document).ready(function () {
+                            $('#creditCard').mask('999-9999-999');
+                        });
+                </script>
+                </center>
+            </form>
+            <br>
 
-    </body>
-</html>
+        </body>
+    </html>
