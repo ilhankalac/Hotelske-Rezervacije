@@ -19,7 +19,7 @@ public class Logout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             
             HttpSession sesija = request.getSession();
             sesija.removeAttribute("ulogovan");
@@ -27,8 +27,12 @@ public class Logout extends HttpServlet {
             sesija.removeAttribute("BrojPoenaKlijenta");
             sesija.removeAttribute("HotelId");
             response.sendRedirect("Hoteli.jsp");
+           
+        }
+        catch(Exception e){
             
         }
+        
     }
 
   

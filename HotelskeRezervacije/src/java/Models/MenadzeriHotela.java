@@ -5,7 +5,7 @@ package Models;
  * @author Ilhan Kalac
  */
 public class MenadzeriHotela {
-    
+
     private Integer Id;
     private Integer KlijentId;
     private Integer HotelId;
@@ -15,8 +15,10 @@ public class MenadzeriHotela {
         this.KlijentId = KlijentId;
         this.HotelId = HotelId;
     }
-    public MenadzeriHotela(){ }
-    
+
+    public MenadzeriHotela() {
+    }
+
     public Integer getId() {
         return Id;
     }

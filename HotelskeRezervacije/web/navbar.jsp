@@ -11,14 +11,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css">
         <script src="jQuery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
     </head>
     <style>
         * {
@@ -26,7 +24,6 @@
             padding:0px;
             box-sizing:border-box;
             font-family:"Bree Serif",sans-serif;
-
         }
         body {
             overflow:hidden;
@@ -109,15 +106,9 @@
         <div class="background-image"></div>
         <%
             Boolean pom = false;
-            if (request.getSession().getAttribute("ulogovan") != null) {
+            if (request.getSession().getAttribute("ulogovan") != null) 
                 pom = true;
-            }
-        %>     
-
-
-
-
-
+        %> 
         <div id="sidebar">
             <ul>
 
@@ -125,68 +116,67 @@
 
 
                 <%
-                    if ((request.getSession().getAttribute("ulogovan")) != null) {%>
-                <li>
-                    <% Klijent UlogovanKlijent = new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan"));%>
-                    <a style="color:white;" class="btn" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=UlogovanKlijent.getKlijentId()%>"><i class="fas fa-user"></i> Profil</a>
-                </li> 
+                 if ((request.getSession().getAttribute("ulogovan")) != null) {%>
+                    <li>
+                        <% Klijent UlogovanKlijent = new KlijentRepo().selectByUsername("" + request.getSession().getAttribute("ulogovan"));%>
+                        <a style="color:white;" class="btn" href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%=UlogovanKlijent.getKlijentId()%>"><i class="fas fa-user"></i> Profil</a>
+                    </li> 
                 <%}
                 %>
-                <%if (pom) {%>
+                <%
+                if (pom) {%>
 
-                <li> <a style=" color:white;" class="btn" href="Hoteli.jsp"><i class="fas fa-hotel"></i> Početna </a></li>
-                    <%
-                        String ulogovanaRola = "";
-                        if (request.getSession().getAttribute("UlogovanaRola") != null) {
-                            ulogovanaRola = "" + request.getSession().getAttribute("UlogovanaRola");
-                        }
-
-                        if (ulogovanaRola.equals("2") || ulogovanaRola.equals("3")) {%>
-
-                <li>
-                    <a style="color:white" class="btn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-cogs"></i> Opcije
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
+                    <li> <a style=" color:white;" class="btn" href="Hoteli.jsp"><i class="fas fa-hotel"></i> Početna </a></li>
                         <%
-                            if (ulogovanaRola.equals("2")) {
-                                {%> 
-                        <a class="dropdown-item" href="KreiranjeHotela.jsp"><i class="fas fa-plus"></i> Kreiraj hotel</a>
-                        <a class="dropdown-item" href="Klijenti.jsp"><i class="fas fa-users"></i> Svi korisnici</a>
+                            String ulogovanaRola = "";
+                            if (request.getSession().getAttribute("UlogovanaRola") != null) 
+                                ulogovanaRola = "" + request.getSession().getAttribute("UlogovanaRola");
+         
+                            if (ulogovanaRola.equals("2") || ulogovanaRola.equals("3")) {%>
 
-                        <%}
-                            }
-                            if (ulogovanaRola.equals("3")) {
-                                {%> 
-                        <a class="dropdown-item" href="EditHotel.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId")%>">Upravljanje hotelom</a>
-                        <%}
-                            }
-                        %>
-                        <a class="dropdown-item" href="Rezervacije.jsp"><i class="fas fa-list-ol"></i> Sve rezervacije</a>
+                    <li>
+                        <a style="color:white" class="btn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cogs"></i> Opcije
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                    </div>
-                </li>
-                <% } %>
+                            <%
+                                if (ulogovanaRola.equals("2")) {
+                                    {%> 
+                                    <a class="dropdown-item" href="KreiranjeHotela.jsp"><i class="fas fa-plus"></i> Kreiraj hotel</a>
+                                    <a class="dropdown-item" href="Klijenti.jsp"><i class="fas fa-users"></i> Svi korisnici</a>
+                                    <%}
+                                }
+                                if (ulogovanaRola.equals("3")) {      
+                                   {%>  <a class="dropdown-item" href="EditHotel.jsp?Hotel_Id=<%= request.getSession().getAttribute("HotelId")%>">Upravljanje hotelom</a>  <%}                                  
+                                }
+                            %>
+                            <a class="dropdown-item" href="Rezervacije.jsp"><i class="fas fa-list-ol"></i> Sve rezervacije</a>
+                        </div>
+                    </li>
+                    <% } %>
 
                 <%}
                 %>
 
 
-                <% if (!pom) { %>
-                <li><a class="btn" style=" color:white;" href="Registracija.jsp">Registruj se</a></li>
-                <li><a class="btn" style=" color:white;" href="" data-toggle="modal" data-target="#exampleModal" >Prijavi se <i class="fas fa-sign-in-alt"></i></a></li>
-                        <% } else {
-                        %>
-                <li>
-                    <%  String brojPoenaKlijenta = "0";
-                        if (request.getSession().getAttribute("BrojPoenaKlijenta") != null) {
-                            brojPoenaKlijenta = "" + request.getSession().getAttribute("BrojPoenaKlijenta");
-                        }%>
-                    <a class="btn" href="#">  <i class="fas fa-coins "></i> <%=brojPoenaKlijenta%> poena</a>
-                </li>
-                <li>   <a class="btn" style=" color:red;" href="Logout">Odjavi se <i class="fas fa-sign-out-alt"></i> </a></li>
-                    <% } %>
+                <% 
+                if (!pom) { %>
+                    <li><a class="btn" style=" color:white;" href="Registracija.jsp">Registruj se</a></li>
+                    <li><a class="btn" style=" color:white;" href="" data-toggle="modal" data-target="#exampleModal" >Prijavi se <i class="fas fa-sign-in-alt"></i></a></li>
+                <%}
+                else {
+                    %>    
+                    <li>
+                        <%  String brojPoenaKlijenta = "0";
+                            if (request.getSession().getAttribute("BrojPoenaKlijenta") != null) {
+                                brojPoenaKlijenta = "" + request.getSession().getAttribute("BrojPoenaKlijenta");
+                            }%>
+                        <a class="btn" href="#">  <i class="fas fa-coins "></i> <%=brojPoenaKlijenta%> poena</a>
+                    </li>
+                    <li>   <a class="btn" style=" color:red;" href="Logout">Odjavi se <i class="fas fa-sign-out-alt"></i> </a></li>
+                    <% 
+                }%>                    
             </ul>
         </div>
         <div id="toggle-btn" onclick="toggleSidebar(this)">
@@ -236,14 +226,7 @@
             </div>
         </div>
     </div> 
-
-
-
-</body>
-</html>
-
 <script>
-
     function toggleSidebar(ref) {
         ref.classList.toggle('active');
         document.getElementById('sidebar').classList.toggle('active');
@@ -253,3 +236,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>

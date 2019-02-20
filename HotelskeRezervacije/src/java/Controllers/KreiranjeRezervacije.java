@@ -42,9 +42,11 @@ public class KreiranjeRezervacije extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
         Rezervacija rezervacija = new Rezervacija();
         
         try {
+            
             Soba soba = new SobeRepo().select(request.getParameter("Soba_Id"));
             Klijent klijent = new KlijentRepo().selectByUsername((String) request.getSession().getAttribute("ulogovan"));
             
@@ -59,12 +61,8 @@ public class KreiranjeRezervacije extends HttpServlet {
             
             long brojDana = new  RezervacijaRepo().brojDana(rezervacija);
             double racun = brojDana * Double.parseDouble(request.getParameter("CenaSobe"));
-            rezervacija.setNovac(racun);
-
-            //Integer Poeni = Math.round(brojDana * soba.getCena());
-            
-                 rezervacija.setPoeni(soba.getCenaUPoenima());
-            
+            rezervacija.setNovac(racun);            
+            rezervacija.setPoeni(soba.getCenaUPoenima());
             
             try {
                 
@@ -82,13 +80,16 @@ public class KreiranjeRezervacije extends HttpServlet {
                     request.setAttribute("Greska", "False");
                     request.getRequestDispatcher("Rezervisi.jsp?Soba_Id="+soba.getSobaId()).forward(request, response);
                 }
+                
             } 
             catch (SQLException ex) {
                 Logger.getLogger(KreiranjeRezervacije.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(KreiranjeRezervacije.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     @Override

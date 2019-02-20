@@ -4,26 +4,32 @@ package Models;
  *
  * @author Ilhan Kalac
  */
-public class Datumi{
-        private String DatumDolaska;
-        private String DatumOdlaska;
-        public Datumi(){}
-        public Datumi(String DatumDolaska, String DatumOdlaska) {
-            this.DatumDolaska = DatumDolaska;
-            this.DatumOdlaska = DatumOdlaska;
-        }
-       public void setDatumDolaska(String DatumDolaska) {
-        this.DatumDolaska = DatumDolaska;
-       } 
+public class Datumi {
 
-       public String getDatumDolaska() {
-            return this.DatumDolaska;
-       }
-       public void setDatumOdlaska(String DatumOdlaska) {
-        this.DatumOdlaska = DatumOdlaska;
-       } 
+    private String DatumDolaska;
+    private String DatumOdlaska;
 
-       public String getDatumOdlaska() {
-            return this.DatumOdlaska;
-       }
+    public Datumi() {
     }
+
+    public Datumi(String DatumDolaska, String DatumOdlaska) {
+        this.DatumDolaska = DatumDolaska;
+        this.DatumOdlaska = DatumOdlaska;
+    }
+
+    public void setDatumDolaska(String DatumDolaska) {
+        this.DatumDolaska = DatumDolaska;
+    }
+
+    public String getDatumDolaska() {
+        return this.DatumDolaska;
+    }
+
+    public void setDatumOdlaska(String DatumOdlaska) {
+        this.DatumOdlaska = DatumOdlaska;
+    }
+
+    public String getDatumOdlaska() {
+        return this.DatumOdlaska;
+    }
+}

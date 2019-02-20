@@ -3,7 +3,6 @@ package Controllers;
 import Models.Soba;
 import RepoPattern.SobeRepo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,11 +53,9 @@ public class EditSoba extends HttpServlet {
         try {
             
             String HotelID = new SobeRepo().update(soba, part);
-
-            
-            if(!(HotelID.equals(""))){
+            if(!(HotelID.equals("")))
                 response.sendRedirect("Sobe.jsp?Hotel_Id=" + HotelID);
-            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(EditSoba.class.getName()).log(Level.SEVERE, null, ex);
         }

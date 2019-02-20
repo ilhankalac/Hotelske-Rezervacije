@@ -22,7 +22,8 @@ public class BrisanjeTipovaSoba extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-         String[] parameterValues =  request.getParameterValues("TipSobe");
+        
+        String[] parameterValues =  request.getParameterValues("TipSobe");
         String niz_ID = "";
         
         for(String data : parameterValues){
@@ -31,12 +32,11 @@ public class BrisanjeTipovaSoba extends HttpServlet {
     
         niz_ID = niz_ID.substring(0,niz_ID.length()-1);
         
-        if(new  TipSobeRepo().brisanje(niz_ID)){
-            response.sendRedirect("EditHotel.jsp?Hotel_Id=" + request.getParameter("Hotel_Id"));
-        }
-        else{
+        if(new  TipSobeRepo().brisanje(niz_ID))
+            response.sendRedirect("EditHotel.jsp?Hotel_Id=" + request.getParameter("Hotel_Id"));        
+        else
             response.sendRedirect("Greska.jsp");
-        }
+        
     }
 
 
@@ -44,7 +44,9 @@ public class BrisanjeTipovaSoba extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            
             processRequest(request, response);
+            
         } catch (SQLException ex) {
             Logger.getLogger(BrisanjeTipovaSoba.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -23,7 +23,8 @@ public class Registracija extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        try (PrintWriter out = response.getWriter()) {
+        try {
+            
             Klijent klijent = new Klijent();
             klijent.setIme(request.getParameter("Ime"));
             klijent.setPrezime(request.getParameter("Prezime"));
@@ -36,7 +37,6 @@ public class Registracija extends HttpServlet {
             klijent.setGrad(request.getParameter("Grad"));
             klijent.setPostanskiBroj(request.getParameter("PostanskiBroj"));
 
-            
             if(new KlijentRepo().insert(klijent)){
                 request.setAttribute("rezultat", "True");
                 request.getRequestDispatcher("Registracija.jsp").forward(request, response);
@@ -47,8 +47,10 @@ public class Registracija extends HttpServlet {
                 new KlijentRepo().brojPoena(klijent.getKIme()));
             }
             else{
+                
                 request.setAttribute("rezultat", "False");
                 request.getRequestDispatcher("Registracija.jsp").forward(request, response);
+                
             }
            
         } catch (SQLException ex) {

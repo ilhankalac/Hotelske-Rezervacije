@@ -18,7 +18,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Hoteli</title>
+        <title>Kreiranje hotela</title>
     </head>
     <style>
         th, td { 
@@ -35,10 +35,8 @@
                 <br>  
                 <h1 align="center">Kreiranje hotela</h1>
                 <center>
-                    <br> <br>
-
+                    <br><br>
                     <table  style="text-align: right; padding:5px" cellspacing="10" >
-
                         <tr>
                             <td> Naziv: </td>
                             <td>

@@ -24,7 +24,8 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
+            
             HttpSession  sesija = request.getSession();
             String  username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -33,20 +34,25 @@ public class Login extends HttpServlet {
             if(new KlijentRepo().logovanje(username, password)){
                 if(ulogovanaRola.equals("3"))
                     sesija.setAttribute("HotelId", new MenadzerHotelaRepo().select(new KlijentRepo().selectByUsername(username).getKlijentId()).getHotelId());
+                
                 sesija.setAttribute("ulogovan", username); 
                 sesija.setAttribute("UlogovanaRola", ulogovanaRola);
                 sesija.setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena(username));
                 request.setAttribute("prvoLogovanje", "True");
                 request.getRequestDispatcher("Hoteli.jsp").forward(request, response);
+                
             }
-            else{
+            else {
+                
                 request.setAttribute("prvoLogovanje", "False");
                 request.getRequestDispatcher("Hoteli.jsp").forward(request, response);
+                
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        } 
+        
     }
 
 

@@ -33,19 +33,13 @@
     </style>
     <body>
         <br> <br> <br>
-        <%            if (request.getSession().getAttribute("UlogovanaRola") != null) {
-                if (!request.getSession().getAttribute("UlogovanaRola").equals("2")) {
-                    response.sendRedirect("index.jsp");
-                }
-            } else {
+        <%   
+            if (request.getSession().getAttribute("UlogovanaRola") != null) 
+                if (!request.getSession().getAttribute("UlogovanaRola").equals("2")) 
+                    response.sendRedirect("index.jsp"); 
+            else 
                 response.sendRedirect("index.jsp");
-            }
-
-
         %>
-
-
-
         <div style="width:90%; margin-left:5%;  color:black;  font-family: Roboto;">
             <table id="Tabela" class="display" style="background-color: #32383e;" >
                 <thead  style="font-size:90%;">
@@ -67,47 +61,42 @@
                 </thead>
                 <tbody style="font-size:78%;">
                     <%             int i = 1;
-                        for (Klijent klijent : new KlijentRepo().lista()) {
-                            String Rola = "";
-                            if (klijent.getRola().equals("1")) {
-                                Rola = "Klijent";
-                            } else if (klijent.getRola().equals("2")) {
-                                Rola = "Administrator";
-                            } else {
-                                Rola = "Menadžer hotela";
-                            }
-                            {%>
-
-
-                    <tr>
-                        <td class="align-middle text-center"> <%= i++%> </td>
-                        <td class="align-middle text-center"><%=klijent.getIme()%> </td>
-                        <td class="align-middle text-center"><%=klijent.getPrezime()%> </td>
-                        <td class="align-middle text-center"><%=klijent.getKIme()%> </td>
-                        <td class="align-middle text-center"><%=klijent.getEmail()%> </td>
-                        <td class="align-middle text-center"><%=klijent.getTelefon()%> </td>
-                        <td class="align-middle text-center"><%=klijent.getAdresa()%> </td>
-                        <td class="align-middle text-center"><%=klijent.getDrzava()%> </td>
-                        <td class="align-middle text-center"><%=klijent.getGrad()%> </td>
-                        <td class="align-middle text-center"><%=Rola%> </td>
-                        <td class="align-middle text-center"><%=klijent.getPoeni()%> </td>
-                        <td class="align-middle text-center"><%=klijent.getPostanskiBroj()%> </td>
-                        <td class="align-middle text-center"> 
-
-                            <a class="delete_link"
-                               href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%= klijent.getKlijentId()%>" >
-                                <i class="fas fa-edit"> </i>                                  
-                            </a>
-                            <a class="delete_link" style="color:red"
-                               href="${pageContext.request.contextPath}/Klijenti?Klijent_Id=<%= klijent.getKlijentId()%>" >
-                                <i class="fa fa-trash"> </i>                                  
-                            </a>
-                        </td>
-                    </tr>
-
-                    <%}
+                    for (Klijent klijent : new KlijentRepo().lista()) {
+                        String Rola = "";
+                        if (klijent.getRola().equals("1")) {
+                            Rola = "Klijent";
+                        } else if (klijent.getRola().equals("2")) {
+                            Rola = "Administrator";
+                        } else {
+                            Rola = "Menadžer hotela";
                         }
-                    %>
+                        {%>
+                        <tr>
+                            <td class="align-middle text-center"><%= i++%> </td>
+                            <td class="align-middle text-center"><%=klijent.getIme()%> </td>
+                            <td class="align-middle text-center"><%=klijent.getPrezime()%> </td>
+                            <td class="align-middle text-center"><%=klijent.getKIme()%> </td>
+                            <td class="align-middle text-center"><%=klijent.getEmail()%> </td>
+                            <td class="align-middle text-center"><%=klijent.getTelefon()%> </td>
+                            <td class="align-middle text-center"><%=klijent.getAdresa()%> </td>
+                            <td class="align-middle text-center"><%=klijent.getDrzava()%> </td>
+                            <td class="align-middle text-center"><%=klijent.getGrad()%> </td>
+                            <td class="align-middle text-center"><%=Rola%> </td>
+                            <td class="align-middle text-center"><%=klijent.getPoeni()%> </td>
+                            <td class="align-middle text-center"><%=klijent.getPostanskiBroj()%> </td>
+                            <td class="align-middle text-center"> 
+                                <a class="delete_link"
+                                   href="${pageContext.request.contextPath}/EditKlijent.jsp?Klijent_Id=<%= klijent.getKlijentId()%>" >
+                                    <i class="fas fa-edit"> </i>                                  
+                                </a>
+                                <a class="delete_link" style="color:red"
+                                   href="${pageContext.request.contextPath}/Klijenti?Klijent_Id=<%= klijent.getKlijentId()%>" >
+                                    <i class="fa fa-trash"> </i>                                  
+                                </a>
+                            </td>
+                        </tr>
+                    <%}
+                   }%>   
                 </tbody>
             </table>
         </div>

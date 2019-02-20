@@ -21,14 +21,18 @@ public class BrisanjeSoba extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         try
         {
+            
             String HotelID = new SobeRepo().brisanje(request.getParameter("Soba_Id"));
             response.sendRedirect("Sobe.jsp?Hotel_Id=" + HotelID);
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(BrisanjeSoba.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     @Override

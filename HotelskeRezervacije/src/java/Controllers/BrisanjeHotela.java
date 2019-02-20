@@ -23,7 +23,7 @@ public class BrisanjeHotela extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try
         {
-            String HotelId=  request.getParameter("Hotel_Id");
+            String HotelId =  request.getParameter("Hotel_Id");
             new HotelRepo().brisanje(HotelId);
             response.sendRedirect("Hoteli.jsp");
             

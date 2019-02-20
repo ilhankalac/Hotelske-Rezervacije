@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title> Registracija </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             * {box-sizing: border-box}
@@ -92,44 +93,40 @@
         </style>
     </head>
     <body style="width:100%;overflow:scroll; overflow-x: hidden;" >
+         <%@ include file="navbar.jsp" %> 
         <%
-            if (request.getSession().getAttribute("ulogovan") != null) {
+            if (request.getSession().getAttribute("ulogovan") != null)  
                 response.sendRedirect("index.jsp");
-            }
         %>
-        <%@ include file="navbar.jsp" %> 
-        <%             String rezultat = (String) request.getAttribute("rezultat");
-
+       
+        <%           
+            String rezultat = (String) request.getAttribute("rezultat");
             if (rezultat != null)
                 if (rezultat.equals("True")) {%>
-        <script type="text/javascript">
-            swal("Dobar  posao", "Registracija uspela", "success")
-                    .then(function () {
-                        window.location = "Hoteli.jsp";
-                    });
+                    <script type="text/javascript">
+                        swal("Dobar  posao", "Registracija uspela", "success")
+                                .then(function () {
+                                    window.location = "Hoteli.jsp";
+                                });
 
-        </script>
+                    </script>
 
-        <%   } else if (rezultat.equals("False")) {%>
+        <%}
+            else if (rezultat.equals("False")) {%>
 
-        <script type="text/javascript">
-            swal("Greška", "Uneli ste postojeće korisničko ime ili E-mail.", "error")
-                    .then(function () {
-                        window.location = "Registracija.jsp";
-                    });
-        </script>
+                    <script type="text/javascript">
+                        swal("Greška", "Uneli ste postojeće korisničko ime ili E-mail.", "error")
+                                .then(function () {
+                                    window.location = "Registracija.jsp";
+                                });
+                    </script>
 
-        <% }%>
+        <%}%>
 
         <form action="KlijentController" style="width:50%;margin:0 auto;padding-top:2%;" class="main-form needs-validation"  novalidate>
-
-
             <div class="slideshow-container" style="border-radius:5px;background:rgba(0,0,0,0.5); color:white;">
-
-
                 <div class="mySlides" cellspacing="10">
                     <h3> Osnovni podaci</h3> <br>
-
                     <table style="width:88%;">
                         <tr>
                             <td align="right">Ime:</td>
@@ -161,11 +158,8 @@
                                 <div class="invalid-feedback">Unesite email</div>
                             </td>
                         </tr>
-
                     </table>
-
                 </div>
-
                 <div class="mySlides">
                     <h3> Ostali podaci</h3> <br>
                     <table style="width:88%;">

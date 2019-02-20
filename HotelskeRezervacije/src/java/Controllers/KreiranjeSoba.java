@@ -33,7 +33,9 @@ public class KreiranjeSoba extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        try{
+        
+        try {
+            
             Soba soba = new  Soba();
             soba.setBrojSobe(request.getParameter("BrojSobe"));
             soba.setTipSobeID(Integer.parseInt(request.getParameter("TipSobe")));
@@ -44,16 +46,15 @@ public class KreiranjeSoba extends HttpServlet {
             soba.setKapacitet(Integer.parseInt(request.getParameter("Kapacitet")));
             soba.setPoeni(Integer.parseInt(request.getParameter("Poeni")));
             soba.setCenaUPoenima(Integer.parseInt(request.getParameter("CenaUPoenima")));
+            
             //klasa koja pomaze  za insert fotografije u bazu
             Part part = request.getPart("file");
             
-
-            if(new SobeRepo().insert(soba, part)){
+            if(new SobeRepo().insert(soba, part))
                response.sendRedirect("Sobe.jsp?Hotel_Id=" + request.getParameter("Hotel_Id"));
-            }
-            else{
+            else
                 response.sendRedirect("Greska.jsp");
-            }
+            
         }catch(Exception  ex){
              response.sendRedirect("Greska.jsp");
         }

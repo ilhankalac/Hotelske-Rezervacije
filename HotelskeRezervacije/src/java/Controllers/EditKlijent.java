@@ -6,7 +6,6 @@ import Models.MenadzeriHotela;
 import RepoPattern.KlijentRepo;
 import RepoPattern.MenadzerHotelaRepo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +41,9 @@ public class EditKlijent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         try {
+            
             processRequest(request, response);
             Klijent klijent = new Klijent();
             klijent.setKlijentId(Integer.parseInt(request.getParameter("Klijent_Id")));
@@ -73,8 +74,7 @@ public class EditKlijent extends HttpServlet {
                         new MenadzerHotelaRepo().insert(menadzerHotela);
                     }
                 response.sendRedirect("EditKlijent.jsp?Klijent_Id="+klijent.getKlijentId());
-            }
-                
+            }     
             else
             {
                 request.setAttribute("Klijent_Id", klijent.getKlijentId());
@@ -82,9 +82,11 @@ public class EditKlijent extends HttpServlet {
                 request.getRequestDispatcher("EditKlijent.jsp").forward(request, response);
             }
             request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
+        
         } catch (SQLException ex) {
             Logger.getLogger(EditKlijent.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
 

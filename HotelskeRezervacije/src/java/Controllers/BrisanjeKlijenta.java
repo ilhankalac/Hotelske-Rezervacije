@@ -21,12 +21,11 @@ public class BrisanjeKlijenta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             
             new KlijentRepo().brisanje(request.getParameter("Klijent_Id"));
             response.sendRedirect("Klijenti.jsp");   
-           
-            
+                       
         } catch (SQLException ex) {
             Logger.getLogger(BrisanjeKlijenta.class.getName()).log(Level.SEVERE, null, ex);
         } 

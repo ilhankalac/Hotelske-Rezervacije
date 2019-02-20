@@ -23,11 +23,11 @@
             padding:7px;
 
         }
-
     </style>
     <body style="overflow:scroll; overflow-x: hidden;">
         <%@ include file="navbar.jsp" %> 
-        <%             String HotelID = request.getParameter("Hotel_Id");
+        <% 
+            String HotelID = request.getParameter("Hotel_Id");
             ArrayList<TipSobe> tipoviSoba = new TipSobeRepo().lista(HotelID);
             Hotel hotel = new HotelRepo().select(HotelID);
         %>
@@ -49,14 +49,12 @@
                     </tr>
                     <tr>
                         <td>  Tip Sobe: </td>
-                        <td>  <select class="form-control" name="TipSobe">
+                        <td> 
+                            <select class="form-control" name="TipSobe">
                                 <%
-                                    for (TipSobe tipSobe : tipoviSoba) {
-                                        {%> 
-                                <option  value="<%=tipSobe.getTipSobeId()%>"><%=tipSobe.getNaziv()%></option>
-                                <%}
-                                    }
-                                %> 
+                                    for (TipSobe tipSobe : tipoviSoba) {                                  
+                                         {%> <option  value="<%=tipSobe.getTipSobeId()%>"><%=tipSobe.getNaziv()%></option>   <%}
+                                    }%>                               
                             </select>
                         </td>
                     </tr>

@@ -19,9 +19,7 @@
         }
     </style>
     <body style="overflow:scroll; overflow-x: hidden;">
-
-        <%@ include file="navbar.jsp" %>
-        <br>
+        <%@ include file="navbar.jsp" %><br>
         <form action="Naplacivanje" method="post" style="border-radius: 5px;background:rgba(0,0,0,0.5); color:white; width:50%; margin:0 auto;">
             <center>
                 <h2> Plaćanje  </h2>
@@ -41,13 +39,13 @@
                     </tr>
                     <tr>
                         <td>Datum  isteka: (Mesec) </td>
-                        <td><select  class="form-control" name="DatumIstekaMesec">
-                                <%                    for (int i = 1; i <= 12; i++) {
-                                        {%>
-                                <option value="<%=i%>"> <%=i%> </option>
-                                <%}
-                                    }
-                                %>
+                        <td>
+                            <select  class="form-control" name="DatumIstekaMesec">
+                                <%for (int i = 1; i <= 12; i++) {
+                                    {%>
+                                        <option value="<%=i%>"> <%=i%> </option> 
+                                    <%}
+                                }%>
                                 <input  class="form-control" type="hidden" value="<%=request.getAttribute("CenaUPoenima")%>" name="CenaUPoenima">   
                             </select>
                         </td>
@@ -68,64 +66,54 @@
                             </select>
                         </td>
                     </tr>
-
-
                 </table>
-
                 <input class="form-control" type="hidden" name="BrojPoena" value="<%=request.getAttribute("BrojPoena")%>">
-
-
                 <br><br>
-                <% if (request.getAttribute("Racun") != null) {
-                        {%>
-                <h2>Račun: <%=request.getAttribute("Racun")%> EUR.</h2> 
-                <%}
-                    }
-                %>
+                <%
+                    if (request.getAttribute("Racun") != null) {
+                        {%><h2>Račun: <%=request.getAttribute("Racun")%> EUR.</h2><%}
+                    }%>
                 <br>
-
                 <input style="width:50%" type="submit" name="NaplacivanjeNovcem" value="Potvrdi plaćanje" class="btn btn-success"> <br> <br>
                 <hr style="height:1px; border:none; background-color: #000">
 
                 <%
-                    if (request.getAttribute("CenaUPoenima") != null)
-                        if ((Integer) request.getSession().getAttribute("BrojPoenaKlijenta") >= (Integer) request.getAttribute("CenaUPoenima")) {
-                            {%>
-                <h4>Ili platite Starling poenima</h4>
-                <h3>Vaše trenutan  broj poena: <%=request.getSession().getAttribute("BrojPoenaKlijenta")%></h3>
+                if (request.getAttribute("CenaUPoenima") != null)
+                    if ((Integer) request.getSession().getAttribute("BrojPoenaKlijenta") >= (Integer) request.getAttribute("CenaUPoenima")) {
+                        {%>    
+                        <h4>Ili platite Starling poenima</h4>
+                        <h3>Vaše trenutan  broj poena: <%=request.getSession().getAttribute("BrojPoenaKlijenta")%></h3>
 
-                <input style="width:50%" type="submit" value="Plati sa <%=request.getAttribute("CenaUPoenima")%> poena" class="btn btn-warning"> <br> <br>  
-
-                <%}
-                } else {
+                        <input style="width:50%" type="submit" value="Plati sa <%=request.getAttribute("CenaUPoenima")%> poena" class="btn btn-warning"> <br> <br>  
+                    <%}} 
+                else {
                     {%> 
 
-                <h4>Plaćanje Starling poenima</h4>
-                <h4>Nemate dovoljno poena, potrebno <%=request.getAttribute("CenaUPoenima")%> poena</h4>
-                <h3>Vaš trenutan  broj poena: <%=request.getSession().getAttribute("BrojPoenaKlijenta")%></h3>
-                <%}
-                        }
-                %>
+                    <h4>Plaćanje Starling poenima</h4>
+                    <h4>Nemate dovoljno poena, potrebno <%=request.getAttribute("CenaUPoenima")%> poena</h4>
+                    <h3>Vaš trenutan  broj poena: <%=request.getSession().getAttribute("BrojPoenaKlijenta")%></h3>
+                    <%}
+                }%>
 
-
-
-                <%  if (request.getAttribute("poruka") != null) {
+                <% 
+                    if (request.getAttribute("poruka") != null) {
                         if (request.getAttribute("poruka").equals("True")) {
                             {%> 
-                <script type="text/javascript">
-                    swal("Dobar  posao", "Rezervacija uspela", "success")
-                            .then(function () {
-                                window.location = "Hoteli.jsp";
-                            });
-                    <%}
-                    } else if (request.getAttribute("poruka").equals("False")) {
-                        {%>
-                    < script type = "text/javascript" >
-                            swal("Dobar  posao", "Rezervacija uspešna", "success")
-                            .then(function () {
-                                window.location = "Hoteli.jsp";
-                            });
-                    <%}
+                            <script type="text/javascript">
+                                swal("Dobar  posao", "Rezervacija uspela", "success")
+                                        .then(function () {
+                                            window.location = "Hoteli.jsp";
+                                        });
+                                <%}
+                    } 
+                    else if (request.getAttribute("poruka").equals("False")) {
+                                {%>
+                            < script type = "text/javascript" >
+                                    swal("Dobar  posao", "Rezervacija uspešna", "success")
+                                    .then(function () {
+                                        window.location = "Hoteli.jsp";
+                                    });
+                            <%}
                             }
                         }
                     %>
@@ -136,9 +124,7 @@
                             $('#creditCard').mask('999-9999-999');
                         });
                 </script>
-                </center>
-            </form>
-            <br>
-
+            </center>
+        </form> <br>
         </body>
     </html>

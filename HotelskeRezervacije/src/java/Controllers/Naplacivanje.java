@@ -5,7 +5,6 @@ import Models.KreditnaKartica;
 import RepoPattern.KlijentRepo;
 import RepoPattern.RezervacijaRepo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,15 +60,17 @@ public class Naplacivanje extends HttpServlet {
                     new  KlijentRepo().updatePoeniNakonPlacanjaNovcem((String)request.getSession().getAttribute("ulogovan"), Integer.parseInt(request.getParameter("BrojPoena")));                            
                 else
                     new KlijentRepo().updatePoeniNakonPlacanjaPoenima((String)request.getSession().getAttribute("ulogovan"), Integer.parseInt(request.getParameter("CenaUPoenima")), Integer.parseInt(request.getParameter("BrojPoena")));
-                
-                
+
                 request.getSession().setAttribute("BrojPoenaKlijenta", new KlijentRepo().brojPoena((String)request.getSession().getAttribute("ulogovan")));
                 request.setAttribute("poruka", "True");
                 request.getRequestDispatcher("Placanje.jsp").forward(request, response);
+                
             }
             else{
+                
                 request.setAttribute("poruka", "False");
                 request.getRequestDispatcher("Placanje.jsp").forward(request, response);
+                
             }
            
         } catch (SQLException ex) {

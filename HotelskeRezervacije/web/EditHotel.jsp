@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Edit hotel</title>
     </head>
     <style>
         th, td { 
@@ -26,7 +26,8 @@
         </style>
         <body style="overflow:scroll; overflow-x: hidden;">
         <%@ include file="navbar.jsp" %>  
-        <%            String HotelID = request.getParameter("Hotel_Id");
+        <%  
+            String HotelID = request.getParameter("Hotel_Id");
             Hotel hotel = new HotelRepo().select(HotelID);
 
             boolean pristupSvomHotelu = true;
@@ -51,14 +52,13 @@
         <div class="row" style="border-radius:5px;width:70%;   margin:0 auto;color:white;background:rgba(0,0,0,0.5)">
 
             <div  class="col">
-                <br><br> <br>
+                <br><br><br>
                 <center>
                     <h3>Izmena hotela </h3>
                 </center>
                 <br>
                 <form  action="EditHotel" method="post" enctype="multipart/form-data" class="main-form needs-validation"  novalidate>
                     <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
-
                     <table style=" text-align: right;margin:0 auto; display:inline-block">
                         <tr>
 
@@ -133,11 +133,10 @@
                         </form>
                     </center>
                 </form>
-
-
             </div>
+                                
             <div class="vl"></div>
-
+            
             <div class="col">
                 <div style="margin-top:5%">                           
                     <div class="span6">
@@ -161,29 +160,28 @@
                                 </form> 
                                 <form action="BrisanjeTipovaSoba" method="post"> 
                                     <input value="<%= request.getParameter("Hotel_Id")%>" name="Hotel_Id" type="hidden">
-                                    <%for (TipSobe tipSobe : new TipSobeRepo().lista(HotelID)) {
-                                            {%>                   
-                                    <br>
                                     <table>
-                                        <div class="input-group">
+                                    <%for (TipSobe tipSobe : new TipSobeRepo().lista(HotelID)) {
+                                          {%>                   
+                                            <br>
+                                            
+                                                <div class="input-group">
 
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <input type="checkbox" name="TipSobe" value="<%=tipSobe.getTipSobeId()%>" aria-label="Radio button for following text input">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <input type="checkbox" name="TipSobe" value="<%=tipSobe.getTipSobeId()%>" aria-label="Radio button for following text input">
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="<%=tipSobe.getNaziv()%>" aria-label="Text input with radio button">
                                                 </div>
-                                            </div>
-                                            <input type="text" class="form-control" value="<%=tipSobe.getNaziv()%>" aria-label="Text input with radio button">
-                                        </div>
-                                        <%}
-                                            }%>  <br>
+                                          <%}
+                                     }%>  <br>
 
                                         <td style="padding-top:2%">  <input type="submit" style="float:left; margin-left:10%" value ="Obriši"  class="btn btn-danger" ><br> <br> </td>                                
-
+                                    </table>
                                 </form>
-                            </div> 
-                            </table>                             
+                            </div>                               
                     </div>  
-
                 </div>                               
             </div>
         </div>

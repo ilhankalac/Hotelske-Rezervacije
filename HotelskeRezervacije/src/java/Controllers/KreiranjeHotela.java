@@ -2,13 +2,9 @@ package Controllers;
 
 import Models.Hotel;
 import RepoPattern.HotelRepo;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +39,8 @@ public class KreiranjeHotela extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        try{
+        try {
+            
             Hotel hotel = new  Hotel();
             hotel.setNaziv(request.getParameter("Naziv"));
             hotel.setDrzava(request.getParameter("Drzava"));
@@ -51,16 +48,16 @@ public class KreiranjeHotela extends HttpServlet {
             hotel.setAdresa(request.getParameter("Adresa")); 
             hotel.setBrojZvezdica(Integer.parseInt(request.getParameter("Zvezdice")));
             hotel.setOpis(request.getParameter("Opis"));
+            
             //klasa koja pomaze  za insert fotografije u bazu
             Part part = request.getPart("file");
-            
-
-            if(new HotelRepo().insert(hotel, part)){
+           
+            if(new HotelRepo().insert(hotel, part))
                     response.sendRedirect("Hoteli.jsp");
-            }
-            else{
+            else
                 response.sendRedirect("Greska.jsp");
-            }
+            
+            
         }catch(Exception  ex){
              response.sendRedirect("Greska.jsp");
         }

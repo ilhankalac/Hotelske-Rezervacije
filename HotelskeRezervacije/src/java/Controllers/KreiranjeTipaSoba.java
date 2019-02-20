@@ -3,7 +3,6 @@ package Controllers;
 import Models.TipSobe;
 import RepoPattern.TipSobeRepo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,22 +31,22 @@ public class KreiranjeTipaSoba extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-         try{
+        
+        try {
+            
             TipSobe tipSobe = new  TipSobe();
             tipSobe.setNaziv(request.getParameter("Naziv"));
             tipSobe.SetHotelID(Integer.parseInt(request.getParameter("Hotel_Id")));
-            
-            
 
-            if(new TipSobeRepo().insert(tipSobe)){
+            if(new TipSobeRepo().insert(tipSobe))
                response.sendRedirect("EditHotel.jsp?Hotel_Id=" + request.getParameter("Hotel_Id"));
-            }
-            else{
+            else
                 response.sendRedirect("Greska.jsp");
-            }
+            
         }catch(Exception  ex){
              response.sendRedirect("Greska.jsp");
         }
+        
     }
 
     @Override

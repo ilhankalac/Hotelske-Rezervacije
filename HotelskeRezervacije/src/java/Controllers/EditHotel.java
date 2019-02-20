@@ -41,6 +41,7 @@ public class EditHotel extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
         Hotel hotel = new Hotel();
         hotel.setHotelId(Integer.parseInt(request.getParameter("Hotel_Id")));
         hotel.setNaziv(request.getParameter("Naziv"));
@@ -53,14 +54,14 @@ public class EditHotel extends HttpServlet {
         Part part = request.getPart("file");
         
         try {
-            if(new HotelRepo().update(hotel, part)){
+            
+            if(new HotelRepo().update(hotel, part))
                 response.sendRedirect("Hoteli.jsp");
-            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(EditHotel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
 
     @Override
