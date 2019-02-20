@@ -21,7 +21,7 @@ korisnika koji nisu administratori.
 * Kreiranje i pregled svojih rezervacija kao i pregled rezervacija u svom hotelu i
 brisanje svih rezervacija koje još nisu postale aktivne.
 
-<b>3. Korisnik</b>
+<b>3. KORISNIK</b>
 * Pregled i izmena osnovnih informacija o svom profilu.
 * Pregled i pretraga svih hotela u aplikaciji.
 * Pregled i mogućnost biranja sobe za rezervaciju.
